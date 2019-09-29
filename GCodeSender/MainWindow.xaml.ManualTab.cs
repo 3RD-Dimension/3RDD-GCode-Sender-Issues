@@ -77,8 +77,6 @@ namespace GCodeSender
 		{
 			if (machine.Mode != Machine.OperatingMode.Manual)
 				return;
-
-            //TextBoxManual.Text = "G10 L2 P0 X0 Y0 Z0";
             TextBoxManual.Text = Properties.Settings.Default.ZeroAllCmd;
             ManualSend(); // Automatically Send Command
 		}
@@ -89,9 +87,7 @@ namespace GCodeSender
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
-            //TextBoxManual.Text = "G10 L2 P0 X0";
-            TextBoxManual.Text = Properties.Settings.Default.ZeroXCmd;     
-
+            TextBoxManual.Text = Properties.Settings.Default.ZeroXCmd;               
             ManualSend(); // Automatically Send Command
         }
         // Zero Y Axis
@@ -99,8 +95,6 @@ namespace GCodeSender
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
-
-            //TextBoxManual.Text = "G10 L2 P0 Y0";
             TextBoxManual.Text = Properties.Settings.Default.ZeroYCmd;
             ManualSend(); // Automatically Send Command
         }
@@ -109,7 +103,6 @@ namespace GCodeSender
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
-            //TextBoxManual.Text = "G10 L2 P0 Z0";
             TextBoxManual.Text = Properties.Settings.Default.ZeroZCmd;
             ManualSend(); // Automatically Send Command
         }
