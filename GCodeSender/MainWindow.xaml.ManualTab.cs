@@ -21,18 +21,7 @@ namespace GCodeSender
 
 			string tosend;
 
-			if (Properties.Settings.Default.ManualUseExpressions)
-			{
-				if (ManualExpressionSuccess)
-					tosend = TextBoxPreview.Text;
-				else
-				{
-					Machine_NonFatalException("Expression did not evaluate");
-					return;
-				}
-			}
-			else
-				tosend = TextBoxManual.Text;
+			tosend = TextBoxManual.Text;
 
 			machine.SendLine(tosend);
 
@@ -40,25 +29,6 @@ namespace GCodeSender
 			ManualCommandIndex = -1;
 
 			TextBoxManual.Text = "";
-		}
-
-		private void UpdateExpressionPreview()
-		{
-			if (Properties.Settings.Default.ManualUseExpressions)
-				TextBoxPreview.Text = machine.Calculator.Evaluate(TextBoxManual.Text, out ManualExpressionSuccess);
-
-			TextBoxPreview.Background = ManualExpressionSuccess ? Brushes.LightYellow : Brushes.Red;
-		}
-
-		private void TextBoxManual_TextChanged(object sender, TextChangedEventArgs e)
-		{
-			UpdateExpressionPreview();
-		}
-
-		private void CheckBoxUseExpressions_Changed(object sender, RoutedEventArgs e)
-		{
-			TextBoxPreview.Visibility = Properties.Settings.Default.ManualUseExpressions ? Visibility.Visible : Visibility.Collapsed;
-			UpdateExpressionPreview();
 		}
 
 		private void ButtonManualSend_Click(object sender, RoutedEventArgs e)

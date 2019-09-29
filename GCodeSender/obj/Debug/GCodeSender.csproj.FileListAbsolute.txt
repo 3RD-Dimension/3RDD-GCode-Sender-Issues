@@ -81,3 +81,4 @@ V:\3RDD GCode Sender WPF\GCodeSender\obj\Debug\GCodeSender.csproj.CoreCompileInp
 V:\3RDD GCode Sender WPF\GCodeSender\obj\Debug\GCodeSender.csproj.CopyComplete
 V:\3RDD GCode Sender WPF\GCodeSender\obj\Debug\3RDD GCode Sender.exe
 V:\3RDD GCode Sender WPF\GCodeSender\obj\Debug\3RDD GCode Sender.pdb
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Debug\GCodeSender.csprojAssemblyReference.cache

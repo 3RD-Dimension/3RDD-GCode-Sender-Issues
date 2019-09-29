@@ -132,11 +132,9 @@
                     <Expander Header="Manual" IsExpanded="{util:SettingBinding ManualExpanderOpen}">
                         <StackPanel>
                             <Grid Margin="3,0,3,0">
-                                <TextBox Name="TextBoxManual" Height="23" HorizontalAlignment="Stretch" PreviewKeyDown="TextBoxManual_PreviewKeyDown" TextChanged="TextBoxManual_TextChanged" Margin="0,5,41,5"/>
+                                <TextBox Name="TextBoxManual" Height="23" HorizontalAlignment="Stretch" PreviewKeyDown="TextBoxManual_PreviewKeyDown" Margin="0,5,41,5"/>
                                 <Button Name="ButtonManualSend" Click="ButtonManualSend_Click" Style="{StaticResource styleButton}" Height="23" Content="Send" HorizontalAlignment="Right"/>
                             </Grid>
-                            <TextBox Name="TextBoxPreview" IsReadOnly="True" Margin="3,0,3,3" Background="LightYellow"/>
-                            <CheckBox Name="CheckBoxUseExpressions" Content="Use Expressions" Margin="3,0,3,3" IsChecked="{util:SettingBinding ManualUseExpressions}" Checked="CheckBoxUseExpressions_Changed" Unchecked="CheckBoxUseExpressions_Changed"/>
                             <StackPanel Orientation="Horizontal">
                                 <Button Name="ButtonManualResetX" Click="ButtonManualResetX_Click" Style="{StaticResource styleButton}" Content="Zero X"
 									    ToolTip="Zero X Axis"/>

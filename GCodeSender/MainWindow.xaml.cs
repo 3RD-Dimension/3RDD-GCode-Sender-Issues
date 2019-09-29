@@ -72,7 +72,6 @@ namespace GCodeSender
             
 			settingsWindow.SendLine += machine.SendLine;
                        
-			CheckBoxUseExpressions_Changed(null, null);
 			ButtonRestoreViewport_Click(null, null);
 
             AutoUpdater.UpdateFormSize = new System.Drawing.Size(500, 500);

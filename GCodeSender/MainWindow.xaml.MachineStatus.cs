@@ -77,8 +77,6 @@ namespace GCodeSender
 
 			TextBoxCurrentTLO.Text = machine.CurrentTLO.ToString("N", nfi);
 
-			if (machine.Mode == Machine.OperatingMode.Manual)
-				UpdateExpressionPreview();
 		}
 
 		private void Machine_BufferStateChanged()
