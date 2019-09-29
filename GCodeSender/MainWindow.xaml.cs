@@ -73,7 +73,7 @@ namespace GCodeSender
 			settingsWindow.SendLine += machine.SendLine;
                        
 			ButtonRestoreViewport_Click(null, null);
-
+               // Autoupdater
             AutoUpdater.UpdateFormSize = new System.Drawing.Size(500, 500);
             AutoUpdater.ShowSkipButton = false;
             AutoUpdater.Start("http://3rd-dimension.nz/3rdd_version/GCode_Sender_Update.xml");
