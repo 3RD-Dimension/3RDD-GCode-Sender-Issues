@@ -163,13 +163,13 @@ G92Z0;</Value>
       <Value Profile="(Default)">G90 G10 L20 P0 X0 Y0 Z0</Value>
     </Setting>
     <Setting Name="ZeroXCmd" Type="System.String" Scope="User">
-      <Value Profile="(Default)">G90 G10 L20 P0 X0</Value>
+      <Value Profile="(Default)">G90 G10 P0 X0</Value>
     </Setting>
     <Setting Name="ZeroYCmd" Type="System.String" Scope="User">
-      <Value Profile="(Default)">G90 G10 L20 P0 Y0</Value>
+      <Value Profile="(Default)">G90 G10 P0 Y0</Value>
     </Setting>
     <Setting Name="ZeroZCmd" Type="System.String" Scope="User">
-      <Value Profile="(Default)">G90 G10 L20 P0 Z0</Value>
+      <Value Profile="(Default)">G90 G10 P0 Z0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

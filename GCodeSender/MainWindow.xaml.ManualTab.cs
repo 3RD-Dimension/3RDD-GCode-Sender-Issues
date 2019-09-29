@@ -79,16 +79,19 @@ namespace GCodeSender
 				return;
 
             //TextBoxManual.Text = "G10 L2 P0 X0 Y0 Z0";
-            TextBoxManual.Text = "G90 G10 L20 P0 X0 Y0 Z0";
+            TextBoxManual.Text = Properties.Settings.Default.ZeroAllCmd;
             ManualSend(); // Automatically Send Command
 		}
+
+        // TODO Get the commands from Settings
         // Zero X Axis
         private void ButtonManualResetX_Click(object sender, RoutedEventArgs e)
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
             //TextBoxManual.Text = "G10 L2 P0 X0";
-            TextBoxManual.Text = "G90 G10 P0 X0";
+            TextBoxManual.Text = Properties.Settings.Default.ZeroXCmd;     
+
             ManualSend(); // Automatically Send Command
         }
         // Zero Y Axis
@@ -98,7 +101,7 @@ namespace GCodeSender
                 return;
 
             //TextBoxManual.Text = "G10 L2 P0 Y0";
-            TextBoxManual.Text = "G90 G10 P0 Y0";
+            TextBoxManual.Text = Properties.Settings.Default.ZeroYCmd;
             ManualSend(); // Automatically Send Command
         }
         // Zero Z Axis
@@ -107,7 +110,7 @@ namespace GCodeSender
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
             //TextBoxManual.Text = "G10 L2 P0 Z0";
-            TextBoxManual.Text = "G90 G10 P0 Z0";
+            TextBoxManual.Text = Properties.Settings.Default.ZeroZCmd;
             ManualSend(); // Automatically Send Command
         }
 
@@ -127,11 +130,13 @@ namespace GCodeSender
 			machine.JogCancel();
 		}
 
+         // TODO Add Configurable Keys 
 		private void Jogging_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (!machine.Connected)
 				return;
 
+            // Pressing ESC Key Soft Resets Machine
 			if (e.Key == Key.Escape)
 			{
 				if (Properties.Settings.Default.EnableEscapeSoftReset)
@@ -153,6 +158,7 @@ namespace GCodeSender
 
 			string direction = null;
 
+            // If Left or Right Shift is held down...
 			if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
 			{
 				if (e.Key == Key.Up)
@@ -160,7 +166,7 @@ namespace GCodeSender
 				else if (e.Key == Key.Down)
 					direction = "Z-";
 			}
-			else
+			else // Otherwise If Left or Right Shift is not held down
 			{
 				if (e.Key == Key.Right)
 					direction = "X";

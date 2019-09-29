@@ -150,8 +150,12 @@
                                     <CheckBox Name="CheckBoxEnableJog" Content="Enable Keyboard Jogging" Checked="CheckBoxEnableJog_Checked" Unchecked="CheckBoxEnableJog_Unchecked" VerticalAlignment="Top"/>
                                 </GroupBox.Header>
                                 <Grid IsEnabled="{Binding ElementName=CheckBoxEnableJog, Path=IsChecked}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="26*"/>
+                                        <ColumnDefinition Width="83*"/>
+                                    </Grid.ColumnDefinitions>
                                     <TextBox Name="TextBoxJog" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="23" Margin="10,5,0,0" Text="Jogging Keyboard Focus" VerticalAlignment="Top" Width="208" VerticalContentAlignment="Center"
-											 PreviewKeyDown="Jogging_KeyDown" PreviewKeyUp="Jogging_KeyUp" LostKeyboardFocus="Jogging_LostKeyboardFocus">
+											 PreviewKeyDown="Jogging_KeyDown" PreviewKeyUp="Jogging_KeyUp" LostKeyboardFocus="Jogging_LostKeyboardFocus" Grid.ColumnSpan="2">
                                         <TextBox.ToolTip>
                                             <TextBlock>
 												You can only Jog as long as this textbox has the keyboard focus<LineBreak/>
@@ -163,13 +167,13 @@
                                         </TextBox.ToolTip>
                                     </TextBox>
                                     <Label Content="Feed" HorizontalAlignment="Left" Margin="12,33,0,0" VerticalAlignment="Top"/>
-                                    <TextBox Name="TextBoxJogFeed" Text="{util:SettingBinding JogFeed}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="50,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40"/>
-                                    <Label Content="Max Distance" HorizontalAlignment="Left" Margin="90,33,0,0" VerticalAlignment="Top"/>
-                                    <TextBox Name="TextBoxJogDistance" Text="{util:SettingBinding JogDistance}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="0,34,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40"/>
-                                    <Label Content="CtrlFeed" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top"/>
-                                    <TextBox Name="TextBoxJogFeedFine" Text="{util:SettingBinding JogFeedCtrl}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="69,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40"/>
-                                    <Label Content="Distance" HorizontalAlignment="Left" Margin="116,61,0,0" VerticalAlignment="Top"/>
-                                    <TextBox Name="TextBoxJogDistanceFine" Text="{util:SettingBinding JogDistanceCtrl}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="0,62,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40"/>
+                                    <TextBox Name="TextBoxJogFeed" Text="{util:SettingBinding JogFeed}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="50,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.ColumnSpan="2"/>
+                                    <Label Content="Max Distance" HorizontalAlignment="Left" Margin="38,33,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                    <TextBox Name="TextBoxJogDistance" Text="{util:SettingBinding JogDistance}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="0,34,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="1"/>
+                                    <Label Content="CtrlFeed" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                                    <TextBox Name="TextBoxJogFeedFine" Text="{util:SettingBinding JogFeedCtrl}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="17,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="1"/>
+                                    <Label Content="Distance" HorizontalAlignment="Left" Margin="64,61,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                                    <TextBox Name="TextBoxJogDistanceFine" Text="{util:SettingBinding JogDistanceCtrl}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="0,62,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="1"/>
                                 </Grid>
                             </GroupBox>
                         </StackPanel>

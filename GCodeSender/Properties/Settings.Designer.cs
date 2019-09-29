@@ -661,7 +661,7 @@ namespace GCodeSender.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("G90 G10 L20 P0 X0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("G90 G10 P0 X0")]
         public string ZeroXCmd {
             get {
                 return ((string)(this["ZeroXCmd"]));
@@ -673,7 +673,7 @@ namespace GCodeSender.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("G90 G10 L20 P0 Y0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("G90 G10 P0 Y0")]
         public string ZeroYCmd {
             get {
                 return ((string)(this["ZeroYCmd"]));
@@ -685,7 +685,7 @@ namespace GCodeSender.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("G90 G10 L20 P0 Z0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("G90 G10 P0 Z0")]
         public string ZeroZCmd {
             get {
                 return ((string)(this["ZeroZCmd"]));
