@@ -1,0 +1,12 @@
+﻿Resources: 
+			- alarm_codes_en_US.csv
+			- error_codes_en_US.csv
+			- setting_codes_en_US.csv
+
+Calculator.dll
+HelixToolkit.dll
+HelixToolkit.wpf.dll
+3RDD GCode Sender.exe
+License.txt
+Changes.txt
+AutoUpdater.NET.dll

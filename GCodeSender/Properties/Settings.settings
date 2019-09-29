@@ -1,0 +1,175 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GCodeSender.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SerialPortName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">COM3</Value>
+    </Setting>
+    <Setting Name="SerialPortBaud" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">115200</Value>
+    </Setting>
+    <Setting Name="ConnectionType" Type="GCodeSender.Communication.ConnectionType" Scope="User">
+      <Value Profile="(Default)">Serial</Value>
+    </Setting>
+    <Setting Name="ControllerBufferSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">120</Value>
+    </Setting>
+    <Setting Name="StatusPollInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="ViewportArcSplit" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="EnableCodePreview" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ProbeSafeHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="ProbeMinimumHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="ProbeMaxDepth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="AbortOnProbeFail" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ProbeFeed" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="ArcToLineSegmentLength" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="SplitSegmentLength" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="WebServerPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">8080</Value>
+    </Setting>
+    <Setting Name="JogFeed" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="JogDistance" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="LogTraffic" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GCodeIncludeSpindle" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="GCodeIncludeDwell" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="GCodeIncludeMEnd" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="JogFeedCtrl" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">250</Value>
+    </Setting>
+    <Setting Name="JogDistanceCtrl" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="PauseFileOnHold" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ProbeXAxisWeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0.95</Value>
+    </Setting>
+    <Setting Name="ShowStatusLines" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConsoleFadeTime" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="ToolLengthSetterPos" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="SettingsSendDelay" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="SettingsUpdateRequired" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="TLSUseActualPos" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ManualUseExpressions" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FileExpanderOpen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EditExpanderOpen" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="OverrideExpanderOpen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ProbingExpanderOpen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ManualExpanderOpen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ManualProbingExpanderOpen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MacroExpanderOpen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MachineExpanderOpen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AboutExpanderOpen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DebugExpanderOpen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="WindowWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">900</Value>
+    </Setting>
+    <Setting Name="WindowHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
+    <Setting Name="BackupHeightMap" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="HeightMapOpacity" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.8</Value>
+    </Setting>
+    <Setting Name="EnableEscapeSoftReset" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="IgnoreAdditionalAxes" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GridThickness" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.1</Value>
+    </Setting>
+    <Setting Name="SerialPortDTR" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ViewPortPos" Type="System.String" Scope="User">
+      <Value Profile="(Default)">50;-150;250;-50;150;-250</Value>
+    </Setting>
+    <Setting Name="Macros" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Probe and set Zero:G38.2Z-10F20
+G92Z0;</Value>
+    </Setting>
+    <Setting Name="ZeroAllCmd" Type="System.String" Scope="User">
+      <Value Profile="(Default)">G90 G10 L20 P0 X0 Y0 Z0</Value>
+    </Setting>
+    <Setting Name="ZeroXCmd" Type="System.String" Scope="User">
+      <Value Profile="(Default)">G90 G10 L20 P0 X0</Value>
+    </Setting>
+    <Setting Name="ZeroYCmd" Type="System.String" Scope="User">
+      <Value Profile="(Default)">G90 G10 L20 P0 Y0</Value>
+    </Setting>
+    <Setting Name="ZeroZCmd" Type="System.String" Scope="User">
+      <Value Profile="(Default)">G90 G10 L20 P0 Z0</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

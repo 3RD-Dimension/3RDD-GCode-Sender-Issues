@@ -1,0 +1,61 @@
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\Resources\error_codes_en_US.csv
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\Resources\alarm_codes_en_US.csv
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\Resources\setting_codes_en_US.csv
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\License.txt
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\Changes.txt
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\3RDD GCode Sender.exe.config
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\3RDD GCode Sender.exe
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\3RDD GCode Sender.pdb
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\AutoUpdater.NET.dll
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\Calculator.dll
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\HelixToolkit.dll
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\HelixToolkit.Wpf.dll
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\Calculator.xml
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\HelixToolkit.pdb
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\HelixToolkit.xml
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\HelixToolkit.Wpf.pdb
+V:\3RDD GCode Sender WPF\GCodeSender\bin\Release\HelixToolkit.Wpf.xml
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\GCodeSender.csprojAssemblyReference.cache
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\EditMacroItemWindow.baml
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\EditMacroItemWindow.g.cs
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\EnterNumberWindow.g.cs
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\GrblSettingsWindow.g.cs
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\MainWindow.g.cs
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\NewHeightMapWindow.g.cs
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\SettingsWindow.g.cs
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\WarningWindow.g.cs
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\App.g.cs
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\GeneratedInternalTypeHelper.g.cs
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\3RDD GCode Sender_MarkupCompile.cache
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\3RDD GCode Sender_MarkupCompile.lref
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\EnterNumberWindow.baml
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\GrblSettingsWindow.baml
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\MainWindow.Resources.baml
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\MainWindow.baml
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\NewHeightMapWindow.baml
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\SettingsWindow.baml
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\WarningWindow.baml
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\3RDD GCode Sender.g.resources
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\GCodeSender.Properties.Resources.resources
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\GCodeSender.csproj.GenerateResource.cache
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\GCodeSender.csproj.CoreCompileInputs.cache
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\GCodeSender.csproj.CopyComplete
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\3RDD GCode Sender.exe
+V:\3RDD GCode Sender WPF\GCodeSender\obj\Release\3RDD GCode Sender.pdb
+V:\3RDD GCode Sender WPF\GCodeSender\Build\Resources\error_codes_en_US.csv
+V:\3RDD GCode Sender WPF\GCodeSender\Build\Resources\alarm_codes_en_US.csv
+V:\3RDD GCode Sender WPF\GCodeSender\Build\Resources\setting_codes_en_US.csv
+V:\3RDD GCode Sender WPF\GCodeSender\Build\License.txt
+V:\3RDD GCode Sender WPF\GCodeSender\Build\Changes.txt
+V:\3RDD GCode Sender WPF\GCodeSender\Build\3RDD GCode Sender.exe.config
+V:\3RDD GCode Sender WPF\GCodeSender\Build\3RDD GCode Sender.exe
+V:\3RDD GCode Sender WPF\GCodeSender\Build\3RDD GCode Sender.pdb
+V:\3RDD GCode Sender WPF\GCodeSender\Build\AutoUpdater.NET.dll
+V:\3RDD GCode Sender WPF\GCodeSender\Build\Calculator.dll
+V:\3RDD GCode Sender WPF\GCodeSender\Build\HelixToolkit.dll
+V:\3RDD GCode Sender WPF\GCodeSender\Build\HelixToolkit.Wpf.dll
+V:\3RDD GCode Sender WPF\GCodeSender\Build\Calculator.xml
+V:\3RDD GCode Sender WPF\GCodeSender\Build\HelixToolkit.pdb
+V:\3RDD GCode Sender WPF\GCodeSender\Build\HelixToolkit.xml
+V:\3RDD GCode Sender WPF\GCodeSender\Build\HelixToolkit.Wpf.pdb
+V:\3RDD GCode Sender WPF\GCodeSender\Build\HelixToolkit.Wpf.xml
