@@ -3,4 +3,4 @@
 - Added Zero X, Y, Z buttons in addition to Zero All.
 - Added option to export GRBL settings to a formatted text file.
 - Added Autoupdater
-- Manual Jogging buttons for X,Y and Z Axis #1
+- Manual Jogging buttons for X,Y and Z Axis : Enhancement Issue: #1
