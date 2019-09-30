@@ -19,60 +19,49 @@ namespace GCodeSender
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
-            double feed = Properties.Settings.Default.JogFeed;
-            double distance = Properties.Settings.Default.JogDistance;
-            direction = "X";
-            machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feed, direction, distance));
+            manualJogSendCommand("X");
         }
 
         private void manualJogBtnXNegBtn_Click(object sender, RoutedEventArgs e)
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
-            double feed = Properties.Settings.Default.JogFeed;
-            double distance = Properties.Settings.Default.JogDistance;
-            direction = "X-";
-            machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feed, direction, distance));
+            manualJogSendCommand("X-");
         }
 
         private void manualJogBtnYPlusBtn_Click(object sender, RoutedEventArgs e)
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
-            double feed = Properties.Settings.Default.JogFeed;
-            double distance = Properties.Settings.Default.JogDistance;
-            direction = "Y";
-            machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feed, direction, distance));
+            manualJogSendCommand("Y");
         }
 
         private void manualJogBtnYNegBtn_Click(object sender, RoutedEventArgs e)
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
-            double feed = Properties.Settings.Default.JogFeed;
-            double distance = Properties.Settings.Default.JogDistance;
-            direction = "Y-";
-            machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feed, direction, distance));
+            manualJogSendCommand("Y-");
         }
 
         private void manualJogBtnZPlusBtn_Click(object sender, RoutedEventArgs e)
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
-            double feed = Properties.Settings.Default.JogFeed;
-            double distance = Properties.Settings.Default.JogDistance;
-            direction = "Z";
-            machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feed, direction, distance));
+            manualJogSendCommand("Z");
         }
 
         private void manualJogBtnZNegBtn_Click(object sender, RoutedEventArgs e)
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
+            manualJogSendCommand("Z-");  
+        }        
+
+        private void manualJogSendCommand(string direction)
+        {
             double feed = Properties.Settings.Default.JogFeed;
             double distance = Properties.Settings.Default.JogDistance;
-            direction = "Z-";
             machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feed, direction, distance));
-        }        
+        }
     }
 }
