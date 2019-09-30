@@ -694,5 +694,17 @@ namespace GCodeSender.Properties {
                 this["ZeroZCmd"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ManualJogExpanderOpen {
+            get {
+                return ((bool)(this["ManualJogExpanderOpen"]));
+            }
+            set {
+                this["ManualJogExpanderOpen"] = value;
+            }
+        }
     }
 }
