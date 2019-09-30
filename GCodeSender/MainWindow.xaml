@@ -284,7 +284,7 @@
                     <Expander Header="About" IsExpanded="{util:SettingBinding AboutExpanderOpen}">
                         <StackPanel>
                             <TextBlock TextAlignment="Center" FontSize="14" Padding="5">
-                                <Image HorizontalAlignment="Center"  Source="pack://siteoforigin:,,,/Resources/3rdd_logo.png" Height="23" Width="113"/><LineBreak/>
+                                <Image HorizontalAlignment="Center"  Source="pack://siteoforigin:,,,/Resources/3rdd_logo.png" Height="30" Width="147"/><LineBreak/>
 								<Span FontWeight="Bold" FontSize="12">3RDD GCode Sender <Run Text="{Binding Version,Mode=OneWay}"/></Span><LineBreak/>                               
 								<Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="http://3rd-dimension.nz/cncrouter/3rdd-grbl-sender/">Program Information</Hyperlink>
                             </TextBlock>
