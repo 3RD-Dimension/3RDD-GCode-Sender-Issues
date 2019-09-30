@@ -12,7 +12,6 @@ namespace GCodeSender
 	{
 		private List<string> ManualCommands = new List<string>();   //pos 0 is the last command sent, pos1+ are older
 		private int ManualCommandIndex = -1;
-		private bool ManualExpressionSuccess = true;
 
 		void ManualSend()
 		{

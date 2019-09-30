@@ -9,7 +9,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using AutoUpdaterDotNET;
-// Disabled Update Checking - Line ~ 78
+
 namespace GCodeSender
 {
 	public partial class MainWindow : Window, INotifyPropertyChanged

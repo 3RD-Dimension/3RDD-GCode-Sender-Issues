@@ -345,6 +345,15 @@ Be aware that the affected lines will likely move when using edit functions." + 
             ButtonManualResetY.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
             ButtonManualResetZ.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
 
+            // Manual Jogging - Enable only if machine is not activly sending a file
+            manualJogBtnXPlusBtn.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            manualJogBtnXNegBtn.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            manualJogBtnYPlusBtn.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            manualJogBtnYNegBtn.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            manualJogBtnZPlusBtn.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            manualJogBtnZNegBtn.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+
+
             if (machine.Mode != Machine.OperatingMode.Manual)
 				CheckBoxEnableJog.IsChecked = false;
 			CheckBoxEnableJog.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
