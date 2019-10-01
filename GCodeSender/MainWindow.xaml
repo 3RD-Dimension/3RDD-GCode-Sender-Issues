@@ -314,10 +314,11 @@
                 <Border Style="{StaticResource stylePanelOut}" BorderBrush="#FFCE0606">
                     <Expander Header="About" IsExpanded="{util:SettingBinding AboutExpanderOpen}">
                         <StackPanel>
-                            <TextBlock TextAlignment="Center" FontSize="14" Padding="5">
-                                <Image HorizontalAlignment="Center"  Source="pack://siteoforigin:,,,/Resources/3rdd_logo.png" Height="30" Width="147"/><LineBreak/>
+                            <Image HorizontalAlignment="Center"  Source="Resources/3rdd_logo.png" Height="37" Width="187"/>
+                            <TextBlock TextAlignment="Center" FontSize="14" Padding="5">                              
 								<Span FontWeight="Bold" FontSize="12">3RDD GCode Sender <Run Text="{Binding Version,Mode=OneWay}"/></Span><LineBreak/>                               
-								<Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="http://3rd-dimension.nz/cncrouter/3rdd-grbl-sender/">Program Information</Hyperlink>
+								<Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="http://3rd-dimension.nz/cncrouter/3rdd-grbl-sender/" FontSize="12">Program Information</Hyperlink><LineBreak/>
+                                <Span FontSize="12">Original Code by Martin Pittermann </Span>
                             </TextBlock>
                         </StackPanel>
                     </Expander>

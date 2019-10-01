@@ -239,7 +239,7 @@
     <Resource Include="3rdd_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\3rdd_logo.png" />
+    <Resource Include="Resources\3rdd_logo.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="License.txt">
