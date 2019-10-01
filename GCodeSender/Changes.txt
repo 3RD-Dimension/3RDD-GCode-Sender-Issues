@@ -4,3 +4,4 @@
 - Added Autoupdater.
 - Manual Jogging buttons for X,Y and Z Axis : Enhancement Issue: #1.
 - Added "Return to Zero" button to return all axis to the set Zero position.
+- Added option to edit change the commands for Zero X, Zero Y and Zero Z buttons in Settings.
