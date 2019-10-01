@@ -1,6 +1,6 @@
 ﻿Change Log for 2.0.1
-- Deleted Surface probing, Not needed for CNC.
 - Added Zero X, Y, Z buttons in addition to Zero All.
 - Added option to export GRBL settings to a formatted text file.
-- Added Autoupdater
-- Manual Jogging buttons for X,Y and Z Axis : Enhancement Issue: #1
+- Added Autoupdater.
+- Manual Jogging buttons for X,Y and Z Axis : Enhancement Issue: #1.
+- Added "Return to Zero" button to return all axis to the set Zero position.
