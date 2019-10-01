@@ -312,7 +312,7 @@
                     </Expander>
                 </Border>
                 <Border Style="{StaticResource stylePanelOut}" BorderBrush="#FFCE0606">
-                    <Expander Header="About" IsExpanded="{util:SettingBinding AboutExpanderOpen}">
+                    <Expander Header="About">
                         <StackPanel>
                             <Image HorizontalAlignment="Center"  Source="Resources/3rdd_logo.png" Height="37" Width="187"/>
                             <TextBlock TextAlignment="Center" FontSize="14" Padding="5">                              

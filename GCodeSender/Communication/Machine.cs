@@ -829,7 +829,31 @@ namespace GCodeSender.Communication
 			ToSend.Clear();
 		}
 
-		private static Regex GCodeSplitter = new Regex(@"([GZ])\s*(\-?\d+\.?\d*)", RegexOptions.Compiled);
+
+
+        // Get and Parse Offsets for G54, G55, G56, G57, G58, G59. Called from UpdateStatus
+        private void parseG5xOffsets(string recievedG5x)
+        {
+            // Splitting each recieved axis and value
+            // TODO populate textboxes with values
+            string label;
+            string[] axes;
+
+            recievedG5x = recievedG5x.Remove(0, 1);                   // remove the leading [
+            recievedG5x = recievedG5x.Remove(recievedG5x.Length - 1, 1);     // remove the trailing "] <vbLf>"
+            label = recievedG5x.Substring(0, 3);
+            recievedG5x = recievedG5x.Remove(0, 4);                   // finally remove the label:
+            axes = recievedG5x.Split(',');
+
+            int i = 0;
+            foreach (var axi in new[] { "X", "Y", "Z" })
+            {               
+               Console.WriteLine(label + ": "+ axi + axes[i]);
+                i += 1;
+            }
+        }
+
+        private static Regex GCodeSplitter = new Regex(@"([GZ])\s*(\-?\d+\.?\d*)", RegexOptions.Compiled);
 
 		/// <summary>
 		/// Updates Status info from each line sent
@@ -853,6 +877,13 @@ namespace GCodeSender.Communication
 				catch { RaiseEvent(NonFatalException, "Error while Parsing Status Message"); }
 				return;
 			}
+                        
+            // TODO Recieve Work Offsets (G54, G55, G56, G57, G58, G59) from $# command
+            if (line.StartsWith("[G54:"))
+            {
+                parseG5xOffsets(line);
+            }
+             
 
 			try
 			{
