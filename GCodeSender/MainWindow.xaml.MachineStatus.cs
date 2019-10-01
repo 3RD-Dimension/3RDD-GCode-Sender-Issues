@@ -344,6 +344,7 @@ Be aware that the affected lines will likely move when using edit functions." + 
             ButtonManualResetX.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
             ButtonManualResetY.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
             ButtonManualResetZ.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            ButtonManualReturnToZero.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
 
             // Manual Jogging - Enable only if machine is not activly sending a file
             manualJogBtnXPlusBtn.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
@@ -353,6 +354,11 @@ Be aware that the affected lines will likely move when using edit functions." + 
             manualJogBtnZPlusBtn.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
             manualJogBtnZNegBtn.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
 
+            // Manual Control - TextBoxJogFeed, TextBoxJogDistance, TextBoxJogFeedFine, TextBoxJogDistanceFine
+            TextBoxJogFeed.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            TextBoxJogDistance.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            TextBoxJogFeedFine.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            TextBoxJogDistanceFine.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
 
             if (machine.Mode != Machine.OperatingMode.Manual)
 				CheckBoxEnableJog.IsChecked = false;

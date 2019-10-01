@@ -106,6 +106,16 @@ namespace GCodeSender
             ManualSend(); // Automatically Send Command
         }
 
+        private void ButtonManualReturnToZero_Click(object sender, RoutedEventArgs e)
+        {
+            // Return all Axis to Zero
+            if (machine.Mode != Machine.OperatingMode.Manual)
+                return;
+
+            machine.SendLine("G90 G0 X0 Y0");
+            machine.SendLine("G90 G0 Z0");
+        }
+
         private void CheckBoxEnableJog_Checked(object sender, RoutedEventArgs e)
 		{
 			if (machine.Mode != Machine.OperatingMode.Manual)
