@@ -1,0 +1,66 @@
+﻿<Window x:Class="GCodeSender.WorkOffsetsWindow"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GCodeSender"
+        xmlns:util="clr-namespace:GCodeSender.Util"
+        mc:Ignorable="d"
+        Title="Work Offsets" Height="450" Width="450" Closed="Window_Closed" ResizeMode="NoResize">
+    <StackPanel Margin="0,0,0,115">
+        <Grid Margin="0,50,0,10" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <!--Header-->
+            <Label Content="View and nanage current work Offsets" HorizontalAlignment="Left" Margin="51,-36,0,0" VerticalAlignment="Top" FontWeight="Bold" Grid.ColumnSpan="3" Grid.Column="1" Width="229"/>
+            <!--Axis Lables-->
+            <Label Content="X Axis" HorizontalAlignment="Left" Margin="32,6,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="Y Axis" HorizontalAlignment="Left" Margin="32,6,0,0" Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="Z Axis" HorizontalAlignment="Left" Margin="32,6,0,0" Grid.Row="0" Grid.Column="3" VerticalAlignment="Top" FontWeight="Bold"/>
+            <!--G54 X,Y,Z-->
+            <Label Content="G54" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <TextBox Name="G54X"  Grid.Column="1" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="91" Height="23" VerticalAlignment="Top"/>
+            <TextBox Name="G54Y" Grid.Column="2" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="91" Height="23" VerticalAlignment="Top"/>
+            <TextBox Name="G54Z" Grid.Column="3" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="91" Height="23" VerticalAlignment="Top"/>
+            <!--G55 X,Y,Z-->
+            <Label Content="G55" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <TextBox Name="G55X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="2" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <TextBox Name="G55Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="2" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <TextBox Name="G55Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="2" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <!--G56 X,Y,Z-->
+            <Label Content="G56" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <TextBox Name="G56X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="3" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <TextBox Name="G56Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="3" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <TextBox Name="G56Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="3" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <!--G57 X,Y,Z-->
+            <Label Content="G57" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="4" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <TextBox Name="G57X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="4" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <TextBox Name="G57Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="4" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <TextBox Name="G57Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="4" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <!--G58 X,Y,Z-->
+            <Label Content="G58" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <TextBox Name="G58X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="5" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <TextBox Name="G58Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="5" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <TextBox Name="G58Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="5" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <!--G59 X,Y,Z-->
+            <Label Content="G59" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="6" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <TextBox Name="G59X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <TextBox Name="G59Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <TextBox Name="G59Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+        </Grid>
+        
+    </StackPanel>
+</Window>

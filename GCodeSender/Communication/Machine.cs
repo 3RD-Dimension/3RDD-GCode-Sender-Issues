@@ -48,6 +48,7 @@ namespace GCodeSender.Communication
         public event Action FileChanged;
         public event Action FilePositionChanged;
         public event Action OverrideChanged;
+        public event Action<string> parseG5xOffsets;
 
         public Vector3 MachinePosition { get; private set; } = new Vector3();   //No events here, the parser triggers a single event for both
         public Vector3 WorkOffset { get; private set; } = new Vector3();
@@ -81,6 +82,8 @@ namespace GCodeSender.Communication
             get { return _pauselines; }
             private set { _pauselines = value; }
         }
+
+        WorkOffsetsWindow WOST = new WorkOffsetsWindow(); // New WorkOffsetWindow Object
 
         private ReadOnlyCollection<string> _file = new ReadOnlyCollection<string>(new string[0]);
         public ReadOnlyCollection<string> File
@@ -827,30 +830,7 @@ namespace GCodeSender.Communication
             }
 
             ToSend.Clear();
-        }
-
-        // Get and Parse Offsets for G54, G55, G56, G57, G58, G59. Called from UpdateStatus
-        // TODO Move this to antoher sub class - send $# then parse - otherwise when a G5x is seen anywhere it would parse it which we dont want to do
-        private void parseG5xOffsets(string recievedG5x)
-        {
-            // Splitting each recieved axis and value
-            // TODO populate textboxes with values
-            string label;
-            string[] axes;
-
-            recievedG5x = recievedG5x.Remove(0, 1);                   // remove the leading [
-            recievedG5x = recievedG5x.Remove(recievedG5x.Length - 1, 1);     // remove the trailing "] <vbLf>"
-            label = recievedG5x.Substring(0, 3);
-            recievedG5x = recievedG5x.Remove(0, 4);                   // finally remove the label:
-            axes = recievedG5x.Split(',');
-
-            int i = 0;
-            foreach (var axi in new[] { "X", "Y", "Z" })
-            {
-                Console.WriteLine(label + ": " + axi + axes[i]);
-                i += 1;
-            }
-        }
+        } 
 
         private static Regex GCodeSplitter = new Regex(@"([GZ])\s*(\-?\d+\.?\d*)", RegexOptions.Compiled);
 
@@ -883,9 +863,7 @@ namespace GCodeSender.Communication
             {
                 if (line.StartsWith("[G54:") || line.StartsWith("[G55:") || line.StartsWith("[G56:") || line.StartsWith("[G57:") || line.StartsWith("[G58:") || line.StartsWith("[G59:"))
                 {
-                    // SendLine("$#");
-                    parseG5xOffsets(line);
-
+                    WOST.parseG5xOffsets(line); // Calls WOST Object (WorkOffsetsWindow)
                 }
             }
 

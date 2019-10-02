@@ -388,9 +388,11 @@ Be aware that the affected lines will likely move when using edit functions." + 
 
 			groupBoxTLO.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
 
-			ButtonGrblSettings.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
-			ButtonMachineHome.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
-		}
+			ButtonGrblSettings.IsEnabled = machine.Mode == Machine.OperatingMode.Manual; // GRBL Settings Window
+			ButtonMachineHome.IsEnabled = machine.Mode == Machine.OperatingMode.Manual; // Home Button
+            ButtonWorkOffsets.IsEnabled = machine.Mode == Machine.OperatingMode.Manual; // Work OffSets
+
+        }
 
 		private void FileRuntimeTimer_Tick(object sender, EventArgs e)
 		{

@@ -289,6 +289,9 @@
                                 </Grid>
                             </Button>
                             <StackPanel Orientation="Horizontal">
+                                <Button Name="ButtonWorkOffsets" Content="Work Offsets" Style="{StaticResource styleButton}" Click="ButtonWorkOffsets_click"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
                                 <Button Content="GRBL Settings" Style="{StaticResource styleButton}" Click="ShowGrblSettings_Click" Name="ButtonGrblSettings"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Margin="0,-5,0,0">
