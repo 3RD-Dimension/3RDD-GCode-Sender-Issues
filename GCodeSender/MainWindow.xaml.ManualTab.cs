@@ -76,8 +76,7 @@ namespace GCodeSender
 		{
 			if (machine.Mode != Machine.OperatingMode.Manual)
 				return;
-            TextBoxManual.Text = Properties.Settings.Default.ZeroAllCmd;
-            ManualSend(); // Automatically Send Command
+            machine.SendLine(Properties.Settings.Default.ZeroAllCmd);
 		}
 
         // TODO Get the commands from Settings
@@ -85,25 +84,22 @@ namespace GCodeSender
         private void ButtonManualResetX_Click(object sender, RoutedEventArgs e)
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
-                return;
-            TextBoxManual.Text = Properties.Settings.Default.ZeroXCmd;               
-            ManualSend(); // Automatically Send Command
+                return;           
+            machine.SendLine(Properties.Settings.Default.ZeroXCmd);
         }
         // Zero Y Axis
         private void ButtonManualResetY_Click(object sender, RoutedEventArgs e)
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
-            TextBoxManual.Text = Properties.Settings.Default.ZeroYCmd;
-            ManualSend(); // Automatically Send Command
+            machine.SendLine(Properties.Settings.Default.ZeroYCmd);
         }
         // Zero Z Axis
         private void ButtonManualResetZ_Click(object sender, RoutedEventArgs e)
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
-            TextBoxManual.Text = Properties.Settings.Default.ZeroZCmd;
-            ManualSend(); // Automatically Send Command
+            machine.SendLine(Properties.Settings.Default.ZeroZCmd);
         }
 
         private void ButtonManualReturnToZero_Click(object sender, RoutedEventArgs e)
