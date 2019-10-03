@@ -23,6 +23,7 @@ namespace GCodeSender
 		HeightMap Map { get; set; }
 
 		GrblSettingsWindow settingsWindow = new GrblSettingsWindow();
+        WorkOffsetsWindow workOffsetsWindows = new WorkOffsetsWindow();
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
@@ -44,8 +45,9 @@ namespace GCodeSender
 			machine.NonFatalException += Machine_NonFatalException;
 			machine.Info += Machine_Info;
 			machine.LineReceived += Machine_LineReceived;
-			machine.LineReceived += settingsWindow.LineReceived;            
-			machine.StatusReceived += Machine_StatusReceived;
+			machine.LineReceived += settingsWindow.LineReceived;
+            machine.LineReceived += workOffsetsWindows.parseG5xOffsets;
+            machine.StatusReceived += Machine_StatusReceived;
 			machine.LineSent += Machine_LineSent;
 
 			machine.PositionUpdateReceived += Machine_PositionUpdateReceived;

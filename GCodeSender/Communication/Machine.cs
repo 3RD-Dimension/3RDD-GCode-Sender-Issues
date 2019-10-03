@@ -48,7 +48,6 @@ namespace GCodeSender.Communication
         public event Action FileChanged;
         public event Action FilePositionChanged;
         public event Action OverrideChanged;
-        public event Action<string> parseG5xOffsets;
 
         public Vector3 MachinePosition { get; private set; } = new Vector3();   //No events here, the parser triggers a single event for both
         public Vector3 WorkOffset { get; private set; } = new Vector3();
@@ -855,16 +854,6 @@ namespace GCodeSender.Communication
                 }
                 catch { RaiseEvent(NonFatalException, "Error while Parsing Status Message"); }
                 return;
-            }
-
-            // Retrieve work offsets from controller
-            // Processing of G54-G59 settings is only performed if the machine is not sending a file and then processes lines in parseG5xOffsets()            
-            if (Mode != Machine.OperatingMode.SendFile) // Maybe change to Machine.OperatingMode.Manual but Sendfile seems a better option.  Will keep an eye on this
-            {
-                if (line.StartsWith("[G54:") || line.StartsWith("[G55:") || line.StartsWith("[G56:") || line.StartsWith("[G57:") || line.StartsWith("[G58:") || line.StartsWith("[G59:"))
-                {
-                    WOST.parseG5xOffsets(line); // Calls WOST Object (WorkOffsetsWindow)
-                }
             }
 
             try

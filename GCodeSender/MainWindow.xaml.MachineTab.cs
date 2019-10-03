@@ -80,10 +80,10 @@ namespace GCodeSender
 
         private void ButtonWorkOffsets_click(object sender, RoutedEventArgs e)
         {
-            //if (machine.Mode != Communication.Machine.OperatingMode.Manual)
-            //    return;
+            if (machine.Mode != Communication.Machine.OperatingMode.Manual)
+                return;
             machine.SendLine("$#");
-            new WorkOffsetsWindow().ShowDialog();        
+            workOffsetsWindows.ShowDialog();        
         }
     }
 }
