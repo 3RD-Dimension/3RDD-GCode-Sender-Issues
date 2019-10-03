@@ -73,6 +73,7 @@ namespace GCodeSender
 			LoadMacros();
             
 			settingsWindow.SendLine += machine.SendLine;
+            workOffsetsWindows.SendLine += machine.SendLine;
                        
 			ButtonRestoreViewport_Click(null, null);
                // Autoupdater

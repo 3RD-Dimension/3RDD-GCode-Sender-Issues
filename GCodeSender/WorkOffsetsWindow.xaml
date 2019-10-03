@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:GCodeSender"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         mc:Ignorable="d"
-        Title="Work Offsets" Height="450" Width="450" Closed="Window_Closed" ResizeMode="NoResize">
+        Title="Work Offsets" Height="450" Width="450" Closed="Window_Closed" ResizeMode="NoResize" Closing="Window_Closing">
     <StackPanel Margin="0,0,0,115">
         <Grid Margin="0,50,0,10" >
             <Grid.RowDefinitions>
@@ -23,7 +23,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <!--<Button Name="btnSetG54" Content="Work Offsets" Style="{StaticResource styleButton}" Click="btnSetG54_click"/> -->
+            
             <!--Header-->
             <Label Content="View and nanage current work Offsets" HorizontalAlignment="Left" Margin="51,-36,0,0" VerticalAlignment="Top" FontWeight="Bold" Grid.ColumnSpan="3" Grid.Column="1" Width="229"/>
             <!--Axis Lables-->
@@ -32,38 +35,40 @@
             <Label Content="Z Axis" HorizontalAlignment="Left" Margin="32,6,0,0" Grid.Row="0" Grid.Column="3" VerticalAlignment="Top" FontWeight="Bold"/>
             <!--G54 X,Y,Z-->
             <Label Content="G54" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBox x:Name="G54X" Grid.Column="1" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="91" Height="23" VerticalAlignment="Top"/>
-            <TextBox x:Name="G54Y" Grid.Column="2" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="91" Height="23" VerticalAlignment="Top"/>
-            <TextBox x:Name="G54Z" Grid.Column="3" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="91" Height="23" VerticalAlignment="Top"/>
+            <TextBox x:Name="G54X" Grid.Column="1" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="75" Height="23" VerticalAlignment="Top"/>
+            <TextBox x:Name="G54Y" Grid.Column="2" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="75" Height="23" VerticalAlignment="Top"/>
+            <TextBox x:Name="G54Z" Grid.Column="3" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="75" Height="23" VerticalAlignment="Top"/>
+            <Button x:Name="btnSetG54" Grid.Column="4" Grid.Row="1" Content="Set G54" Width="70" Height="25" Click="BtnSetG54_Click"/>
             <!--G55 X,Y,Z-->
             <Label Content="G55" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBox x:Name="G55X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="2" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
-            <TextBox x:Name="G55Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="2" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
-            <TextBox x:Name="G55Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="2" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <TextBox x:Name="G55X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="2" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="G55Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="2" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="G55Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="2" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="btnSetG55" Grid.Column="4" Grid.Row="2" Content="Set G55" Width="70" Height="25" Click="BtnSetG55_Click"/>
             <!--G56 X,Y,Z-->
             <Label Content="G56" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBox x:Name="G56X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="3" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
-            <TextBox x:Name="G56Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="3" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
-            <TextBox x:Name="G56Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="3" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <TextBox x:Name="G56X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="3" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="G56Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="3" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="G56Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="3" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="btnSetG56" Grid.Column="4" Grid.Row="3" Content="Set G56" Width="70" Height="25" Click="BtnSetG56_Click"/>
             <!--G57 X,Y,Z-->
             <Label Content="G57" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="4" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBox x:Name="G57X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="4" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
-            <TextBox x:Name="G57Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="4" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
-            <TextBox x:Name="G57Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="4" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <TextBox x:Name="G57X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="4" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="G57Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="4" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="G57Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="4" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="btnSetG57" Grid.Column="4" Grid.Row="4" Content="Set G57" Width="70" Height="25" Click="BtnSetG57_Click"/>
             <!--G58 X,Y,Z-->
             <Label Content="G58" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBox x:Name="G58X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="5" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
-            <TextBox x:Name="G58Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="5" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
-            <TextBox x:Name="G58Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="5" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
+            <TextBox x:Name="G58X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="5" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="G58Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="5" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="G58Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="5" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="btnSetG58" Grid.Column="4" Grid.Row="5" Content="Set G58" Width="70" Height="25" Click="BtnSetG58_Click"/>
             <!--G59 X,Y,Z-->
             <Label Content="G59" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="6" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBox x:Name="G59X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
-            <TextBox x:Name="G59Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
-            <TextBox x:Name="G59Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Top" Width="91"/>
-        <Button Content="Button" Click="Button_Click"/>
+            <TextBox x:Name="G59X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="G59Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
+            <TextBox x:Name="G59Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
+            <Button x:Name="btnSetG59" Grid.Column="4" Grid.Row="6" Content="Set G59" Width="70" Height="25" Click="BtnSetG59_Click"/>
         </Grid>
-       
-
-
     </StackPanel>
 </Window>
