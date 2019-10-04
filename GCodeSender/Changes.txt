@@ -1,4 +1,9 @@
-﻿Change Log for 2.0.1.0
+﻿Change Log for 2.0.2.0
+- Now can set G5x Offsets from current Machine Postion, Reset to Zero or change an individual G5x Axis offset.
+- Can change an idividual G5x Axis by entering the number and then Double-Clicking in the field
+
+
+Change Log for 2.0.1.0
 - Added Zero X, Y, Z buttons in addition to Zero All.
 - Added option to export GRBL settings to a formatted text file.
 - Added Autoupdater.

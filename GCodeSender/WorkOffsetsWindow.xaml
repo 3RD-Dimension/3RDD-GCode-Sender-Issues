@@ -6,9 +6,32 @@
         xmlns:local="clr-namespace:GCodeSender"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         mc:Ignorable="d"
-        Title="Work Offsets" Height="450" Width="450" Closed="Window_Closed" ResizeMode="NoResize" Closing="Window_Closing">
-    <StackPanel Margin="0,0,0,115">
-        <Grid Margin="0,50,0,10" >
+        Title="View and manage current machine work Offsets" Height="450" Width="450" Closed="Window_Closed" ResizeMode="NoResize" Closing="Window_Closing">
+    <Window.Resources>
+        <ResourceDictionary Source="WorkOffsetsWindow.Resources.xaml"/>
+    </Window.Resources>
+    <StackPanel Margin="0,0,0,0">
+        <!--Current Machine Location-->
+        <Label Content="Current Machine Location" Margin="140,10,0,0" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Left" Width="156"/>
+        <Grid Height="50" Margin="0,5,0,0" ShowGridLines="false" Width="300">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            <Label Content="X Axis" HorizontalAlignment="Left" Margin="25,0,0,0" Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="Y Axis" HorizontalAlignment="Left" Margin="25,0,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" FontWeight="Bold"/>
+            <Label Content="Z Axis" HorizontalAlignment="Left" Margin="25,0,0,0" Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" FontWeight="Bold"/>
+            <TextBox x:Name="MachineX_Current" VerticalContentAlignment="Center" IsReadOnly="True" Grid.Column="0" HorizontalAlignment="Left" Margin="10,2,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="75" Height="23" VerticalAlignment="Top"/>
+            <TextBox x:Name="MachineY_Current" VerticalContentAlignment="Center" IsReadOnly="True" Grid.Column="1" HorizontalAlignment="Left" Margin="10,2,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="75" Height="23" VerticalAlignment="Top"/>
+            <TextBox x:Name="MachineZ_Current" VerticalContentAlignment="Center" IsReadOnly="True" Grid.Column="2" HorizontalAlignment="Left" Margin="10,2,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="75" Height="23" VerticalAlignment="Top"/>
+            
+        </Grid>
+        <Grid Margin="0,20,0,0" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="35"/>
@@ -19,56 +42,53 @@
                 <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="80"/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <!--<Button Name="btnSetG54" Content="Work Offsets" Style="{StaticResource styleButton}" Click="btnSetG54_click"/> -->
-            
-            <!--Header-->
-            <Label Content="View and nanage current work Offsets" HorizontalAlignment="Left" Margin="51,-36,0,0" VerticalAlignment="Top" FontWeight="Bold" Grid.ColumnSpan="3" Grid.Column="1" Width="229"/>
             <!--Axis Lables-->
             <Label Content="X Axis" HorizontalAlignment="Left" Margin="32,6,0,0" Grid.Row="0" Grid.Column="1" VerticalAlignment="Top" FontWeight="Bold"/>
             <Label Content="Y Axis" HorizontalAlignment="Left" Margin="32,6,0,0" Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" FontWeight="Bold"/>
             <Label Content="Z Axis" HorizontalAlignment="Left" Margin="32,6,0,0" Grid.Row="0" Grid.Column="3" VerticalAlignment="Top" FontWeight="Bold"/>
             <!--G54 X,Y,Z-->
-            <Label Content="G54" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBox x:Name="G54X" Grid.Column="1" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="75" Height="23" VerticalAlignment="Top"/>
-            <TextBox x:Name="G54Y" Grid.Column="2" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="75" Height="23" VerticalAlignment="Top"/>
-            <TextBox x:Name="G54Z" Grid.Column="3" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="75" Height="23" VerticalAlignment="Top"/>
-            <Button x:Name="btnSetG54" Grid.Column="4" Grid.Row="1" Content="Set G54" Width="70" Height="25" Click="BtnSetG54_Click"/>
+            <TextBox x:Name="G54X" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="75" Height="23" VerticalAlignment="Top" Tag="G54X" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <TextBox x:Name="G54Y" VerticalContentAlignment="Center" Grid.Column="2" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="75" Height="23" VerticalAlignment="Top" Tag="G54Y" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <TextBox x:Name="G54Z" VerticalContentAlignment="Center" Grid.Column="3" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="1" TextWrapping="NoWrap" Width="75" Height="23" VerticalAlignment="Top" Tag="G54Z" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <Button x:Name="btnSetG54" Grid.Column="0" Grid.Row="1" Content="Set G54" Width="70" Height="25" Click="BtnSetG54_Click"  Style="{StaticResource styleButton}"/>
+            <Button x:Name="btnZeroG54" Grid.Column="4" Grid.Row="1" Content="Reset to 0" Width="70" Height="25" Click="BtnResetOffset_Click"  Style="{StaticResource styleButton}" Tag="ResetG54"/>
             <!--G55 X,Y,Z-->
-            <Label Content="G55" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBox x:Name="G55X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="2" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
-            <TextBox x:Name="G55Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="2" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
-            <TextBox x:Name="G55Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="2" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="btnSetG55" Grid.Column="4" Grid.Row="2" Content="Set G55" Width="70" Height="25" Click="BtnSetG55_Click"/>
+            <TextBox x:Name="G55X" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="2" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Tag="G55X" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <TextBox x:Name="G55Y" VerticalContentAlignment="Center" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="2" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Tag="G55Y" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <TextBox x:Name="G55Z" VerticalContentAlignment="Center" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="2" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Tag="G55Z" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <Button x:Name="btnSetG55" Grid.Column="0" Grid.Row="2" Content="Set G55" Width="70" Height="25" Click="BtnSetG55_Click"  Style="{StaticResource styleButton}"/>
+            <Button x:Name="btnZeroG55" Grid.Column="4" Grid.Row="2" Content="Reset to 0" Width="70" Height="25" Click="BtnResetOffset_Click"  Style="{StaticResource styleButton}" Tag="ResetG55"/>
             <!--G56 X,Y,Z-->
-            <Label Content="G56" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBox x:Name="G56X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="3" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
-            <TextBox x:Name="G56Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="3" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
-            <TextBox x:Name="G56Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="3" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="btnSetG56" Grid.Column="4" Grid.Row="3" Content="Set G56" Width="70" Height="25" Click="BtnSetG56_Click"/>
+            <TextBox x:Name="G56X" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="3" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Tag="G56X" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <TextBox x:Name="G56Y" VerticalContentAlignment="Center" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="3" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Tag="G56Y" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <TextBox x:Name="G56Z" VerticalContentAlignment="Center" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="3" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Tag="G56Z" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <Button x:Name="btnSetG56" Grid.Column="0" Grid.Row="3" Content="Set G56" Width="70" Height="25" Click="BtnSetG56_Click"  Style="{StaticResource styleButton}"/>
+            <Button x:Name="btnZeroG56" Grid.Column="4" Grid.Row="3" Content="Reset to 0" Width="70" Height="25" Click="BtnResetOffset_Click"  Style="{StaticResource styleButton}" Tag="ResetG56"/>
             <!--G57 X,Y,Z-->
-            <Label Content="G57" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="4" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBox x:Name="G57X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="4" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
-            <TextBox x:Name="G57Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="4" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
-            <TextBox x:Name="G57Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="4" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="btnSetG57" Grid.Column="4" Grid.Row="4" Content="Set G57" Width="70" Height="25" Click="BtnSetG57_Click"/>
+            <TextBox x:Name="G57X" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="4" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Tag="G57X" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <TextBox x:Name="G57Y" VerticalContentAlignment="Center" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="4" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Tag="G57Y" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <TextBox x:Name="G57Z" VerticalContentAlignment="Center" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="4" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Tag="G57Z" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <Button x:Name="btnSetG57" Grid.Column="0" Grid.Row="4" Content="Set G57" Width="70" Height="25" Click="BtnSetG57_Click"  Style="{StaticResource styleButton}"/>
+            <Button x:Name="btnZeroG57" Grid.Column="4" Grid.Row="4" Content="Reset to 0" Width="70" Height="25" Click="BtnResetOffset_Click"  Style="{StaticResource styleButton}" Tag="ResetG57"/>
             <!--G58 X,Y,Z-->
-            <Label Content="G58" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="5" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBox x:Name="G58X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="5" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
-            <TextBox x:Name="G58Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="5" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
-            <TextBox x:Name="G58Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="5" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="btnSetG58" Grid.Column="4" Grid.Row="5" Content="Set G58" Width="70" Height="25" Click="BtnSetG58_Click"/>
+            <TextBox x:Name="G58X" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="5" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Tag="G58X" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <TextBox x:Name="G58Y" VerticalContentAlignment="Center" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="5" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Tag="G58Y" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <TextBox x:Name="G58Z" VerticalContentAlignment="Center" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="5" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Tag="G58Z" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <Button x:Name="btnSetG58" Grid.Column="0" Grid.Row="5" Content="Set G58" Width="70" Height="25" Click="BtnSetG58_Click"  Style="{StaticResource styleButton}"/>
+            <Button x:Name="btnZeroG58" Grid.Column="4" Grid.Row="5" Content="Reset to 0" Width="70" Height="25" Click="BtnResetOffset_Click"  Style="{StaticResource styleButton}" Tag="ResetG58"/>
             <!--G59 X,Y,Z-->
-            <Label Content="G59" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="6" Grid.Column="0" VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBox x:Name="G59X" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
-            <TextBox x:Name="G59Y" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
-            <TextBox x:Name="G59Z" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75"/>
-            <Button x:Name="btnSetG59" Grid.Column="4" Grid.Row="6" Content="Set G59" Width="70" Height="25" Click="BtnSetG59_Click"/>
+            <TextBox x:Name="G59X" VerticalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Tag="G59X" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <TextBox x:Name="G59Y" VerticalContentAlignment="Center" Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Tag="G59Y" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <TextBox x:Name="G59Z" VerticalContentAlignment="Center" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Tag="G59Z" MouseDoubleClick="saveIndividualOffsetAxis"/>
+            <Button x:Name="btnSetG59" Grid.Column="0" Grid.Row="6" Content="Set G59" Width="70" Height="25" Click="BtnSetG59_Click"  Style="{StaticResource styleButton}"/>
+            <Button x:Name="btnZeroG59" Grid.Column="4" Grid.Row="6" Content="Reset to 0" Width="70" Height="25" Click="BtnResetOffset_Click"  Style="{StaticResource styleButton}" Tag="ResetG59"/>
         </Grid>
     </StackPanel>
 </Window>

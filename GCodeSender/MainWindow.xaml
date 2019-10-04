@@ -211,7 +211,7 @@
                     </Expander>
                 </Border>
                 <Border Style="{StaticResource stylePanelOut}" BorderBrush="#FFCE0606">
-                    <Expander Header="Probing" IsExpanded="{util:SettingBinding ManualProbingExpanderOpen}">
+                    <Expander Header="Probing / TLO" IsExpanded="{util:SettingBinding ManualProbingExpanderOpen}">
                         <StackPanel>
                             <GroupBox Header="Last Probe Position">
                                 <StackPanel>

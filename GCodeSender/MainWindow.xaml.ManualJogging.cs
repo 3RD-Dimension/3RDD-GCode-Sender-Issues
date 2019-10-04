@@ -10,9 +10,7 @@ using System.Windows.Media;
 namespace GCodeSender
 {
     partial class MainWindow
-    {
-        string direction = null;
-        
+    {     
         // $J=G91F800Y-100
 
         private void manualJogBtnXPlusBtn_Click(object sender, RoutedEventArgs e)

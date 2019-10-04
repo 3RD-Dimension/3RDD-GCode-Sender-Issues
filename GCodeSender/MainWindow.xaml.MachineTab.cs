@@ -81,7 +81,10 @@ namespace GCodeSender
         private void ButtonWorkOffsets_click(object sender, RoutedEventArgs e)
         {
             if (machine.Mode != Communication.Machine.OperatingMode.Manual)
-                return;
+                return;           
+            workOffsetsWindows.MachineX_Current.Text = LabelPosMX.Text;
+            workOffsetsWindows.MachineY_Current.Text = LabelPosMY.Text;
+            workOffsetsWindows.MachineZ_Current.Text = LabelPosMZ.Text;
             machine.SendLine("$#");
             workOffsetsWindows.ShowDialog();        
         }
