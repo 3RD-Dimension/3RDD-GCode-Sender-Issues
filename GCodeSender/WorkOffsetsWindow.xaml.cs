@@ -376,7 +376,7 @@ namespace GCodeSender
         }
         #endregion
 
-
+        
         #region Closing Window Functions
         private void Window_Closed(object sender, EventArgs e)
         {
@@ -388,8 +388,6 @@ namespace GCodeSender
             e.Cancel = true;
             Hide();
         }
-        #endregion
-
-        
+        #endregion       
     }
 }

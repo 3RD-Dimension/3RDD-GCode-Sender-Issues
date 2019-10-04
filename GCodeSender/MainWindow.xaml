@@ -288,9 +288,21 @@
                                     </StackPanel>
                                 </Grid>
                             </Button>
+                            <!-- Work Offset Selection Dropdown-->
+                            <ComboBox x:Name="workOffsetSelect" SelectedIndex="0" IsReadOnly="True" DropDownClosed="WorkOffsetSelect_DropDownClosed">
+                                <ComboBoxItem Name="G541" Foreground="Green" FontWeight="Bold">G54</ComboBoxItem>
+                                <ComboBoxItem Name="G551" Foreground="Red">G55</ComboBoxItem>
+                                <ComboBoxItem Name="G561" Foreground="Red">G56</ComboBoxItem>
+                                <ComboBoxItem Name="G57" Foreground="Red">G57</ComboBoxItem>
+                                <ComboBoxItem Name="G58" Foreground="Red">G58</ComboBoxItem>
+                                <ComboBoxItem Name="G59" Foreground="Red">G59</ComboBoxItem>
+                            </ComboBox>
+                            
                             <StackPanel Orientation="Horizontal">
                                 <Button Name="ButtonWorkOffsets" Content="Work Offsets" Style="{StaticResource styleButton}" Click="ButtonWorkOffsets_click"/>
                             </StackPanel>
+                            
+                            
                             <StackPanel Orientation="Horizontal">
                                 <Button Content="GRBL Settings" Style="{StaticResource styleButton}" Click="ShowGrblSettings_Click" Name="ButtonGrblSettings"/>
                             </StackPanel>

@@ -391,8 +391,8 @@ Be aware that the affected lines will likely move when using edit functions." + 
 			ButtonGrblSettings.IsEnabled = machine.Mode == Machine.OperatingMode.Manual; // GRBL Settings Window
 			ButtonMachineHome.IsEnabled = machine.Mode == Machine.OperatingMode.Manual; // Home Button
             ButtonWorkOffsets.IsEnabled = machine.Mode == Machine.OperatingMode.Manual; // Work OffSets
-
-        }
+            workOffsetSelect.IsEnabled = machine.Mode == Machine.OperatingMode.Manual; // Work Offset Selection
+          }
 
 		private void FileRuntimeTimer_Tick(object sender, EventArgs e)
 		{
