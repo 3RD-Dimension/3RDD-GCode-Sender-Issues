@@ -4,6 +4,7 @@ using System.IO.Ports;
 using System.Management;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace GCodeSender
 {
@@ -61,10 +62,9 @@ namespace GCodeSender
 			Properties.Settings.Default.Save();
 		}
 
-        private void HotkeyTest_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void HotkeyTest_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            TextBox clickedTB = sender as TextBox;
-            clickedTB.Text = e.Key.ToString();
+           
         }
     }
 }

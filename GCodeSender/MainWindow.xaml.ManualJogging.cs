@@ -11,13 +11,13 @@ namespace GCodeSender
 {
     partial class MainWindow
     {     
-        // $J=G91F800Y-100
 
         private void manualJogBtnXPlusBtn_Click(object sender, RoutedEventArgs e)
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
             manualJogSendCommand("X");
+           
         }
 
         private void manualJogBtnXNegBtn_Click(object sender, RoutedEventArgs e)
@@ -61,5 +61,6 @@ namespace GCodeSender
             double distance = Properties.Settings.Default.JogDistance;
             machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feed, direction, distance));
         }
+       
     }
 }

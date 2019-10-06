@@ -12,7 +12,7 @@
       <Value Profile="(Default)">Serial</Value>
     </Setting>
     <Setting Name="ControllerBufferSize" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">120</Value>
+      <Value Profile="(Default)">127</Value>
     </Setting>
     <Setting Name="StatusPollInterval" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">100</Value>

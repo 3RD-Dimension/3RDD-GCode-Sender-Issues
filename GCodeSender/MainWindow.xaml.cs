@@ -9,6 +9,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using AutoUpdaterDotNET;
+using System.Windows.Input;
 
 namespace GCodeSender
 {
@@ -76,11 +77,14 @@ namespace GCodeSender
             workOffsetsWindows.SendLine += machine.SendLine;
                        
 			ButtonRestoreViewport_Click(null, null);
-               // Autoupdater
+
+            // Setup HotKeys
+            SetupHotkeys();
+
+            // Autoupdater
             AutoUpdater.UpdateFormSize = new System.Drawing.Size(500, 500);
             AutoUpdater.ShowSkipButton = false;
-            AutoUpdater.Start("http://3rd-dimension.nz/3rdd_version/GCode_Sender_Update.xml");
-            
+            AutoUpdater.Start("http://3rd-dimension.nz/3rdd_version/GCode_Sender_Update.xml");            
         }
         
         private void Machine_LineReceived1(string obj)
@@ -90,6 +94,15 @@ namespace GCodeSender
 
         public Vector3 LastProbePosMachine { get; set; }
 		public Vector3 LastProbePosWork { get; set; }
+
+        private void SetupHotkeys()
+        {
+            // HotKeys Setup - Seperate RoutedCommands for each hotkey
+            // TODO Only allow user to use 1x Key and 1x Modifier Key.
+            RoutedCommand newCmd = new RoutedCommand();
+            newCmd.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
+            CommandBindings.Add(new CommandBinding(newCmd, manualJogBtnZPlusBtn_Click));
+        }
 
 		private void Machine_ProbeFinished_UserOutput(Vector3 position, bool success)
 		{
