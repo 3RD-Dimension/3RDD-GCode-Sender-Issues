@@ -60,5 +60,11 @@ namespace GCodeSender
 		{
 			Properties.Settings.Default.Save();
 		}
-	}
+
+        private void HotkeyTest_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            TextBox clickedTB = sender as TextBox;
+            clickedTB.Text = e.Key.ToString();
+        }
+    }
 }
