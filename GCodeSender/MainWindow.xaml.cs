@@ -398,17 +398,18 @@ namespace GCodeSender
 
         private void manualProbeBtn_Click(object sender, RoutedEventArgs e)
         {
-            // Manual Probe (Uses values from settings
-            //G21
-            //G38.2 Z - 20 F60(Go down upto 20mm)
-            //G92 Z-15(Thichness of touch plate)
-            //G91
-            //G0 Z10(Move Z back up)
-            //M30(End of Job)
-
+            // Requires physical testing on the machine to make sure it is operating correctly
             machine.SendLine("G21");
-            machine.SendLine($"G38.2 Z-{Properties.Settings.Default.ProbeMaxDepth}");
-            machine.SendLine($"G92 Z-{Properties.Settings.Default.ProbeTouchPlateThickness}");
+            if (Properties.Settings.Default.AbortOnProbeFail)
+            { // If Abort and Notify selected, display error if problem probing
+                machine.SendLine($"G38.2 Z{Properties.Settings.Default.ProbeMaxDepth} F{Properties.Settings.Default.ProbeFeed}");
+            }
+            else
+            { // If Abort and Notify not selected, dont display an error
+                machine.SendLine($"G38.3 Z{Properties.Settings.Default.ProbeMaxDepth} F{Properties.Settings.Default.ProbeFeed}");
+            }
+            
+            machine.SendLine($"G92 Z{Properties.Settings.Default.ProbeTouchPlateThickness}");
             machine.SendLine("G91");
             machine.SendLine($"G0 Z{Properties.Settings.Default.ProbeSafeHeight}");
             machine.SendLine("M30");

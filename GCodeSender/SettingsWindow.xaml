@@ -70,7 +70,7 @@
                 <TextBox Margin="10,10,0,0" Text="{util:SettingBinding ProbeFeed}" FontSize="10"/>
                 <Label Content="Probe Plunge Feedrate (mm/min)" HorizontalAlignment="Left" Margin="135,9,0,0" VerticalAlignment="Top" FontSize="10" Grid.ColumnSpan="2"/>
 
-                <CheckBox Content="Abort on Probe Fail" HorizontalAlignment="Left" Margin="116,40,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding AbortOnProbeFail}" FontSize="10" Grid.ColumnSpan="2"/>
+                <CheckBox Content="Abort and signal on Probe Fail" HorizontalAlignment="Left" Margin="116,40,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding AbortOnProbeFail}" FontSize="10" Grid.ColumnSpan="2"/>
 
                 <TextBox Margin="10,61,0,0" Text="{util:SettingBinding ProbeSafeHeight}" FontSize="10" ToolTip="The height to safely retract Z after probe"/>
                 <Label Content="Safe Retract Height (mm)" HorizontalAlignment="Left" Margin="135,61,0,0" VerticalAlignment="Top" FontSize="10" Grid.ColumnSpan="2"/>
