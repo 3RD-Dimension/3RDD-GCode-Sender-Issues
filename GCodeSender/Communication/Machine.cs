@@ -449,12 +449,7 @@ namespace GCodeSender.Communication
                         {
                             RaiseEvent(ParseProbe, line);
                             RaiseEvent(LineReceived, line);
-                        }
-                        else if (line.StartsWith("[VER:")) // Catch Version Number of GRBL
-                        {
-                            RaiseEvent(LineReceived, line);
-                            RaiseEvent(ParseStartup, line);
-                        }
+                        }                      
                         else if (line.StartsWith("["))
                         {
                             RaiseEvent(UpdateStatus, line);

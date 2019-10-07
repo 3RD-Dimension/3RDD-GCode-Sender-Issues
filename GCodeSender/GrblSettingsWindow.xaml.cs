@@ -24,76 +24,107 @@ namespace GCodeSender
 		static Regex settingParser = new Regex(@"\$([0-9]+)=([0-9\.]+)");
 		public void LineReceived(string line)
 		{
-			if (!line.StartsWith("$"))
+            // Recieve GRBL Controller Version number and display - $i
+            // Recieved in format [VER: ... and [OPT:
+
+            if (!line.StartsWith("$") && !line.StartsWith("[VER:") && !line.StartsWith("[OPT:"))
 				return;
-           
-			try
-			{               
-				Match m = settingParser.Match(line);
-				int number = int.Parse(m.Groups[1].Value);
-				double value = double.Parse(m.Groups[2].Value, Util.Constants.DecimalParseFormat);
 
-				if (!CurrentSettings.ContainsKey(number))
-				{
-					RowDefinition rowDef = new RowDefinition();
-					rowDef.Height = new GridLength(25);
-					gridMain.RowDefinitions.Add(rowDef);
+            if (line.StartsWith("$"))
+            {
+                try
+                {
+                    Match m = settingParser.Match(line);
+                    int number = int.Parse(m.Groups[1].Value);
+                    double value = double.Parse(m.Groups[2].Value, Util.Constants.DecimalParseFormat);
 
-					TextBox valBox = new TextBox
-					{
-						Text = value.ToString(Util.Constants.DecimalOutputFormat),
-						VerticalAlignment = VerticalAlignment.Center
-					};
-					Grid.SetRow(valBox, gridMain.RowDefinitions.Count - 1);
-					Grid.SetColumn(valBox, 1);
-					gridMain.Children.Add(valBox);
+                    if (!CurrentSettings.ContainsKey(number))
+                    {
+                        RowDefinition rowDef = new RowDefinition();
+                        rowDef.Height = new GridLength(25);
+                        gridMain.RowDefinitions.Add(rowDef);
 
-					TextBlock num = new TextBlock
-					{
-						Text = $"${number}=",
-						HorizontalAlignment = HorizontalAlignment.Right,
-						VerticalAlignment = VerticalAlignment.Center
-					};
-					Grid.SetRow(num, gridMain.RowDefinitions.Count - 1);
-					Grid.SetColumn(num, 0);
-					gridMain.Children.Add(num);
+                        TextBox valBox = new TextBox
+                        {
+                            Text = value.ToString(Util.Constants.DecimalOutputFormat),
+                            VerticalAlignment = VerticalAlignment.Center
+                        };
+                        Grid.SetRow(valBox, gridMain.RowDefinitions.Count - 1);
+                        Grid.SetColumn(valBox, 1);
+                        gridMain.Children.Add(valBox);
 
-					if (Util.GrblCodeTranslator.Settings.ContainsKey(number))
-					{
-						Tuple<string, string, string> labels = Util.GrblCodeTranslator.Settings[number];
+                        TextBlock num = new TextBlock
+                        {
+                            Text = $"${number}=",
+                            HorizontalAlignment = HorizontalAlignment.Right,
+                            VerticalAlignment = VerticalAlignment.Center
+                        };
+                        Grid.SetRow(num, gridMain.RowDefinitions.Count - 1);
+                        Grid.SetColumn(num, 0);
+                        gridMain.Children.Add(num);
 
-						TextBlock name = new TextBlock
-						{
-							Text = labels.Item1,
-							VerticalAlignment = VerticalAlignment.Center
-						};
-						Grid.SetRow(name, gridMain.RowDefinitions.Count - 1);
-						Grid.SetColumn(name, 0);
-						gridMain.Children.Add(name);
+                        if (Util.GrblCodeTranslator.Settings.ContainsKey(number))
+                        {
+                            Tuple<string, string, string> labels = Util.GrblCodeTranslator.Settings[number];
 
-						TextBlock unit = new TextBlock
-						{
-							Text = labels.Item2,
-							VerticalAlignment = VerticalAlignment.Center
-						};
-						Grid.SetRow(unit, gridMain.RowDefinitions.Count - 1);
-						Grid.SetColumn(unit, 2);
-						gridMain.Children.Add(unit);
+                            TextBlock name = new TextBlock
+                            {
+                                Text = labels.Item1,
+                                VerticalAlignment = VerticalAlignment.Center
+                            };
+                            Grid.SetRow(name, gridMain.RowDefinitions.Count - 1);
+                            Grid.SetColumn(name, 0);
+                            gridMain.Children.Add(name);
 
-						valBox.ToolTip = $"{labels.Item1} ({labels.Item2}):\n{labels.Item3}";
-					}
+                            TextBlock unit = new TextBlock
+                            {
+                                Text = labels.Item2,
+                                VerticalAlignment = VerticalAlignment.Center
+                            };
+                            Grid.SetRow(unit, gridMain.RowDefinitions.Count - 1);
+                            Grid.SetColumn(unit, 2);
+                            gridMain.Children.Add(unit);
 
-					CurrentSettings.Add(number, value);
-					SettingsBoxes.Add(number, valBox);
-				}
-				else
-				{
-					SettingsBoxes[number].Text = value.ToString(Util.Constants.DecimalOutputFormat);
-					CurrentSettings[number] = value;
-				}
-			}
-			catch { }
-		}
+                            valBox.ToolTip = $"{labels.Item1} ({labels.Item2}):\n{labels.Item3}";
+                        }
+
+                        CurrentSettings.Add(number, value);
+                        SettingsBoxes.Add(number, valBox);
+                    }
+                    else
+                    {
+                        SettingsBoxes[number].Text = value.ToString(Util.Constants.DecimalOutputFormat);
+                        CurrentSettings[number] = value;
+                    }
+                }
+                catch { }
+            }
+            // If the line starts with [VER: then we know we are getting the version and options
+            else if (line.StartsWith("[VER:") || line.StartsWith("[OPT:"))
+            {
+                // Frist need to remove front [ and rear ]
+                string VerOptInput;
+                string[] VerOptTrimmed;
+                VerOptInput = line.Remove(0, 1); // Remove [ from the start
+                VerOptInput = VerOptInput.Remove(VerOptInput.Length - 1);
+                               
+                // Next, split the values in half at the : - we only want VER/OPT and then the values
+                VerOptTrimmed = VerOptInput.Split(':');   
+                
+                // Now we fill in the boxes depending on which one
+                switch (VerOptTrimmed[0])
+                {
+                    case "VER":
+                        GRBL_Version.Content = VerOptTrimmed[1];
+                        break;
+
+                    case "OPT":
+                        GRBL_Options.Content = VerOptTrimmed[1];
+                        break;
+                }
+
+            }
+   		}
 
 		private async void ButtonApply_Click(object sender, RoutedEventArgs e)
 		{

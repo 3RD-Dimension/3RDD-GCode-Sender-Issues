@@ -98,10 +98,11 @@ namespace GCodeSender
         private void SetupHotkeys()
         {
             // HotKeys Setup - Seperate RoutedCommands for each hotkey
-            // TODO Only allow user to use 1x Key and 1x Modifier Key.
-            RoutedCommand newCmd = new RoutedCommand();
-            newCmd.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
-            CommandBindings.Add(new CommandBinding(newCmd, manualJogBtnZPlusBtn_Click));
+            // TODO Work out a sensible way to do hotkeys or just leave them as they are.  
+            // TODO Only allow user to use 1x Key and 1x Modifier Key. TODO Have to decide if save and load hotkeys to an XML file, or the settings file
+            //RoutedCommand newCmd = new RoutedCommand();
+            //newCmd.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
+            //CommandBindings.Add(new CommandBinding(newCmd, manualJogBtnZPlusBtn_Click));
         }
 
 		private void Machine_ProbeFinished_UserOutput(Vector3 position, bool success)

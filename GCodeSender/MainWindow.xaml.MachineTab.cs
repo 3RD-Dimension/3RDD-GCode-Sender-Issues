@@ -66,7 +66,8 @@ namespace GCodeSender
             if (machine.Mode != Communication.Machine.OperatingMode.Manual)
                 return;
 
-            machine.SendLine("$$");
+            machine.SendLine("$I"); // Send command to get GRBL version number from controller
+            machine.SendLine("$$"); // Send command to get GRBL settings from controller
             settingsWindow.ShowDialog();
         }
 
