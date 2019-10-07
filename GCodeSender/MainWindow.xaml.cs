@@ -395,5 +395,23 @@ namespace GCodeSender
 
 			machine.SendLine("G49");
 		}
+
+        private void manualProbeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            // Manual Probe (Uses values from settings
+            //G21
+            //G38.2 Z - 20 F60(Go down upto 20mm)
+            //G92 Z-15(Thichness of touch plate)
+            //G91
+            //G0 Z10(Move Z back up)
+            //M30(End of Job)
+
+            machine.SendLine("G21");
+            machine.SendLine($"G38.2 Z-{Properties.Settings.Default.ProbeMaxDepth}");
+            machine.SendLine($"G92 Z-{Properties.Settings.Default.ProbeTouchPlateThickness}");
+            machine.SendLine("G91");
+            machine.SendLine($"G0 Z{Properties.Settings.Default.ProbeSafeHeight}");
+            machine.SendLine("M30");
+        }
     }
 }

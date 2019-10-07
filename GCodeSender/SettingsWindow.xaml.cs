@@ -61,10 +61,5 @@ namespace GCodeSender
 		{
 			Properties.Settings.Default.Save();
 		}
-
-        private void HotkeyTest_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-           
-        }
     }
 }

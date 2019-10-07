@@ -694,5 +694,17 @@ namespace GCodeSender.Properties {
                 this["ZeroZCmd"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public float ProbeTouchPlateThickness {
+            get {
+                return ((float)(this["ProbeTouchPlateThickness"]));
+            }
+            set {
+                this["ProbeTouchPlateThickness"] = value;
+            }
+        }
     }
 }

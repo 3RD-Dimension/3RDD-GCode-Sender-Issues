@@ -213,6 +213,9 @@
                 <Border Style="{StaticResource stylePanelOut}" BorderBrush="#FFCE0606">
                     <Expander Header="Probing / TLO" IsExpanded="{util:SettingBinding ManualProbingExpanderOpen}">
                         <StackPanel>
+                            <GroupBox Header="Probing">
+                                <Button Content="Manual Probe" x:Name="manualProbeBtn" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource styleButton}"  Click="manualProbeBtn_Click"/>
+                            </GroupBox>
                             <GroupBox Header="Last Probe Position">
                                 <StackPanel>
                                     <Label Content="Machine:"/>
