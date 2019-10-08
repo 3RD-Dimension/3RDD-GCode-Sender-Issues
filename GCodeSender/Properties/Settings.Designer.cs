@@ -421,10 +421,10 @@ namespace GCodeSender.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string EditExpanderOpen {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EditExpanderOpen {
             get {
-                return ((string)(this["EditExpanderOpen"]));
+                return ((bool)(this["EditExpanderOpen"]));
             }
             set {
                 this["EditExpanderOpen"] = value;

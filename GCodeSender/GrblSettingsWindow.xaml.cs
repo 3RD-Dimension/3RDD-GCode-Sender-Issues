@@ -11,15 +11,37 @@ namespace GCodeSender
 {
 	public partial class GrblSettingsWindow : Window
 	{
-		Dictionary<int, double> CurrentSettings = new Dictionary<int, double>();
-		Dictionary<int, TextBox> SettingsBoxes = new Dictionary<int, TextBox>();
-       
-		public event Action<string> SendLine;
+		Dictionary<int, double> CurrentSettings = new Dictionary<int, double>(); // Current Settigs
+		Dictionary<int, TextBox> SettingsBoxes = new Dictionary<int, TextBox>(); // Setting Boxes
+        Dictionary<string, String> buildCodes = new Dictionary<string, string>(); // Build Codes
+
+        public string controllerInfo = ""; // Options Description Output
+
+        public event Action<string> SendLine;
 
 		public GrblSettingsWindow()
 		{
 			InitializeComponent();
-		}
+
+            // Add build codes to Dictionary 
+            // TODO Add using build_option.codes_en_US.csv
+            buildCodes.Add("V", "Variable spindle enabled");
+            buildCodes.Add("N", "Line numbers enabled");
+            buildCodes.Add("M", "Mist coolant enabled");
+            buildCodes.Add("C", "CoreXY enabled");
+            buildCodes.Add("P", "Parking motion enabled");
+            buildCodes.Add("Z", "Homing force origin enabled");
+            buildCodes.Add("H", "Homing single axis enabled");
+            buildCodes.Add("T", "Two limit switches on axis enabled");
+            buildCodes.Add("A", "Allow feed rate overrides in probe cycles");
+            buildCodes.Add("*", "Restore all EEPROM disabled");
+            buildCodes.Add("$", "Restore EEPROM $ settings disabled");
+            buildCodes.Add("#", "Restore EEPROM parameter data disabled");
+            buildCodes.Add("I", "Build info write user string disabled");
+            buildCodes.Add("E", "Force sync upon EEPROM write disabled");
+            buildCodes.Add("W", "Force sync upon work coordinate offset change disabled");
+            buildCodes.Add("L", "Homing init lock sets Grbl into an alarm state upon power up");
+        }
 
 		static Regex settingParser = new Regex(@"\$([0-9]+)=([0-9\.]+)");
 		public void LineReceived(string line)
@@ -103,7 +125,7 @@ namespace GCodeSender
             else if (line.StartsWith("[VER:") || line.StartsWith("[OPT:"))
             {
                 // Frist need to remove front [ and rear ]
-                string VerOptInput;
+                string VerOptInput; // Input string
                 string[] VerOptTrimmed;
                 VerOptInput = line.Remove(0, 1); // Remove [ from the start
                 VerOptInput = VerOptInput.Remove(VerOptInput.Length - 1);
@@ -115,14 +137,33 @@ namespace GCodeSender
                 switch (VerOptTrimmed[0])
                 {
                     case "VER":
-                        GRBL_Version.Content = VerOptTrimmed[1];
+                        controllerInfo += "Version: " + VerOptTrimmed[1];
                         break;
 
                     case "OPT":
-                        GRBL_Options.Content = VerOptTrimmed[1];
+                        // First we have to split commas
+                        string[] optSplit;
+                        optSplit = VerOptTrimmed[1].Split(','); // Splits Options into 3.  0=Options, 1=blockBufferSize, 2=rxBufferSize
+                        var individualChar = optSplit[0].ToCharArray();// Now split optSplit[0] into each option character
+
+                        controllerInfo += " | Options: " + VerOptTrimmed[1]; // Full Options Non-Decoded String
+
+                        foreach (char c in individualChar)
+                        {
+                            // Lookup what each code is and display....  buildCodes Dictionary
+                            if (buildCodes.ContainsKey(c.ToString()))
+                            {
+
+                                // Console.WriteLine($"This has option {buildCodes[c.ToString()]}"); <<<< This works
+                                // Now lets try and create and append to a string and then bind it to a ToolTip? or some other way
+                                controllerInfo += Environment.NewLine + buildCodes[c.ToString()];
+                            }
+                        }
+                        controllerInfo += Environment.NewLine + "Block Buffer Size: " + optSplit[1];
+                        controllerInfo += Environment.NewLine + "RX Buffer Size: " + optSplit[2];                      
+                        GRBL_Controller_Info.Text = controllerInfo.ToString();
                         break;
                 }
-
             }
    		}
 
@@ -158,8 +199,8 @@ namespace GCodeSender
 		}
 
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			e.Cancel = true;
+		{      
+            e.Cancel = true;
 			Hide();
 		}
         private void ButtonGrblExport_Click(object sender, RoutedEventArgs e)

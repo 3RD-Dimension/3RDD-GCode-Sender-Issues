@@ -101,8 +101,8 @@
     <Setting Name="FileExpanderOpen" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="EditExpanderOpen" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="EditExpanderOpen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="OverrideExpanderOpen" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
