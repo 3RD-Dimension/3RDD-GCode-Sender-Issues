@@ -9,16 +9,50 @@ namespace GCodeSender.Util
 	{
 		static Dictionary<int, string> Errors = new Dictionary<int, string>();
 		static Dictionary<int, string> Alarms = new Dictionary<int, string>();
-		/// <summary>
-		/// setting name, unit, description
-		/// </summary>
-		public static Dictionary<int, Tuple<string, string, string>> Settings = new Dictionary<int, Tuple<string, string, string>>();
+        public static Dictionary<string, string> BuildCodes = new Dictionary<string, string>(); // Build Codes
+       
+        /// <summary>
+        /// setting name, unit, description
+        /// </summary>
+        public static Dictionary<int, Tuple<string, string, string>> Settings = new Dictionary<int, Tuple<string, string, string>>();
+
+        // Load Build Codes from File
+        private static void LoadBuildCoads(Dictionary<string, string> dict, string path)
+        {
+            if (!File.Exists(path))
+            {
+                Console.WriteLine("Build Code File Missing: {0}", path);
+            }
+
+            try
+            {
+                using (var reader = new StreamReader(path))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        // Todo Remove Header -> First line
+                        reader.ReadLine(); // Read and Discard Header line
+                        var line = reader.ReadLine().Replace("\"", ""); // Remove " from each line
+                        var values = line.Split(','); // Split into Values - values[0] Code, values[1] Desc, values [2] Enabled/Disabled
+
+                        dict.Add(values[0], values[1] + " " + values[2]); // Add to BuildCodes Dictionary
+                        Console.WriteLine(values[0] +"," + values[1] + " " + values[2]);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
+        }
+
 
 		private static void LoadErr(Dictionary<int, string> dict, string path)
 		{
 			if (!File.Exists(path))
 			{
-				Console.WriteLine("File Missing: {0}", path);
+				Console.WriteLine("Error Code File Missing: {0}", path);
 				return;
 			}
 
@@ -54,7 +88,7 @@ namespace GCodeSender.Util
 		{
 			if (!File.Exists(path))
 			{
-				Console.WriteLine("File Missing: {0}", path);
+				Console.WriteLine("GRBL Settings File Missing: {0}", path);
 				return;
 			}
 
@@ -90,9 +124,10 @@ namespace GCodeSender.Util
 		{
 			Console.WriteLine("Loading GRBL Code Database");
 
-			LoadErr(Errors, "Resources\\error_codes_en_US.csv");
-			LoadErr(Alarms, "Resources\\alarm_codes_en_US.csv");
-			LoadSettings(Settings, "Resources\\setting_codes_en_US.csv");
+			LoadErr(Errors, "Resources\\error_codes_en_US.csv"); // Load Error Codes
+			LoadErr(Alarms, "Resources\\alarm_codes_en_US.csv"); // Load Alarm Codes
+			LoadSettings(Settings, "Resources\\setting_codes_en_US.csv"); // Load Settings Codes
+            LoadBuildCoads(BuildCodes, "Resources\\build_option_codes_en_US.csv"); // Load Build Codes
 
 			Console.WriteLine("Loaded GRBL Code Database");
 		}

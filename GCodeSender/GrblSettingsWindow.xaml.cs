@@ -13,7 +13,6 @@ namespace GCodeSender
 	{
 		Dictionary<int, double> CurrentSettings = new Dictionary<int, double>(); // Current Settigs
 		Dictionary<int, TextBox> SettingsBoxes = new Dictionary<int, TextBox>(); // Setting Boxes
-        Dictionary<string, String> buildCodes = new Dictionary<string, string>(); // Build Codes
 
         public string controllerInfo = ""; // Options Description Output
 
@@ -22,25 +21,6 @@ namespace GCodeSender
 		public GrblSettingsWindow()
 		{
 			InitializeComponent();
-
-            // Add build codes to Dictionary 
-            // TODO Add using build_option.codes_en_US.csv
-            buildCodes.Add("V", "Variable spindle enabled");
-            buildCodes.Add("N", "Line numbers enabled");
-            buildCodes.Add("M", "Mist coolant enabled");
-            buildCodes.Add("C", "CoreXY enabled");
-            buildCodes.Add("P", "Parking motion enabled");
-            buildCodes.Add("Z", "Homing force origin enabled");
-            buildCodes.Add("H", "Homing single axis enabled");
-            buildCodes.Add("T", "Two limit switches on axis enabled");
-            buildCodes.Add("A", "Allow feed rate overrides in probe cycles");
-            buildCodes.Add("*", "Restore all EEPROM disabled");
-            buildCodes.Add("$", "Restore EEPROM $ settings disabled");
-            buildCodes.Add("#", "Restore EEPROM parameter data disabled");
-            buildCodes.Add("I", "Build info write user string disabled");
-            buildCodes.Add("E", "Force sync upon EEPROM write disabled");
-            buildCodes.Add("W", "Force sync upon work coordinate offset change disabled");
-            buildCodes.Add("L", "Homing init lock sets Grbl into an alarm state upon power up");
         }
 
 		static Regex settingParser = new Regex(@"\$([0-9]+)=([0-9\.]+)");
@@ -151,12 +131,12 @@ namespace GCodeSender
                         foreach (char c in individualChar)
                         {
                             // Lookup what each code is and display....  buildCodes Dictionary
-                            if (buildCodes.ContainsKey(c.ToString()))
+                            if (Util.GrblCodeTranslator.BuildCodes.ContainsKey(c.ToString()))
                             {
 
                                 // Console.WriteLine($"This has option {buildCodes[c.ToString()]}"); <<<< This works
                                 // Now lets try and create and append to a string and then bind it to a ToolTip? or some other way
-                                controllerInfo += Environment.NewLine + buildCodes[c.ToString()];
+                                controllerInfo += Environment.NewLine + Util.GrblCodeTranslator.BuildCodes[c.ToString()];
                             }
                         }
                         controllerInfo += Environment.NewLine + "Block Buffer Size: " + optSplit[1];
