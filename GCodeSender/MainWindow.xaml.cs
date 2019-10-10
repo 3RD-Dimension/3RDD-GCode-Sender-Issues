@@ -2,6 +2,7 @@ using Microsoft.Win32;
 using GCodeSender.Communication;
 using GCodeSender.GCode;
 using GCodeSender.Util;
+using GCodeSender.Hotkey;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using AutoUpdaterDotNET;
-using System.Windows.Input;
 
 namespace GCodeSender
 {
@@ -78,13 +78,10 @@ namespace GCodeSender
                        
 			ButtonRestoreViewport_Click(null, null);
 
-            // Setup HotKeys
-            SetupHotkeys();
+            HotKeys.LoadHotKeys(); // Load Hotkeys
 
-            // Autoupdater
-            AutoUpdater.UpdateFormSize = new System.Drawing.Size(500, 500);
-            AutoUpdater.ShowSkipButton = false;
-            AutoUpdater.Start("http://3rd-dimension.nz/3rdd_version/GCode_Sender_Update.xml");            
+            // Check Github for new version
+            UpdateCheck.CheckForUpdate();   
         }
         
         private void Machine_LineReceived1(string obj)
@@ -94,16 +91,6 @@ namespace GCodeSender
 
         public Vector3 LastProbePosMachine { get; set; }
 		public Vector3 LastProbePosWork { get; set; }
-
-        private void SetupHotkeys()
-        {
-            // HotKeys Setup - Seperate RoutedCommands for each hotkey
-            // TODO Work out a sensible way to do hotkeys or just leave them as they are.  
-            // TODO Only allow user to use 1x Key and 1x Modifier Key. TODO Have to decide if save and load hotkeys to an XML file, or the settings file
-            //RoutedCommand newCmd = new RoutedCommand();
-            //newCmd.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
-            //CommandBindings.Add(new CommandBinding(newCmd, manualJogBtnZPlusBtn_Click));
-        }
 
 		private void Machine_ProbeFinished_UserOutput(Vector3 position, bool success)
 		{
