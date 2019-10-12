@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hotkeys name="GCodeSender Hotkeys">
+  <!--KeyFunction = Function it corrosponds to, Keycode = They key that is binded to that keyfunction-->
+  <!--Jogging Key Bindings X Axis-->
+  <bind key_description="Jog X Axis +" keyfunction="JogXPos" keycode="Right" />
+  <bind key_description="Jog X Axis -" keyfunction="JogXNeg" keycode="Left" />
+  <!--Jogging Key Bindings Y Axis-->
+  <bind key_description="Jog Y Axis +" keyfunction="JogYPos" keycode="Up" />
+  <bind key_description="Jog Y Axis -" keyfunction="JogYNeg" keycode="Down" />
+  <!--Jogging Key Bindings Z Axis-->
+  <bind key_description="Jog Z Axis +" keyfunction="JogZPos" keycode="NumPad9" />
+  <bind key_description="Jog Z Axis -" keyfunction="JogZNeg" keycode="NumPad3" />
+</hotkeys>

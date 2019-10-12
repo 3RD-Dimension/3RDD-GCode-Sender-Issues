@@ -109,8 +109,15 @@
             </Grid>
         </TabItem>
         <!-- Hotkey Configuration-->
-        <!--<TabItem Header="HotKeys">
-            
-        </TabItem>-->
+        <TabItem Header="HotKeys" Name="Hotkeys">
+            <ScrollViewer Margin="10">
+                <Grid Name="gridMain">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                </Grid>
+            </ScrollViewer>
+        </TabItem>
     </TabControl>
 </Window>

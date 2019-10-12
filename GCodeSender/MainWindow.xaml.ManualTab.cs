@@ -1,10 +1,13 @@
 ﻿using GCodeSender.Communication;
 using GCodeSender.Util;
+using GCodeSender.Hotkey;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.ComponentModel;
+using System;
 
 namespace GCodeSender
 {
@@ -12,8 +15,8 @@ namespace GCodeSender
 	{
 		private List<string> ManualCommands = new List<string>();   //pos 0 is the last command sent, pos1+ are older
 		private int ManualCommandIndex = -1;
-
-		void ManualSend()
+               
+        void ManualSend()
 		{
 			if (machine.Mode != Machine.OperatingMode.Manual)
 				return;
@@ -128,14 +131,32 @@ namespace GCodeSender
 			machine.JogCancel();
 		}
 
-         // TODO Add Configurable Keys 
+         // TODO Add Configurable Keys - Reference Dictionary?
 		private void Jogging_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (!machine.Connected)
 				return;
 
+            string currentHotPressed = "";
+
+            // Capture HotKey Combination - Result in hotKey
+            if (!HotKeys._ignoredKey.Contains(e.Key) && (e.Key != Key.System || (e.Key == Key.System && !HotKeys._ignoredKey.Contains(e.SystemKey))))
+            {
+                var key = (e.Key == Key.System && !HotKeys._ignoredKey.Contains(e.SystemKey)) ? e.SystemKey : e.Key;
+                var hotKey = new HotKey()
+                {
+                    Ctrl = ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control),
+                    Alt = ((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt),
+                    Shift = ((Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift),
+                    Key = key
+                };
+                currentHotPressed = hotKey.ToString();
+                Console.WriteLine(currentHotPressed);
+
+            }
+
             // Pressing ESC Key Soft Resets Machine
-			if (e.Key == Key.Escape)
+            if (e.Key == Key.Escape)
 			{
 				if (Properties.Settings.Default.EnableEscapeSoftReset)
 					machine.SoftReset();
@@ -159,35 +180,30 @@ namespace GCodeSender
             // If Left or Right Shift is held down...
 			if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
 			{
-				if (e.Key == Key.Up)
-					direction = "Z";
-				else if (e.Key == Key.Down)
-					direction = "Z-";
-			}
+                if (e.Key == Key.Up)
+                    direction = "Z";
+
+                else if (e.Key == Key.Down)
+                    direction = "Z-";
+            }
 			else // Otherwise If Left or Right Shift is not held down
 			{
-				if (e.Key == Key.Right)
-					direction = "X";
-				else if (e.Key == Key.Left)
-					direction = "X-";
-				else if (e.Key == Key.Up)
+                if (currentHotPressed == HotKeys.hotkeyCode["JogXPos"])
+                    direction = "X";
+                else if (currentHotPressed == HotKeys.hotkeyCode["JogXNeg"])
+                    direction = "X-";
+				else if (currentHotPressed == HotKeys.hotkeyCode["JogYPos"])
 					direction = "Y";
-				else if (e.Key == Key.Down)
+				else if (currentHotPressed == HotKeys.hotkeyCode["JogYNeg"])
 					direction = "Y-";
-				else if (e.Key == Key.PageUp)
+				else if (currentHotPressed == HotKeys.hotkeyCode["JogZPos"])
 					direction = "Z";
-				else if (e.Key == Key.PageDown)
+				else if (currentHotPressed == HotKeys.hotkeyCode["JogZNeg"])
 					direction = "Z-";
 			}
 
 			double feed = Properties.Settings.Default.JogFeed;
 			double distance = Properties.Settings.Default.JogDistance;
-
-			if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
-			{
-				feed = Properties.Settings.Default.JogFeedCtrl;
-				distance = Properties.Settings.Default.JogDistanceCtrl;
-			}
 
 			if (direction != null)
 			{
