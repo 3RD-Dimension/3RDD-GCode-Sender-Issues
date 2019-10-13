@@ -15,6 +15,7 @@ namespace GCodeSender.Util
 
         public static void CheckForUpdate()
         {
+            MainWindow.Logger.Info("++++++ CHECKING FOR UPDATE ++++++");
             client = new WebClient();
             client.Headers["User-Agent"] = "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.15) Gecko/20110303 Firefox/3.6.15";
             client.Proxy = null;
@@ -28,16 +29,16 @@ namespace GCodeSender.Util
             {
                 if (e.Error != null)
                 {
-                    Console.WriteLine("Error while checking for new version:");
-                    Console.WriteLine(e.Error.Message);
-                    return;
+                    MainWindow.Logger.Warn("Error while checking for new version:");
+                    MainWindow.Logger.Warn(e.Error.Message);
+                      return;
                 }
 
                 Match m = versionRegex.Match(e.Result);
 
                 if (!m.Success)
                 {
-                    Console.WriteLine("No matching tag_id found");
+                    MainWindow.Logger.Warn("No matching tag_id found");
                     return;
                 }
 
@@ -45,11 +46,11 @@ namespace GCodeSender.Util
 
                 if (!Version.TryParse(m.Groups[1].Value, out latest))
                 {
-                    Console.WriteLine($"Error while parsing version string <{m.Groups[1].Value}>");
+                    MainWindow.Logger.Warn($"Error while parsing version string <{m.Groups[1].Value}>");
                     return;
                 }
 
-                Console.WriteLine($"Latest version on GitHub: {latest}");
+                MainWindow.Logger.Info($"Latest version on GitHub: {latest}");
 
                 if (System.Reflection.Assembly.GetEntryAssembly().GetName().Version < latest)
                 {
@@ -62,8 +63,8 @@ namespace GCodeSender.Util
                         url = urlMatch.Groups[1].Value;
                     }
 
-                    if (MessageBox.Show("There is an update available!\nOpen in browser?", "Update", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
-                        System.Diagnostics.Process.Start(url);
+                    if (MessageBox.Show($"There is an update available! Version {latest}\nOpen in browser?", "Update", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
+                        System.Diagnostics.Process.Start(url);                    
                 }
             }
             catch { }   //update check is non-critical and should never interrupt normal application operation

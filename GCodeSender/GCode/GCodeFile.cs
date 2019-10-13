@@ -189,7 +189,7 @@ namespace GCodeSender.GCode
 			arc.Points = arcPoints;
 
 			sw.Stop();
-			Console.WriteLine("Generating the toolpath model took {0} ms", sw.ElapsedMilliseconds);
+            MainWindow.Logger.Info("Generating the toolpath model took {0} ms", sw.ElapsedMilliseconds);
 		}
 
 		public List<string> GetGCode()

@@ -133,8 +133,6 @@ namespace GCodeSender
                             // Lookup what each code is and display....  buildCodes Dictionary
                             if (Util.GrblCodeTranslator.BuildCodes.ContainsKey(c.ToString()))
                             {
-
-                                // Console.WriteLine($"This has option {buildCodes[c.ToString()]}"); <<<< This works
                                 // Now lets try and create and append to a string and then bind it to a ToolTip? or some other way
                                 controllerInfo += Environment.NewLine + Util.GrblCodeTranslator.BuildCodes[c.ToString()];
                             }

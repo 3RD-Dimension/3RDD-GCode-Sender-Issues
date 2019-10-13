@@ -11,7 +11,8 @@
 		Drop="Window_Drop"
 		DragEnter="Window_DragEnter"
 		DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        PreviewKeyDown="Window_PreviewKeyDown" Height="{util:SettingBinding WindowHeight}" Width="{util:SettingBinding WindowWidth}" Closing="Window_Closing" Title="3RDD GCode Sender">
+        PreviewKeyDown="Window_PreviewKeyDown" 
+        Title="{Binding WindowTitle,Mode=OneWay}" Height="{util:SettingBinding WindowHeight}" Width="{util:SettingBinding WindowWidth}" Closing="Window_Closing">
     <Window.Resources>
         <ResourceDictionary Source="MainWindow.Resources.xaml"/>
     </Window.Resources>

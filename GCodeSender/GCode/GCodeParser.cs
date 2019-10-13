@@ -102,7 +102,7 @@ namespace GCodeSender.GCode
 
 			sw.Stop();
 
-			Console.WriteLine("parsing the G code file took {0} ms", sw.ElapsedMilliseconds);
+            MainWindow.Logger.Info("parsing the G code file took {0} ms", sw.ElapsedMilliseconds);
 		}
 
 		static string CleanupLine(string line, int lineNumber)

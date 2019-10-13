@@ -71,7 +71,6 @@ namespace GCodeSender
             foreach (var hotkey in HotKeys.hotkeyCode)
             {
                 
-                // Console.WriteLine("FOREACH VAR: {0}, {1}", hotkey.Key, hotkey.Value);
                 RowDefinition rowDef = new RowDefinition();
                 rowDef.Height = new GridLength(25);
                 gridMain.RowDefinitions.Add(rowDef);

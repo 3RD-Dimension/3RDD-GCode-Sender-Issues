@@ -17,12 +17,13 @@ namespace GCodeSender.Hotkey
         public static Dictionary<string, string> hotkeyCode = new Dictionary<string, string>(); // Holds Key Fucntions and Keycodes
         public static Dictionary<string, string> hotkeyDescription = new Dictionary<string, string>(); // Holds Key Functions and Description
 
+        public static string HotKeyFile = "Resources\\hotkeys.xml";
+
         /// <summary>
         /// Loads Hotkey XML file and loads keycodes into hotkeyCode and Description into hotkeyDescription
         /// </summary>
         public static void LoadHotKeys()
-        {
-            string HotKeyFile = "Resources\\hotkeys.xml";
+        {           
             hotkeyCode.Clear();
             hotkeyDescription.Clear();
 
@@ -30,6 +31,7 @@ namespace GCodeSender.Hotkey
             if (!File.Exists(fileName))
             {
                 MessageBox.Show("Hotkey file not found, no hotkeys set!", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
+                MainWindow.Logger.Error("Hotkey file not found in directory");
                 return;
 
             }
@@ -67,17 +69,18 @@ namespace GCodeSender.Hotkey
         public static void UpdateHotkey(string keyfunction, string newSetting)
         {
             var root = new XmlDocument();
-            root.Load(@"Resources\\hotkeys.xml");
+            root.Load(@HotKeyFile);
 
             foreach (XmlNode e in root.GetElementsByTagName("bind"))
             {
                 if (e.Attributes["keyfunction"].Value.Equals(keyfunction))
                 {
                     e.Attributes["keycode"].Value = newSetting; // FirstChild because the inner node is actually the inner text, yeah XmlNode is weird.
+                    MainWindow.Logger.Info($"Added Keycode {newSetting} for KeyFunction {keyfunction}");
                     break;
                 }
             }
-            root.Save(@"Resources\\hotkeys.xml");
+            root.Save(@HotKeyFile);
         }
 
         }

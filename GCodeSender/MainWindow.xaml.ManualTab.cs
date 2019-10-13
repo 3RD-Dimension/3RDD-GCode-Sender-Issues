@@ -151,7 +151,7 @@ namespace GCodeSender
                     Key = key
                 };
                 currentHotPressed = hotKey.ToString();
-                Console.WriteLine(currentHotPressed);
+               // Console.WriteLine(currentHotPressed);
 
             }
 

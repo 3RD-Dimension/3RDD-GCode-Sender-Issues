@@ -1,3 +1,8 @@
+// 3RDD GCode Sender
+// Modified Version of OpenCNCPilot by Shayne Bouda
+// 3RD-Dimension.nz
+// 2019
+
 using Microsoft.Win32;
 using GCodeSender.Communication;
 using GCodeSender.GCode;
@@ -27,7 +32,9 @@ namespace GCodeSender
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		private void RaisePropertyChanged(string propertyName)
+        public static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
+        private void RaisePropertyChanged(string propertyName)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
@@ -37,7 +44,9 @@ namespace GCodeSender
 			AppDomain.CurrentDomain.UnhandledException += UnhandledException;
 			InitializeComponent();
 
-			openFileDialogGCode.FileOk += OpenFileDialogGCode_FileOk;
+            Logger.Info("++++++ 3RDD GCode Sender v{0} START ++++++", System.Reflection.Assembly.GetEntryAssembly().GetName().Version);
+
+            openFileDialogGCode.FileOk += OpenFileDialogGCode_FileOk;
 			saveFileDialogGCode.FileOk += SaveFileDialogGCode_FileOk;
 
 			machine.ConnectionStateChanged += Machine_ConnectionStateChanged;
@@ -111,16 +120,10 @@ namespace GCodeSender
 			info += "\r\nToString():\r\n";
 			info += e.ToString();
 
-			MessageBox.Show(info);
-			Console.WriteLine(info);
+			MessageBox.Show("There has been an Unhandled Exception, the error has been logged to a file in the directory");
+            Logger.Error(info);
 
-			try
-			{
-				System.IO.File.WriteAllText("GCodeSender_Crash_Log.txt", info);
-			}
-			catch { }
-
-			Environment.Exit(1);
+            Environment.Exit(1);
 		}
 
 		private void Default_SettingChanging(object sender, System.Configuration.SettingChangingEventArgs e)
@@ -169,9 +172,9 @@ namespace GCodeSender
 			get
 			{
 				if (CurrentFileName.Length < 1)
-					return $"GCodeSender v{Version} 3RDD";
+					return $"3RDD GCode Sender v{Version}";
 				else
-					return $"GCodeSender v{Version} 3RDD - {CurrentFileName}";
+					return $"3RDD GCode Sender v{Version} - {CurrentFileName}";
 			}
 		}
 
