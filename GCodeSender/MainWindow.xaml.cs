@@ -89,7 +89,7 @@ namespace GCodeSender
             HotKeys.LoadHotKeys(); // Load Hotkeys
 
             // Check Github for new version
-            UpdateCheck.CheckForUpdate();   
+            // UpdateCheck.CheckForUpdate();   
         }
         
         private void Machine_LineReceived1(string obj)

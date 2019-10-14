@@ -21,7 +21,7 @@ namespace GCodeSender.Util
         {
             if (!File.Exists(path))
             {
-                Console.WriteLine("Build Code File Missing: {0}", path);
+                MainWindow.Logger.Warn("Build Code File Missing: {0}", path);
             }
 
             try
@@ -35,14 +35,13 @@ namespace GCodeSender.Util
                         var line = reader.ReadLine().Replace("\"", ""); // Remove " from each line
                         var values = line.Split(','); // Split into Values - values[0] Code, values[1] Desc, values [2] Enabled/Disabled
 
-                        dict.Add(values[0], values[1] + " " + values[2]); // Add to BuildCodes Dictionary
-                        Console.WriteLine(values[0] +"," + values[1] + " " + values[2]);
+                        dict.Add(values[0], values[1] + " " + values[2]); // Add to BuildCodes Dictionary                   
                     }
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                MainWindow.Logger.Error(ex.Message);
                 return;
             }
         }
@@ -52,7 +51,7 @@ namespace GCodeSender.Util
 		{
 			if (!File.Exists(path))
 			{
-				Console.WriteLine("Error Code File Missing: {0}", path);
+				MainWindow.Logger.Warn("Error Code File Missing: {0}", path);
 				return;
 			}
 
@@ -64,7 +63,7 @@ namespace GCodeSender.Util
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine(ex.Message);
+                MainWindow.Logger.Error(ex.Message);
 				return;
 			}
 
@@ -88,7 +87,7 @@ namespace GCodeSender.Util
 		{
 			if (!File.Exists(path))
 			{
-				Console.WriteLine("GRBL Settings File Missing: {0}", path);
+                MainWindow.Logger.Warn("GRBL Settings File Missing: {0}", path);
 				return;
 			}
 
@@ -100,7 +99,7 @@ namespace GCodeSender.Util
 			}
 			catch (Exception ex)
 			{
-				Console.WriteLine(ex.Message);
+                MainWindow.Logger.Error(ex.Message);
 				return;
 			}
 
@@ -122,14 +121,12 @@ namespace GCodeSender.Util
 
 		static GrblCodeTranslator()
 		{
-			Console.WriteLine("Loading GRBL Code Database");
-
 			LoadErr(Errors, "Resources\\error_codes_en_US.csv"); // Load Error Codes
 			LoadErr(Alarms, "Resources\\alarm_codes_en_US.csv"); // Load Alarm Codes
 			LoadSettings(Settings, "Resources\\setting_codes_en_US.csv"); // Load Settings Codes
             LoadBuildCoads(BuildCodes, "Resources\\build_option_codes_en_US.csv"); // Load Build Codes
 
-			Console.WriteLine("Loaded GRBL Code Database");
+            MainWindow.Logger.Info("Loaded GRBL Code Database");
 		}
 
 		public static string GetErrorMessage(int errorCode, bool alarm = false)

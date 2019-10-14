@@ -112,24 +112,14 @@ namespace GCodeSender
         {
             var textBox = sender as TextBox;
 
-            if (!HotKeys._ignoredKey.Contains(e.Key) && (e.Key != Key.System || (e.Key == Key.System && !HotKeys._ignoredKey.Contains(e.SystemKey))))
-            {
-                var key = (e.Key == Key.System && !HotKeys._ignoredKey.Contains(e.SystemKey)) ? e.SystemKey : e.Key;
+            // Get Keycode
+            string currentHotPressed = HotKeys.KeyProcess(sender, e); // Get Keycode
+            if (currentHotPressed == null) return; // If currentHotPressed is null, Return (to avoid continuing with  blank)
 
-                textBox.Text = string.Empty;
-
-                var hotKey = new HotKey()
-                {
-                    Ctrl = ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control),
-                    Alt = ((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt),
-                    Shift = ((Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift),
-                    Key = key
-                };
-                textBox.Text = string.Format("{0}", hotKey);
-                e.Handled = true;
-            }
+            textBox.Text = string.Empty;
+            textBox.Text = string.Format("{0}", currentHotPressed);
+            e.Handled = true;
         }
-
 
         private void newHotKeySave(object sender, RoutedEventArgs e)
         {

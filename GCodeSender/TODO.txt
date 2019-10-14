@@ -1,0 +1,27 @@
+﻿To Do for 2.0.1.1
+
+HOTKEY DEFINING FOR FOLLOWING ACTIONS:
+
+[X] Emergency Stop (Keep default ESC but allow to choose another key as well)
+[ ] Normal stop of program.
+[ ] Spindle Increase & Decrease (by set increments in settings - check if spindle option is enabled in firmaware).
+[ ] Feed Rate Increase & Decrease (by set increments in settings) - Should only be adjustable during running a file.
+[ ] Jog Rate Increase & Decrease (by set increments in settings) - Should only be adjustable if machine is idle.
+[X] Origin Point (Return to Zero).
+[ ] Single Step? (Maybe) - Press once changes step to 1 - push again reverts back to original step size.
+[ ] Re-Do (Reload file for doing the same job again).
+[ ] Spindle On/Off (if Enabled in firmware).
+[ ] Mist On/Off (if enabled in firmware).
+[X] Cycle Start (Start running of program).
+[X] Cancel Manual Jogging
+[X] X, Y Z Pos & Neg.
+
+Need to find a proper stop procedure to stop file transfer instead of soft reseting.  
+
+MAYBE: Jogging Keys: Does not move until Key Up, Maybe change to KeyDown so can click and hold
+
+TODO: Suppliment
+- Add check on Hotkeys, display error if a duplicate is currently assigned.  Display duplicate command name (maybe clear the duplicate box so they can issue another keybind)
+- Add option to clear hotkey text box so it is blank/no hotkey set for that fucntion
+
+TODO:  Soft Reset or Full Hard reset when Emergency button clicked.

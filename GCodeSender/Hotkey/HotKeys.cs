@@ -12,7 +12,7 @@ namespace GCodeSender.Hotkey
     {
         // Ignored single keys, need to be paired with another
         public static HashSet<Key> _ignoredKey = new HashSet<Key>() { Key.LeftAlt, Key.RightAlt, Key.LeftCtrl,
-            Key.RightCtrl, Key.LeftShift, Key.RightShift, Key.RWin, Key.LWin, Key.Apps, Key.Escape};
+            Key.RightCtrl, Key.LeftShift, Key.RightShift, Key.RWin, Key.LWin, Key.Apps};
 
         public static Dictionary<string, string> hotkeyCode = new Dictionary<string, string>(); // Holds Key Fucntions and Keycodes
         public static Dictionary<string, string> hotkeyDescription = new Dictionary<string, string>(); // Holds Key Functions and Description
@@ -82,8 +82,25 @@ namespace GCodeSender.Hotkey
             }
             root.Save(@HotKeyFile);
         }
-
+  
+        public static string KeyProcess(object sender, KeyEventArgs e)
+        {
+            if (!HotKeys._ignoredKey.Contains(e.Key) && (e.Key != Key.System || (e.Key == Key.System && !HotKeys._ignoredKey.Contains(e.SystemKey))))
+            {
+                var key = (e.Key == Key.System && !HotKeys._ignoredKey.Contains(e.SystemKey)) ? e.SystemKey : e.Key;
+                var hotKey = new HotKey()
+                {
+                    Ctrl = ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control),
+                    Alt = ((Keyboard.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt),
+                    Shift = ((Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift),
+                    Key = key
+                };
+                string var = hotKey.ToString();
+                return var;
+            }
+            return null;
         }
+    }
         #endregion
 
         #region HotKey Internal Class

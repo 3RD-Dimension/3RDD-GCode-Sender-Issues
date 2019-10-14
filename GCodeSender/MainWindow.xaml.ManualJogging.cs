@@ -53,7 +53,47 @@ namespace GCodeSender
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
             manualJogSendCommand("Z-");  
-        }        
+        }
+
+        // Zero X Axis
+        private void ButtonManualResetX_Click(object sender, RoutedEventArgs e)
+        {
+            if (machine.Mode != Machine.OperatingMode.Manual)
+                return;
+            machine.SendLine(Properties.Settings.Default.ZeroXCmd);
+        }
+        // Zero Y Axis
+        private void ButtonManualResetY_Click(object sender, RoutedEventArgs e)
+        {
+            if (machine.Mode != Machine.OperatingMode.Manual)
+                return;
+            machine.SendLine(Properties.Settings.Default.ZeroYCmd);
+        }
+        // Zero Z Axis
+        private void ButtonManualResetZ_Click(object sender, RoutedEventArgs e)
+        {
+            if (machine.Mode != Machine.OperatingMode.Manual)
+                return;
+            machine.SendLine(Properties.Settings.Default.ZeroZCmd);
+        }
+
+        private void ButtonManualReturnToZero_Click(object sender, RoutedEventArgs e)
+        {
+            // Return all Axis to Zero
+            if (machine.Mode != Machine.OperatingMode.Manual)
+                return;
+
+            machine.SendLine("G90 G0 X0 Y0");
+            machine.SendLine("G90 G0 Z0");
+        }
+
+         // Zero All Axis
+        private void ButtonManualResetAll_Click(object sender, RoutedEventArgs e)
+        {
+            if (machine.Mode != Machine.OperatingMode.Manual)
+                return;
+            machine.SendLine(Properties.Settings.Default.ZeroAllCmd);
+        }
 
         private void manualJogSendCommand(string direction)
         {

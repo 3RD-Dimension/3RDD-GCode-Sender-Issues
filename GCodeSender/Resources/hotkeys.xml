@@ -10,4 +10,21 @@
   <!--Jogging Key Bindings Z Axis-->
   <bind key_description="Jog Z Axis +" keyfunction="JogZPos" keycode="NumPad9" />
   <bind key_description="Jog Z Axis -" keyfunction="JogZNeg" keycode="NumPad3" />
+
+  <!-- Keycodes currently in implementation-->
+  <!-- Default no keycodes set -->
+  <bind key_description="Emergency Stop" keyfunction="EmgStop" keycode="" />
+  <bind key_description="Cycle Start" keyfunction="CycleStart" keycode="" />
+  <bind key_description="Stop File Streaming" keyfunction="FSStop" keycode="" />
+  <bind key_description="Return to Origin (Zero)" keyfunction="RTOrigin" keycode="" /> <!-- DONE-->
+  <bind key_description="Single Step" keyfunction="SStep" keycode="" />
+  <bind key_description="Spindle Increase" keyfunction="SpindleInc" keycode="" />
+  <bind key_description="Spindle Decrease" keyfunction="SprindleDec" keycode="" />
+  <bind key_description="Feed Rate Increase" keyfunction="FRateInc" keycode="" />
+  <bind key_description="Feed Rate Decrease" keyfunction="FRateDec" keycode="" />
+  <bind key_description="Jog Rate Increase" keyfunction="JRateInc" keycode="" />
+  <bind key_description="Jog Rate Decrease" keyfunction="JRateDec" keycode="" />
+  <bind key_description="Re-Do/Reload File" keyfunction="ReDoReload" keycode="" />
+  <bind key_description="Spindle On/Off" keyfunction="SpindleOnOff" keycode="" />
+  <bind key_description="Mist On/Off" keyfunction="MistOnOff" keycode="" /> 
 </hotkeys>
