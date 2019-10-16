@@ -706,5 +706,29 @@ namespace GCodeSender.Properties {
                 this["ProbeTouchPlateThickness"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool FeedRateIncrement {
+            get {
+                return ((bool)(this["FeedRateIncrement"]));
+            }
+            set {
+                this["FeedRateIncrement"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SpindleIncrement {
+            get {
+                return ((bool)(this["SpindleIncrement"]));
+            }
+            set {
+                this["SpindleIncrement"] = value;
+            }
+        }
     }
 }

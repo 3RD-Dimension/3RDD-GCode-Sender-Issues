@@ -5,7 +5,7 @@
 	- Added dectipted description of the compiled options #18.
 - [Added] probing button to Probing panel #16
 	- Probing options set in Settings.
-- [Added Feature] Configurable Hotkeys - accessed through Settings window #19.
+- [Added Feature] Configurable Hotkeys - accessed through Settings window #19.  Highlights Orange if not saved.  Double-Click to save.
 - [Removed Feature] - Automatic Updating (Caused problems, now checks and asks if you want to download manually).
 - [Internal] - Added Error Logger - Logs any crashes and other problems to file.
 

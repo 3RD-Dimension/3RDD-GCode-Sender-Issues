@@ -198,7 +198,13 @@ namespace GCodeSender.Hotkey
                     case Key.Oem3:
                         ret = "`";
                         break;
-                }
+                    case Key.Oem6:
+                        ret = "]";
+                        break;
+                    case Key.OemOpenBrackets:
+                        ret = "[";
+                        break;
+            }
 
                 return ret;
             }

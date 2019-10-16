@@ -14,6 +14,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Text.RegularExpressions;
+using System.Windows.Input;
 
 namespace GCodeSender
 {
@@ -91,7 +93,15 @@ namespace GCodeSender
             // Check Github for new version
             // UpdateCheck.CheckForUpdate();   
         }
-        
+
+        // Only allow numebrs for textbox values
+        // add PreviewTextInput="NumberValidationTextBox" to relevent textbox
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
         private void Machine_LineReceived1(string obj)
         {
             throw new NotImplementedException();
@@ -320,7 +330,30 @@ namespace GCodeSender
 			}
 		}
 
-		private void ButtonResetViewport_Click(object sender, RoutedEventArgs e)
+        // Spindle, Coolant, Mist Controlling
+        /// <summary>
+        /// Enable and Disable Spindle
+        /// </summary>
+        private void SpindleControl()
+        {
+            machine.SendControl(0x9E);
+        }
+
+        /// <summary>
+        /// Enable Disable Flood Coolant
+        /// </summary>
+        private void FloodControl()
+        {
+           machine.SendControl(0xA0);
+        }
+
+        // Enable and Disable Mist Coolant
+        private void MistControl()
+        {
+            machine.SendControl(0xA1);
+        }
+               
+        private void ButtonResetViewport_Click(object sender, RoutedEventArgs e)
 		{
 			viewport.Camera.Position = new System.Windows.Media.Media3D.Point3D(50, -150, 250);
 			viewport.Camera.LookDirection = new System.Windows.Media.Media3D.Vector3D(-50, 150, -250);

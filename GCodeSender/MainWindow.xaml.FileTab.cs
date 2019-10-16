@@ -8,15 +8,16 @@ namespace GCodeSender
 	partial class MainWindow
 	{
 		private string _currentFileName = "";
+        private string ReloadCurrentFileName = "";
 
-		public string CurrentFileName
+
+        public string CurrentFileName
 		{
 			get => _currentFileName;
 			set
 			{
 				_currentFileName = value;
-                // TODO Display loaded file name somewhere
-				//GetBindingExpression(Window.TitleProperty).UpdateTarget();
+				GetBindingExpression(Window.TitleProperty).UpdateTarget();
 			}
 		}
 
@@ -26,18 +27,41 @@ namespace GCodeSender
 				return;
 
 			CurrentFileName = "";
+            ReloadCurrentFileName = "";
 			ToolPath = GCodeFile.Empty;
 
 			try
 			{
 				machine.SetFile(System.IO.File.ReadAllLines(openFileDialogGCode.FileName));
-				CurrentFileName = System.IO.Path.GetFileName(openFileDialogGCode.FileName);
-			}
+                CurrentFileName = System.IO.Path.GetFullPath(openFileDialogGCode.FileName);
+                ReloadCurrentFileName = CurrentFileName;
+            }
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+                Logger.Warn(ex.Message);
+                MessageBox.Show(ex.Message);                
 			}
 		}
+
+        // Reload current file back into
+        private void ReloadCurrentFile()
+        {
+            if (ReloadCurrentFileName == "")
+                return;
+
+            ToolPath = GCodeFile.Empty;
+
+            try
+            {
+                machine.SetFile(System.IO.File.ReadAllLines(ReloadCurrentFileName));
+                CurrentFileName = ReloadCurrentFileName;
+            }
+            catch (Exception ex)
+            {
+                Logger.Warn("Failed to reload file " + ex.Message);
+                MessageBox.Show(ex.Message);
+            }
+        }
 
 		private void SaveFileDialogGCode_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
 		{

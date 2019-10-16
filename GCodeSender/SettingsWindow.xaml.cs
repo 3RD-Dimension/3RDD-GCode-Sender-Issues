@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using GCodeSender.Hotkey;
+using System.Windows.Media;
 
 namespace GCodeSender
 {
@@ -118,6 +119,7 @@ namespace GCodeSender
 
             textBox.Text = string.Empty;
             textBox.Text = string.Format("{0}", currentHotPressed);
+            textBox.Background = Brushes.DarkOrange;    
             e.Handled = true;
         }
 
@@ -126,6 +128,7 @@ namespace GCodeSender
             var newHotKey = sender as TextBox;
             // Save New KeyCode value to Hotkeys XML
             HotKeys.UpdateHotkey(newHotKey.Name, newHotKey.Text);
+            newHotKey.Background = Brushes.White;
         }
 
 		private void Window_Closed(object sender, EventArgs e)

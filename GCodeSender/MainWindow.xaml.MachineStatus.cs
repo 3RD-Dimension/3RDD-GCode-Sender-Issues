@@ -345,6 +345,7 @@ Be aware that the affected lines will likely move when using edit functions." + 
             ButtonManualResetY.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
             ButtonManualResetZ.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
             ButtonManualReturnToZero.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            manualProbeBtn.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
 
             // Manual Jogging - Enable only if machine is not activly sending a file
             manualJogBtnXPlusBtn.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
