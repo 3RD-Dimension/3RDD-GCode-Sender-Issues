@@ -44,7 +44,7 @@ namespace GCodeSender
 
             if (machine.Connected)
             {
-                MessageBox.Show("Can't close while connected!");
+                MessageBox.Show("Can't close while connected!", "Please Disconnect", MessageBoxButton.OK,MessageBoxImage.Information);
                 e.Cancel = true;
                 return;
             }

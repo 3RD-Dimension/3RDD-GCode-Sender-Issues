@@ -88,8 +88,8 @@ namespace GCodeSender
                        
 			ButtonRestoreViewport_Click(null, null);
 
-            HotKeys.LoadHotKeys(); // Load Hotkeys
-
+            //HotKeys.LoadHotKeys(); // Load Hotkeys
+ 
             // Check Github for new version
             // UpdateCheck.CheckForUpdate();   
         }

@@ -30,11 +30,11 @@ namespace GCodeSender.Hotkey
             string fileName = HotKeyFile;
             if (!File.Exists(fileName))
             {
-                MessageBox.Show("Hotkey file not found, no hotkeys set!", "Attention", MessageBoxButton.OK, MessageBoxImage.Information);
-                MainWindow.Logger.Error("Hotkey file not found in directory");
-                return;
-
+               MainWindow.Logger.Error("Hotkey file not found, going to create default");
+                CheckCreateFile.CreateDefaultXML();               
             }
+
+            //CheckCreateFile.UpdateHotKeyFile(); // Run XML Updater
 
             XmlReader r = XmlReader.Create(HotKeyFile);   // "hotkeys.xml");
 
