@@ -117,6 +117,9 @@
     <Compile Include="GrblSettingsWindow.xaml.cs">
       <DependentUpon>GrblSettingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="HotKeyControl.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Hotkey\CheckCreateFile.cs" />
     <Compile Include="Hotkey\HotKeys.cs" />
     <Compile Include="MainWindow.xaml.EditTab.cs">

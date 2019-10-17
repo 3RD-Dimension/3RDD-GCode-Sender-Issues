@@ -18,7 +18,6 @@ using System.Text.RegularExpressions;
 using System.Windows.Input;
 using AutoUpdaterDotNET;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace GCodeSender
 {
