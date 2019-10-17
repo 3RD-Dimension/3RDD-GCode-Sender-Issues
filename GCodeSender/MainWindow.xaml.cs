@@ -16,6 +16,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Text.RegularExpressions;
 using System.Windows.Input;
+using AutoUpdaterDotNET;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace GCodeSender
 {
@@ -47,6 +50,11 @@ namespace GCodeSender
 			InitializeComponent();
 
             Logger.Info("++++++ 3RDD GCode Sender v{0} START ++++++", System.Reflection.Assembly.GetEntryAssembly().GetName().Version);
+
+            // Check for any updates
+            Logger.Info("Checking for Updates");
+            AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
+            AutoUpdater.Start("https://api.github.com/repos/3RD-Dimension/3RDD-GCode-Sender-Issues/releases/latest");
 
             openFileDialogGCode.FileOk += OpenFileDialogGCode_FileOk;
 			saveFileDialogGCode.FileOk += SaveFileDialogGCode_FileOk;
@@ -88,10 +96,30 @@ namespace GCodeSender
                        
 			ButtonRestoreViewport_Click(null, null);
 
-            //HotKeys.LoadHotKeys(); // Load Hotkeys
- 
-            // Check Github for new version
-            // UpdateCheck.CheckForUpdate();   
+            HotKeys.LoadHotKeys(); // Load Hotkeys
+        }
+
+        private void AutoUpdaterOnParseUpdateInfoEvent(ParseUpdateInfoEventArgs args)
+        {
+            dynamic json = JsonConvert.DeserializeObject(args.RemoteData);
+
+            string VersionGitHub = json.name; // Version Number
+            string AssetDownloadURL = "";
+            VersionGitHub = (VersionGitHub.Remove(0, 1)); // Remove "v" from beginning
+            Version v = new Version(VersionGitHub); // Conver to Version
+
+            foreach (var assets in json.assets)
+            {
+                AssetDownloadURL = assets.browser_download_url;
+            }
+
+            args.UpdateInfo = new UpdateInfoEventArgs
+            {
+                CurrentVersion = v,
+                ChangelogURL = json.body,
+                //Mandatory = json.mandatory,
+                DownloadURL = AssetDownloadURL
+            };
         }
 
         // Only allow numebrs for textbox values
