@@ -415,7 +415,7 @@ namespace GCodeSender.Communication
                         }
                         else
                         {
-                            Console.WriteLine("Received OK without anything in the Sent Buffer");
+                            MainWindow.Logger.Info("Received OK without anything in the Sent Buffer");
                             BufferState = 0;
                         }
                     }

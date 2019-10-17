@@ -11,7 +11,8 @@
 		Drop="Window_Drop"
 		DragEnter="Window_DragEnter"
 		DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        PreviewKeyDown="Window_PreviewKeyDown" Height="{util:SettingBinding WindowHeight}" Width="{util:SettingBinding WindowWidth}" Closing="Window_Closing" Title="3RDD GCode Sender">
+        PreviewKeyDown="Window_PreviewKeyDown" 
+        Title="{Binding WindowTitle,Mode=OneWay}" Height="{util:SettingBinding WindowHeight}" Width="{util:SettingBinding WindowWidth}" Closing="Window_Closing">
     <Window.Resources>
         <ResourceDictionary Source="MainWindow.Resources.xaml"/>
     </Window.Resources>
@@ -108,22 +109,22 @@
                                 <Run Name="RunFeedOvr"/>
                             </TextBlock>
                             <StackPanel Orientation="Horizontal">
-                                <Button Click="ButtonFeedOverride_Click" Content="+10%" Style="{StaticResource styleButton}" Tag="+10%"/>
-                                <Button Click="ButtonFeedOverride_Click" Content="+1%" Style="{StaticResource styleButton}" Tag="+1%"/>
+                                <Button Name="Feed10Inc" Click="ButtonFeedOverride_Click" Content="+10%" Style="{StaticResource styleButton}" Tag="+10%"/>
+                                <Button Name="Feed1Inc" Click="ButtonFeedOverride_Click" Content="+1%" Style="{StaticResource styleButton}" Tag="+1%"/>
                                 <Button Click="ButtonFeedOverride_Click" Content="100%" Style="{StaticResource styleButton}" Tag="100%"/>
-                                <Button Click="ButtonFeedOverride_Click" Content="-1%" Style="{StaticResource styleButton}" Tag="-1%"/>
-                                <Button Click="ButtonFeedOverride_Click" Content="-10%" Style="{StaticResource styleButton}" Tag="-10%"/>
+                                <Button Name="Feed1Dec" Click="ButtonFeedOverride_Click" Content="-1%" Style="{StaticResource styleButton}" Tag="-1%"/>
+                                <Button Name="Feed10Dec" Click="ButtonFeedOverride_Click" Content="-10%" Style="{StaticResource styleButton}" Tag="-10%"/>
                             </StackPanel>
                             <TextBlock>
                                 <Run Text="Spindle:"/>
                                 <Run Name="RunSpindleOvr"/>
                             </TextBlock>
                             <StackPanel Orientation="Horizontal">
-                                <Button Click="ButtonSpindleOverride_Click" Content="+10%" Style="{StaticResource styleButton}" Tag="+10%"/>
-                                <Button Click="ButtonSpindleOverride_Click" Content="+1%" Style="{StaticResource styleButton}" Tag="+1%"/>
+                                <Button Name="Spindle10Inc" Click="ButtonSpindleOverride_Click" Content="+10%" Style="{StaticResource styleButton}" Tag="+10%"/>
+                                <Button Name="Spindle1Inc" Click="ButtonSpindleOverride_Click" Content="+1%" Style="{StaticResource styleButton}" Tag="+1%"/>
                                 <Button Click="ButtonSpindleOverride_Click" Content="100%" Style="{StaticResource styleButton}" Tag="100%"/>
-                                <Button Click="ButtonSpindleOverride_Click" Content="-1%" Style="{StaticResource styleButton}" Tag="-1%"/>
-                                <Button Click="ButtonSpindleOverride_Click" Content="-10%" Style="{StaticResource styleButton}" Tag="-10%"/>
+                                <Button Name="Spindle1Dec" Click="ButtonSpindleOverride_Click" Content="-1%" Style="{StaticResource styleButton}" Tag="-1%"/>
+                                <Button Name="Spindle10Dec" Click="ButtonSpindleOverride_Click" Content="-10%" Style="{StaticResource styleButton}" Tag="-10%"/>
                             </StackPanel>
                         </StackPanel>
                     </Expander>
@@ -170,14 +171,14 @@
                                             </TextBlock>
                                         </TextBox.ToolTip>
                                     </TextBox>
-                                    <Label Content="Feed" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                    <TextBox Name="TextBoxJogFeed" Text="{util:SettingBinding JogFeed}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="1"/>
-                                    <Label Content="Feed Dist" HorizontalAlignment="Left" Margin="0,33,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-                                    <TextBox Name="TextBoxJogDistance" Text="{util:SettingBinding JogDistance}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="90,34,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2"/>
+                                    <Label Content="Jog Feed" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                                    <TextBox Name="TextBoxJogFeed" Text="{util:SettingBinding JogFeed}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="1" PreviewTextInput="NumberValidationTextBox"/>
+                                    <Label Content="Max Jog Dist" HorizontalAlignment="Left" Margin="0,33,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                                    <TextBox Name="TextBoxJogDistance" Text="{util:SettingBinding JogDistance}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="90,34,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2" PreviewTextInput="NumberValidationTextBox"/>
                                     <Label Content="Feed Fine" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                    <TextBox Name="TextBoxJogFeedFine" Text="{util:SettingBinding JogFeedCtrl}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="1"/>
+                                    <TextBox Name="TextBoxJogFeedFine" Text="{util:SettingBinding JogFeedCtrl}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="1" PreviewTextInput="NumberValidationTextBox"/>
                                     <Label Content="Fine Distance" HorizontalAlignment="Left" Margin="0,61,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-                                    <TextBox Name="TextBoxJogDistanceFine" Text="{util:SettingBinding JogDistanceCtrl}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="90,62,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2"/>
+                                    <TextBox Name="TextBoxJogDistanceFine" Text="{util:SettingBinding JogDistanceCtrl}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="90,62,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2" PreviewTextInput="NumberValidationTextBox"/>
                                 </Grid>
                             </GroupBox>
                             <StackPanel Orientation="Horizontal">

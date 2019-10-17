@@ -1,19 +1,20 @@
 ﻿using GCodeSender.Communication;
 using GCodeSender.Util;
+using GCodeSender.Hotkey;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
+using System;
 
 namespace GCodeSender
 {
 	partial class MainWindow
 	{
-		private List<string> ManualCommands = new List<string>();   //pos 0 is the last command sent, pos1+ are older
+        private List<string> ManualCommands = new List<string>();   //pos 0 is the last command sent, pos1+ are older
 		private int ManualCommandIndex = -1;
-
-		void ManualSend()
+               
+        void ManualSend()
 		{
 			if (machine.Mode != Machine.OperatingMode.Manual)
 				return;
@@ -70,48 +71,7 @@ namespace GCodeSender
 				}
 			}
 		}
-
-	    // Zero All Axis
-		private void ButtonManualResetAll_Click(object sender, RoutedEventArgs e)
-		{
-			if (machine.Mode != Machine.OperatingMode.Manual)
-				return;
-            machine.SendLine(Properties.Settings.Default.ZeroAllCmd);
-		}
-
-        // TODO Get the commands from Settings
-        // Zero X Axis
-        private void ButtonManualResetX_Click(object sender, RoutedEventArgs e)
-        {
-            if (machine.Mode != Machine.OperatingMode.Manual)
-                return;           
-            machine.SendLine(Properties.Settings.Default.ZeroXCmd);
-        }
-        // Zero Y Axis
-        private void ButtonManualResetY_Click(object sender, RoutedEventArgs e)
-        {
-            if (machine.Mode != Machine.OperatingMode.Manual)
-                return;
-            machine.SendLine(Properties.Settings.Default.ZeroYCmd);
-        }
-        // Zero Z Axis
-        private void ButtonManualResetZ_Click(object sender, RoutedEventArgs e)
-        {
-            if (machine.Mode != Machine.OperatingMode.Manual)
-                return;
-            machine.SendLine(Properties.Settings.Default.ZeroZCmd);
-        }
-
-        private void ButtonManualReturnToZero_Click(object sender, RoutedEventArgs e)
-        {
-            // Return all Axis to Zero
-            if (machine.Mode != Machine.OperatingMode.Manual)
-                return;
-
-            machine.SendLine("G90 G0 X0 Y0");
-            machine.SendLine("G90 G0 Z0");
-        }
-
+	   
         private void CheckBoxEnableJog_Checked(object sender, RoutedEventArgs e)
 		{
 			if (machine.Mode != Machine.OperatingMode.Manual)
@@ -128,20 +88,25 @@ namespace GCodeSender
 			machine.JogCancel();
 		}
 
-         // TODO Add Configurable Keys 
-		private void Jogging_KeyDown(object sender, KeyEventArgs e)
+        private void Jogging_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            machine.JogCancel();
+        }
+
+        private void Jogging_KeyUp(object sender, KeyEventArgs e)
+        {
+            machine.JogCancel();
+        }
+        
+        // This is run when Jogging Keyboard Focus is Focused
+        private void Jogging_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (!machine.Connected)
 				return;
 
-            // Pressing ESC Key Soft Resets Machine
-			if (e.Key == Key.Escape)
-			{
-				if (Properties.Settings.Default.EnableEscapeSoftReset)
-					machine.SoftReset();
-				else
-					machine.JogCancel();
-			}
+            // Get Keycode
+            string currentHotPressed = HotKeys.KeyProcess(sender, e); // Get Keycode
+            if (currentHotPressed == null) return; // If currentHotPressed is null, Return (to avoid continuing with  blank)
 
 			if (!CheckBoxEnableJog.IsChecked.Value)
 				return;
@@ -156,59 +121,30 @@ namespace GCodeSender
 
 			string direction = null;
 
-            // If Left or Right Shift is held down...
-			if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
-			{
-				if (e.Key == Key.Up)
-					direction = "Z";
-				else if (e.Key == Key.Down)
-					direction = "Z-";
-			}
-			else // Otherwise If Left or Right Shift is not held down
-			{
-				if (e.Key == Key.Right)
-					direction = "X";
-				else if (e.Key == Key.Left)
-					direction = "X-";
-				else if (e.Key == Key.Up)
-					direction = "Y";
-				else if (e.Key == Key.Down)
-					direction = "Y-";
-				else if (e.Key == Key.PageUp)
-					direction = "Z";
-				else if (e.Key == Key.PageDown)
-					direction = "Z-";
-			}
-
+            if (currentHotPressed == HotKeys.hotkeyCode["JogXPos"])
+                direction = "X";
+            else if (currentHotPressed == HotKeys.hotkeyCode["JogXNeg"])
+                direction = "X-";
+            else if (currentHotPressed == HotKeys.hotkeyCode["JogYPos"])
+                direction = "Y";
+            else if (currentHotPressed == HotKeys.hotkeyCode["JogYNeg"])
+                direction = "Y-";
+            else if (currentHotPressed == HotKeys.hotkeyCode["JogZPos"])
+                direction = "Z";
+            else if (currentHotPressed == HotKeys.hotkeyCode["JogZNeg"])
+                direction = "Z-";
+            else if (currentHotPressed == HotKeys.hotkeyCode["RTOrigin"]) // Return to Origin ie back to all axis Zero position
+                ButtonManualReturnToZero.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+            else if (currentHotPressed == HotKeys.hotkeyCode["FSStop"]) // Jog Cancel
+                machine.JogCancel();
+   
 			double feed = Properties.Settings.Default.JogFeed;
 			double distance = Properties.Settings.Default.JogDistance;
-
-			if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
-			{
-				feed = Properties.Settings.Default.JogFeedCtrl;
-				distance = Properties.Settings.Default.JogDistanceCtrl;
-			}
 
 			if (direction != null)
 			{
 				machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feed, direction, distance));
 			}
-		}
-
-		private void Jogging_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
-		{
-			machine.JogCancel();
-		}
-
-		private void Jogging_KeyUp(object sender, KeyEventArgs e)
-		{
-			machine.JogCancel();
-		}
-
-		private void Window_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-		{
-			if (machine.Connected && e.Key == Key.Escape && Properties.Settings.Default.EnableEscapeSoftReset)
-				machine.SoftReset();
-		}
-	}
+		}        
+    }
 }

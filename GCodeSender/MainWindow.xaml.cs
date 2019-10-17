@@ -1,15 +1,23 @@
+// 3RDD GCode Sender
+// Modified Version of OpenCNCPilot by Shayne Bouda
+// 3RD-Dimension.nz
+// 2019
+
 using Microsoft.Win32;
 using GCodeSender.Communication;
 using GCodeSender.GCode;
 using GCodeSender.Util;
+using GCodeSender.Hotkey;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using AutoUpdaterDotNET;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
+using AutoUpdaterDotNET;
+using Newtonsoft.Json;
 
 namespace GCodeSender
 {
@@ -28,7 +36,9 @@ namespace GCodeSender
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		private void RaisePropertyChanged(string propertyName)
+        public static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
+        private void RaisePropertyChanged(string propertyName)
 		{
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
@@ -38,7 +48,14 @@ namespace GCodeSender
 			AppDomain.CurrentDomain.UnhandledException += UnhandledException;
 			InitializeComponent();
 
-			openFileDialogGCode.FileOk += OpenFileDialogGCode_FileOk;
+            Logger.Info("++++++ 3RDD GCode Sender v{0} START ++++++", System.Reflection.Assembly.GetEntryAssembly().GetName().Version);
+
+            // Check for any updates
+            Logger.Info("Checking for Updates");
+            AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
+            AutoUpdater.Start("https://api.github.com/repos/3RD-Dimension/3RDD-GCode-Sender-Issues/releases/latest");
+
+            openFileDialogGCode.FileOk += OpenFileDialogGCode_FileOk;
 			saveFileDialogGCode.FileOk += SaveFileDialogGCode_FileOk;
 
 			machine.ConnectionStateChanged += Machine_ConnectionStateChanged;
@@ -78,15 +95,40 @@ namespace GCodeSender
                        
 			ButtonRestoreViewport_Click(null, null);
 
-            // Setup HotKeys
-            SetupHotkeys();
-
-            // Autoupdater
-            AutoUpdater.UpdateFormSize = new System.Drawing.Size(500, 500);
-            AutoUpdater.ShowSkipButton = false;
-            AutoUpdater.Start("http://3rd-dimension.nz/3rdd_version/GCode_Sender_Update.xml");            
+            HotKeys.LoadHotKeys(); // Load Hotkeys
         }
-        
+
+        private void AutoUpdaterOnParseUpdateInfoEvent(ParseUpdateInfoEventArgs args)
+        {
+            dynamic json = JsonConvert.DeserializeObject(args.RemoteData);
+
+            string VersionGitHub = json.name; // Version Number - Change this to tag_name on deployment
+            string AssetDownloadURL = "";
+            VersionGitHub = (VersionGitHub.Remove(0, 1)); // Remove "v" from beginning
+            Version v = new Version(VersionGitHub); // Conver to Version
+
+            foreach (var assets in json.assets)
+            {
+                AssetDownloadURL = assets.browser_download_url;
+            }
+
+            args.UpdateInfo = new UpdateInfoEventArgs
+            {
+                CurrentVersion = v,
+                ChangelogURL = json.body,
+                //Mandatory = json.mandatory,
+                DownloadURL = AssetDownloadURL
+            };
+        }
+
+        // Only allow numebrs for textbox values
+        // add PreviewTextInput="NumberValidationTextBox" to relevent textbox
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
         private void Machine_LineReceived1(string obj)
         {
             throw new NotImplementedException();
@@ -94,16 +136,6 @@ namespace GCodeSender
 
         public Vector3 LastProbePosMachine { get; set; }
 		public Vector3 LastProbePosWork { get; set; }
-
-        private void SetupHotkeys()
-        {
-            // HotKeys Setup - Seperate RoutedCommands for each hotkey
-            // TODO Work out a sensible way to do hotkeys or just leave them as they are.  
-            // TODO Only allow user to use 1x Key and 1x Modifier Key. TODO Have to decide if save and load hotkeys to an XML file, or the settings file
-            //RoutedCommand newCmd = new RoutedCommand();
-            //newCmd.InputGestures.Add(new KeyGesture(Key.N, ModifierKeys.Control));
-            //CommandBindings.Add(new CommandBinding(newCmd, manualJogBtnZPlusBtn_Click));
-        }
 
 		private void Machine_ProbeFinished_UserOutput(Vector3 position, bool success)
 		{
@@ -125,16 +157,10 @@ namespace GCodeSender
 			info += "\r\nToString():\r\n";
 			info += e.ToString();
 
-			MessageBox.Show(info);
-			Console.WriteLine(info);
+			MessageBox.Show("There has been an Unhandled Exception, the error has been logged to a file in the directory");
+            Logger.Error(info);
 
-			try
-			{
-				System.IO.File.WriteAllText("GCodeSender_Crash_Log.txt", info);
-			}
-			catch { }
-
-			Environment.Exit(1);
+            Environment.Exit(1);
 		}
 
 		private void Default_SettingChanging(object sender, System.Configuration.SettingChangingEventArgs e)
@@ -183,9 +209,9 @@ namespace GCodeSender
 			get
 			{
 				if (CurrentFileName.Length < 1)
-					return $"GCodeSender v{Version} 3RDD";
+					return $"3RDD GCode Sender v{Version}";
 				else
-					return $"GCodeSender v{Version} 3RDD - {CurrentFileName}";
+					return $"3RDD GCode Sender v{Version} - {CurrentFileName}";
 			}
 		}
 
@@ -331,7 +357,30 @@ namespace GCodeSender
 			}
 		}
 
-		private void ButtonResetViewport_Click(object sender, RoutedEventArgs e)
+        // Spindle, Coolant, Mist Controlling
+        /// <summary>
+        /// Enable and Disable Spindle
+        /// </summary>
+        private void SpindleControl()
+        {
+            machine.SendControl(0x9E);
+        }
+
+        /// <summary>
+        /// Enable Disable Flood Coolant
+        /// </summary>
+        private void FloodControl()
+        {
+           machine.SendControl(0xA0);
+        }
+
+        // Enable and Disable Mist Coolant
+        private void MistControl()
+        {
+            machine.SendControl(0xA1);
+        }
+               
+        private void ButtonResetViewport_Click(object sender, RoutedEventArgs e)
 		{
 			viewport.Camera.Position = new System.Windows.Media.Media3D.Point3D(50, -150, 250);
 			viewport.Camera.LookDirection = new System.Windows.Media.Media3D.Vector3D(-50, 150, -250);
