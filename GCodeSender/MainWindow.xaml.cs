@@ -102,7 +102,7 @@ namespace GCodeSender
         {
             dynamic json = JsonConvert.DeserializeObject(args.RemoteData);
 
-            string VersionGitHub = json.name; // Version Number - Change this to tag_name on deployment
+            string VersionGitHub = json.tag_name; // Version Number
             string AssetDownloadURL = "";
             VersionGitHub = (VersionGitHub.Remove(0, 1)); // Remove "v" from beginning
             Version v = new Version(VersionGitHub); // Conver to Version
