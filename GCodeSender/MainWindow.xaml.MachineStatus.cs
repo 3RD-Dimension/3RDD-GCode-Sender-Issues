@@ -232,6 +232,8 @@ namespace GCodeSender
 
 			if (ToolPath.Warnings.Count > 0)
 			{
+                if (Properties.Settings.Default.ShowWarningWindow) // If ShowWarningWindow == True, Display when file loaded
+                { 
 				WarningWindow ww = new WarningWindow(@"Parsing this file resulted in some warnings!
 Do not use GCode Sender's edit functions unless you are sure that these warnings can be ignored!
 If you use edit functions, check the output file for errors before running the gcode!
@@ -239,9 +241,10 @@ Be aware that the affected lines will likely move when using edit functions." + 
 "and will not affect the normal running of the code." + "\n\n", ToolPath.Warnings);
 
 				ww.ShowDialog();
-			}
+			    }
+            }
 
-			if (Properties.Settings.Default.EnableCodePreview)
+            if (Properties.Settings.Default.EnableCodePreview)
 				ToolPath.GetModel(ModelLine, ModelRapid, ModelArc);
 
 			RunFileLength.Text = machine.File.Count.ToString();

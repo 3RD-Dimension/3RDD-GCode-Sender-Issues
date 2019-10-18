@@ -730,5 +730,17 @@ namespace GCodeSender.Properties {
                 this["SpindleIncrement"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowWarningWindow {
+            get {
+                return ((bool)(this["ShowWarningWindow"]));
+            }
+            set {
+                this["ShowWarningWindow"] = value;
+            }
+        }
     }
 }
