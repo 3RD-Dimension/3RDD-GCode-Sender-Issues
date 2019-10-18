@@ -24,11 +24,11 @@ namespace GCodeSender.Hotkey
                  new XElement("bind", new XAttribute("key_description", "Jog Z Axis +"), new XAttribute("keyfunction", "JogZPos"), new XAttribute("keycode", "NumPad9")),
                  new XElement("bind", new XAttribute("key_description", "Jog Z Axis -"), new XAttribute("keyfunction", "JogZNeg"), new XAttribute("keycode", "NumPad3")),
                  // Optional Keys
-                 new XElement("bind", new XAttribute("key_description", "Emergency Stop"), new XAttribute("keyfunction", "EmgStop"), new XAttribute("keycode", "")),
+                 new XElement("bind", new XAttribute("key_description", "Emergency Stop"), new XAttribute("keyfunction", "EmgStop"), new XAttribute("keycode", "Escape")),
                  new XElement("bind", new XAttribute("key_description", "Cycle Start"), new XAttribute("keyfunction", "CycleStart"), new XAttribute("keycode", "")),
                  new XElement("bind", new XAttribute("key_description", "File Hold / Jog Cancel"), new XAttribute("keyfunction", "FSStop"), new XAttribute("keycode", "")),
                  new XElement("bind", new XAttribute("key_description", "Return to Origin (Zero)"), new XAttribute("keyfunction", "RTOrigin"), new XAttribute("keycode", "")),
-                 new XElement("bind", new XAttribute("key_description", "Single Step"), new XAttribute("keyfunction", "SStep"), new XAttribute("keycode", "")),
+                 //new XElement("bind", new XAttribute("key_description", "Single Step"), new XAttribute("keyfunction", "SStep"), new XAttribute("keycode", "")),
                  new XElement("bind", new XAttribute("key_description", "Spindle Increase"), new XAttribute("keyfunction", "SpindleInc"), new XAttribute("keycode", "")),
                  new XElement("bind", new XAttribute("key_description", "Spindle Decrease"), new XAttribute("keyfunction", "SprindleDec"), new XAttribute("keycode", "")),
                  new XElement("bind", new XAttribute("key_description", "Feed Rate Increase"), new XAttribute("keyfunction", "FRateInc"), new XAttribute("keycode", "")),
