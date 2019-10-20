@@ -462,6 +462,6 @@ namespace GCodeSender
             machine.SendLine("G91");
             machine.SendLine($"G0 Z{Properties.Settings.Default.ProbeSafeHeight}");
             machine.SendLine("M30");
-        }
+        }      
     }
 }

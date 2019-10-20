@@ -58,9 +58,10 @@
                                 <ColumnDefinition Width="34*"/>
                             </Grid.ColumnDefinitions>
                             <Button Name="ButtonFileOpen" Click="ButtonOpen_Click" Content="Open" Style="{StaticResource styleButton}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                            <Button Name="ButtonFileSave" Click="ButtonSave_Click" Content="Save" Style="{StaticResource styleButton}" HorizontalAlignment="Left" Margin="42,5,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                            <Button Name="ButtonFileClear" Click="ButtonClear_Click" Content="Clear" Style="{StaticResource styleButton}" HorizontalAlignment="Left" Margin="81,5,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                            <TextBlock  VerticalAlignment="Top" Margin="122,9,0,0" Grid.Column="1">
+                            <Button Name="ButtonFileReload" Click="ButtonFileReload_Click" Content="Reload" Style="{StaticResource styleButton}" HorizontalAlignment="Left" Margin="40,5,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                            <Button Name="ButtonFileSave" Click="ButtonSave_Click" Content="Save" Style="{StaticResource styleButton}" HorizontalAlignment="Left" Margin="89,5,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                            <Button Name="ButtonFileClear" Click="ButtonClear_Click" Content="Clear" Style="{StaticResource styleButton}" HorizontalAlignment="Left" Margin="127,5,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                            <TextBlock  VerticalAlignment="Top" Margin="122,34,0,0" Grid.Column="1">
                                 <Run Name="RunFilePosition" Text="0"/>
                                 <Run Text="/"/>
                                 <Run Name="RunFileLength"  Text="0"/>

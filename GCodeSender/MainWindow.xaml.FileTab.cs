@@ -132,5 +132,10 @@ namespace GCodeSender
 
 			machine.FileGoto((int)value - 1);
 		}
-	}
+
+        private void ButtonFileReload_Click(object sender, RoutedEventArgs e)
+        {
+            ReloadCurrentFile();
+        }
+    }
 }
