@@ -341,8 +341,9 @@ Be aware that the affected lines will likely move when using edit functions." + 
 			ButtonFilePause.IsEnabled = machine.Mode == Machine.OperatingMode.SendFile;
 			ButtonFileGoto.IsEnabled = machine.Mode != Machine.OperatingMode.SendFile;
 			ButtonFileClear.IsEnabled = machine.Mode != Machine.OperatingMode.SendFile;
+            ButtonFileReload.IsEnabled = machine.Mode != Machine.OperatingMode.SendFile;
 
-			ButtonManualSend.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            ButtonManualSend.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
 			ButtonManualResetAll.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
             ButtonManualResetX.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
             ButtonManualResetY.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;

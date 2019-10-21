@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GCodeSender"
         xmlns:util="clr-namespace:GCodeSender.Util"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="Settings" Height="300" Width="390" Closed="Window_Closed" ResizeMode="NoResize">
     <Window.Resources>
@@ -47,15 +48,21 @@
         <TabItem Header="Viewport">
             <Grid>
                 <TextBox Margin="10,10,0,0" Text="{util:SettingBinding ViewportArcSplit}" FontSize="10"/>
-                <Label Content="preview arc segment length (mm)" HorizontalAlignment="Left" Margin="135,9,0,0" VerticalAlignment="Top" Height="26" Width="188" FontSize="10"/>
-
-                <TextBox Margin="10,38,0,0" Text="{util:SettingBinding HeightMapOpacity}" FontSize="10"/>
-                <Label Content="height map opacity (0.0 - 1.0)" HorizontalAlignment="Left" Margin="135,37,0,0" VerticalAlignment="Top" Height="26" Width="165" FontSize="10"/>
-
-                <TextBox Margin="10,66,0,0" Text="{util:SettingBinding GridThickness}" FontSize="10"/>
-                <Label Content="grid thickness (0.1 default)" HorizontalAlignment="Left" Margin="135,65,0,0" VerticalAlignment="Top" Height="26" Width="165" FontSize="10"/>
-
-                <CheckBox Content="Preview Toolpath" HorizontalAlignment="Left" Margin="116,107,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding EnableCodePreview}" Height="15" Width="110" FontSize="10"/>
+                <Label Content="Preview Arc Segment Length (mm)" HorizontalAlignment="Left" Margin="135,9,0,0" VerticalAlignment="Top" Height="26" Width="188" FontSize="10"/>
+                <!--<TextBox Margin="10,38,0,0" Text="{util:SettingBinding HeightMapOpacity}" FontSize="10"/>
+                <Label Content="height map opacity (0.0 - 1.0)" HorizontalAlignment="Left" Margin="135,37,0,0" VerticalAlignment="Top" Height="26" Width="165" FontSize="10"/>-->
+                <TextBox Margin="10,38,0,0" Text="{util:SettingBinding GridThickness}" FontSize="10"/>
+                <Label Content="Grid Thickness (0.1 default)" HorizontalAlignment="Left" Margin="135,37,0,0" VerticalAlignment="Top" Height="26" Width="165" FontSize="10"/>
+                <CheckBox Content="Preview Toolpath" HorizontalAlignment="Left" Margin="135,65,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding EnableCodePreview}" Height="15" Width="110" FontSize="10"/>
+                <!--Rapid Line Color-->
+                <Label Content="Rapid Line Color" HorizontalAlignment="Left" Margin="135,93,0,0" VerticalAlignment="Top" Height="26" Width="165" FontSize="10"/>
+                <xctk:ColorPicker Name="ClrPcker_ModelRapidColor" Height="26" Margin="10,93,237,0" VerticalAlignment="Top" FontSize="10" SelectedColor="{util:SettingBinding ModelRapidColor}"/>
+                <!--Color-->
+                <Label Content="Line Color" HorizontalAlignment="Left" Margin="135,121,0,0" VerticalAlignment="Top" Height="26" Width="165" FontSize="10"/>
+                <xctk:ColorPicker Name="ClrPcker_ModelLineColor" Height="26" Margin="10,121,237,0" VerticalAlignment="Top" FontSize="10" SelectedColor="{util:SettingBinding ModelLineColor}"/>
+                <!--Arc Color-->
+                <Label Content="Arc Color" HorizontalAlignment="Left" Margin="135,149,0,0" VerticalAlignment="Top" Height="26" Width="165" FontSize="10"/>
+                <xctk:ColorPicker Name="ClrPcker_ModelArcColor" Height="26" Margin="10,149,237,0" VerticalAlignment="Top" FontSize="10" SelectedColor="{util:SettingBinding ModelArcColor}"/>
             </Grid>
         </TabItem>
 
@@ -72,7 +79,7 @@
 
                 <TextBox Margin="10,61,0,0" Text="{util:SettingBinding ProbeSafeHeight}" FontSize="10" ToolTip="The height to safely retract Z after probe"/>
                 <Label Content="Safe Retract Height (mm)" HorizontalAlignment="Left" Margin="135,61,0,0" VerticalAlignment="Top" FontSize="10" Grid.ColumnSpan="2"/>
-                   
+
                 <!-- This is maximum probe depth -->
                 <TextBox Margin="10,95,0,0" Text="{util:SettingBinding ProbeMaxDepth}" FontSize="10" ToolTip="The maxmum Z will move to contact the probe"/>
                 <Label Content="Max Probe Distance (mm)" HorizontalAlignment="Left" Margin="135,95,0,0" VerticalAlignment="Top" FontSize="10" Grid.ColumnSpan="2"/>

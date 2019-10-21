@@ -70,9 +70,9 @@
                             <ListView Name="ListViewFile"  Margin="0,53" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent" Grid.ColumnSpan="2"/>
 
                             <Button Name="ButtonFileStart" Click="ButtonFileStart_Click" Content="Start" Style="{StaticResource styleButton}" HorizontalAlignment="Left" Margin="5,0,0,25" Height="23" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
-                            <Button Name="ButtonFilePause" Click="ButtonFilePause_Click" Content="Pause" Style="{StaticResource styleButton}" HorizontalAlignment="Left" Margin="42,0,0,25" Height="23" VerticalAlignment="Bottom" Grid.Column="1"/>
-                            <Button Name="ButtonFileGoto" Click="ButtonFileGoto_Click" Content="Go To" Style="{StaticResource styleButton}" HorizontalAlignment="Left" Margin="87,0,0,25" Height="23" VerticalAlignment="Bottom" Grid.Column="1"/>
-                            <CheckBox Name="CheckBoxPauseOnM0" Content="Pause" ToolTip="Pause the Program on M0/M1/M30" IsChecked="{util:SettingBinding PauseFileOnHold}" HorizontalAlignment="Left" Margin="132,0,0,20" Height="23" VerticalAlignment="Bottom" Grid.Column="1"/>
+                            <Button Name="ButtonFilePause" Click="ButtonFilePause_Click" Content="Pause" Style="{StaticResource styleButton}" HorizontalAlignment="Left" Margin="36,0,0,25" Height="23" VerticalAlignment="Bottom" Grid.Column="1"/>
+                            <Button Name="ButtonFileGoto" Click="ButtonFileGoto_Click" Content="Go To" Style="{StaticResource styleButton}" HorizontalAlignment="Left" Margin="81,0,0,25" Height="23" VerticalAlignment="Bottom" Grid.Column="1"/>
+                            <CheckBox Name="CheckBoxPauseOnM0" Content="Pause" ToolTip="Pause the Program on M0/M1/M30" IsChecked="{util:SettingBinding PauseFileOnHold}" HorizontalAlignment="Left" Margin="128,0,0,20" Height="23" VerticalAlignment="Bottom" Grid.Column="1"/>
 
                             <TextBlock  VerticalAlignment="Bottom" Margin="4,0,0,4" HorizontalAlignment="Left" Grid.Column="1">
                                 <Run Text="Runtime:"/>
@@ -370,9 +370,12 @@
 
             <h:DefaultLights/>
             <h:CoordinateSystemVisual3D ArrowLengths="5"/>
-            <h:LinesVisual3D Thickness="0.5" Color="Gray" x:Name="ModelRapid"/>
+            <h:LinesVisual3D Thickness="1" Color="{util:SettingBinding ModelRapidColor}" x:Name="ModelRapid"/>
+            <h:LinesVisual3D Thickness="1" Color="{util:SettingBinding ModelLineColor}" x:Name="ModelLine"/>
+            <h:LinesVisual3D Thickness="1" Color="{util:SettingBinding ModelArcColor}" x:Name="ModelArc"/>
+            <!--<h:LinesVisual3D Thickness="0.5" Color="Gray" x:Name="ModelRapid"/>
             <h:LinesVisual3D Thickness="1" Color="Black" x:Name="ModelLine"/>
-            <h:LinesVisual3D Thickness="1" Color="Blue" x:Name="ModelArc"/>
+            <h:LinesVisual3D Thickness="1" Color="Blue" x:Name="ModelArc"/>-->
             <h:ArrowVisual3D x:Name="ModelTool" Direction="0,0,-10"/>
             <h:GridLinesVisual3D 
 				x:Name="ModelGrid"
