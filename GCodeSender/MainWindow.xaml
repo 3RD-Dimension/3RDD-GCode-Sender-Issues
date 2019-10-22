@@ -373,37 +373,11 @@
             <h:LinesVisual3D Thickness="1" Color="{util:SettingBinding ModelRapidColor}" x:Name="ModelRapid"/>
             <h:LinesVisual3D Thickness="1" Color="{util:SettingBinding ModelLineColor}" x:Name="ModelLine"/>
             <h:LinesVisual3D Thickness="1" Color="{util:SettingBinding ModelArcColor}" x:Name="ModelArc"/>
-            <!--<h:LinesVisual3D Thickness="0.5" Color="Gray" x:Name="ModelRapid"/>
-            <h:LinesVisual3D Thickness="1" Color="Black" x:Name="ModelLine"/>
-            <h:LinesVisual3D Thickness="1" Color="Blue" x:Name="ModelArc"/>-->
             <h:ArrowVisual3D x:Name="ModelTool" Direction="0,0,-10"/>
             <h:GridLinesVisual3D 
 				x:Name="ModelGrid"
 				Width="500" Length="500"
                 Thickness="{util:SettingBinding GridThickness}"/>
-            <h:MeshGeometryVisual3D
-				x:Name="ModelHeightMap">
-                <h:MeshGeometryVisual3D.Material>
-                    <MaterialGroup>
-                        <DiffuseMaterial>
-                            <DiffuseMaterial.Brush>
-                                <LinearGradientBrush StartPoint="0,0" EndPoint="0, 1" Opacity="{util:SettingBinding HeightMapOpacity}">
-                                    <LinearGradientBrush.GradientStops>
-                                        <GradientStop Color="Blue" Offset="0"/>
-                                        <GradientStop Color="Cyan" Offset="0.2"/>
-                                        <GradientStop Color="Green" Offset="0.4"/>
-                                        <GradientStop Color="Yellow" Offset="0.6"/>
-                                        <GradientStop Color="Red" Offset="0.8"/>
-                                        <GradientStop Color="Purple" Offset="1"/>
-                                    </LinearGradientBrush.GradientStops>
-                                </LinearGradientBrush>
-                            </DiffuseMaterial.Brush>
-                        </DiffuseMaterial>
-                    </MaterialGroup>
-                </h:MeshGeometryVisual3D.Material>
-            </h:MeshGeometryVisual3D>
-            <h:LinesVisual3D x:Name="ModelHeightMapBoundary" Thickness="2" Color="Lime"/>
-            <h:PointsVisual3D x:Name="ModelHeightMapPoints" Color="Red" Size="4"/>
             <h:LinesVisual3D x:Name="ModelFileBoundary" Color="GreenYellow" Thickness="2.5"/>
             <h:PointsVisual3D x:Name="ModelFileBoundaryPoints" Color="Green" Size="8"/>
             <h:TextVisual3D x:Name="ModelTextMinPoint" UpDirection="0,1,0" Height="7" VerticalAlignment="Top" HorizontalAlignment="Left"/>
