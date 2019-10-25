@@ -730,5 +730,53 @@ namespace GCodeSender.Properties {
                 this["SpindleIncrement"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowWarningWindow {
+            get {
+                return ((bool)(this["ShowWarningWindow"]));
+            }
+            set {
+                this["ShowWarningWindow"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ModelRapidColor {
+            get {
+                return ((string)(this["ModelRapidColor"]));
+            }
+            set {
+                this["ModelRapidColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ModelLineColor {
+            get {
+                return ((string)(this["ModelLineColor"]));
+            }
+            set {
+                this["ModelLineColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ModelArcColor {
+            get {
+                return ((string)(this["ModelArcColor"]));
+            }
+            set {
+                this["ModelArcColor"] = value;
+            }
+        }
     }
 }

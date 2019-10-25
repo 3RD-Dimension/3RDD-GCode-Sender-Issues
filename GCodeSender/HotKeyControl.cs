@@ -40,6 +40,7 @@ namespace GCodeSender
             {
                 int currentJogRate = Convert.ToInt32(TextBoxJogFeed.Text);
                 TextBoxJogFeed.Text = (currentJogRate + 10).ToString();
+                Properties.Settings.Default.JogFeed = Convert.ToDouble(TextBoxJogFeed.Text);
             }
 
             // Jog rate Increase and Decrease (This is saved to settings always)
@@ -47,6 +48,7 @@ namespace GCodeSender
             {
                 int currentJogRate = Convert.ToInt32(TextBoxJogFeed.Text);
                 TextBoxJogFeed.Text = (currentJogRate - 10).ToString();
+                Properties.Settings.Default.JogFeed = Convert.ToDouble(TextBoxJogFeed.Text);
             }
 
             // Feed Rate

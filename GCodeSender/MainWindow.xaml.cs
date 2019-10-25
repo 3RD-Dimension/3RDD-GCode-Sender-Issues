@@ -53,7 +53,7 @@ namespace GCodeSender
             // Check for any updates
             Logger.Info("Checking for Updates");
             AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
-            AutoUpdater.Start("https://api.github.com/repos/3RD-Dimension/3RDD-GCode-Sender-Issues/releases/latest");
+            //AutoUpdater.Start("https://api.github.com/repos/3RD-Dimension/3RDD-GCode-Sender-Issues/releases/latest");
 
             openFileDialogGCode.FileOk += OpenFileDialogGCode_FileOk;
 			saveFileDialogGCode.FileOk += SaveFileDialogGCode_FileOk;
@@ -103,6 +103,7 @@ namespace GCodeSender
             dynamic json = JsonConvert.DeserializeObject(args.RemoteData);
 
             string VersionGitHub = json.tag_name; // Version Number - Change this to tag_name on deployment
+
             string AssetDownloadURL = "";
             VersionGitHub = (VersionGitHub.Remove(0, 1)); // Remove "v" from beginning
             Version v = new Version(VersionGitHub); // Conver to Version
@@ -462,6 +463,6 @@ namespace GCodeSender
             machine.SendLine("G91");
             machine.SendLine($"G0 Z{Properties.Settings.Default.ProbeSafeHeight}");
             machine.SendLine("M30");
-        }
+        }      
     }
 }

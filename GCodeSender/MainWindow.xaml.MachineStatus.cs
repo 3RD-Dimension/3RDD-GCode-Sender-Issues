@@ -232,6 +232,8 @@ namespace GCodeSender
 
 			if (ToolPath.Warnings.Count > 0)
 			{
+                if (Properties.Settings.Default.ShowWarningWindow) // If ShowWarningWindow == True, Display when file loaded
+                { 
 				WarningWindow ww = new WarningWindow(@"Parsing this file resulted in some warnings!
 Do not use GCode Sender's edit functions unless you are sure that these warnings can be ignored!
 If you use edit functions, check the output file for errors before running the gcode!
@@ -239,9 +241,10 @@ Be aware that the affected lines will likely move when using edit functions." + 
 "and will not affect the normal running of the code." + "\n\n", ToolPath.Warnings);
 
 				ww.ShowDialog();
-			}
+			    }
+            }
 
-			if (Properties.Settings.Default.EnableCodePreview)
+            if (Properties.Settings.Default.EnableCodePreview)
 				ToolPath.GetModel(ModelLine, ModelRapid, ModelArc);
 
 			RunFileLength.Text = machine.File.Count.ToString();
@@ -301,8 +304,8 @@ Be aware that the affected lines will likely move when using edit functions." + 
 
 				ModelFileBoundary.Points = boundary;
 
-				ModelTextMinPoint.Text = string.Format(Constants.DecimalOutputFormat, "({0:0.###}, {1:0.###}, {2:0.###})", MinPoint.X, MinPoint.Y, MinPoint.Z);
-				ModelTextMaxPoint.Text = string.Format(Constants.DecimalOutputFormat, "({0:0.###}, {1:0.###}, {2:0.###})", MaxPoint.X, MaxPoint.Y, MaxPoint.Z);
+				ModelTextMinPoint.Text = string.Format(Constants.DecimalOutputFormat, "(-X {0:0.###}, -Y {1:0.###}, -Z {2:0.###})", MinPoint.X, MinPoint.Y, MinPoint.Z);
+				ModelTextMaxPoint.Text = string.Format(Constants.DecimalOutputFormat, "(+X {0:0.###}, +Y {1:0.###}, +Z {2:0.###})", MaxPoint.X, MaxPoint.Y, MaxPoint.Z);
 				ModelTextMinPoint.Position = MinPoint.ToPoint3D();
 				ModelTextMaxPoint.Position = MaxPoint.ToPoint3D();
 				ModelFileBoundaryPoints.Points.Clear();
@@ -338,8 +341,9 @@ Be aware that the affected lines will likely move when using edit functions." + 
 			ButtonFilePause.IsEnabled = machine.Mode == Machine.OperatingMode.SendFile;
 			ButtonFileGoto.IsEnabled = machine.Mode != Machine.OperatingMode.SendFile;
 			ButtonFileClear.IsEnabled = machine.Mode != Machine.OperatingMode.SendFile;
+            ButtonFileReload.IsEnabled = machine.Mode != Machine.OperatingMode.SendFile;
 
-			ButtonManualSend.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            ButtonManualSend.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
 			ButtonManualResetAll.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
             ButtonManualResetX.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
             ButtonManualResetY.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;

@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using GCodeSender.Hotkey;
 using System.Windows.Media;
+using System.Text.RegularExpressions;
 
 namespace GCodeSender
 {
@@ -27,7 +28,15 @@ namespace GCodeSender
             LoadHotKeys();
         }
 
-		private void ComboBoxSerialPort_DropDownOpened(object sender, EventArgs e)
+        // Only allow numebrs for textbox values
+        // add PreviewTextInput="NumberValidationTextBox" to relevent textbox
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void ComboBoxSerialPort_DropDownOpened(object sender, EventArgs e)
 		{
 			ComboBoxSerialPort.Items.Clear();
 
