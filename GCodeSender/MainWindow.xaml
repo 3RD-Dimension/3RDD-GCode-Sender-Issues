@@ -337,7 +337,7 @@
                             <Image HorizontalAlignment="Center"  Source="Resources/3rdd_logo.png" Height="37" Width="187"/>
                             <TextBlock TextAlignment="Center" FontSize="14" Padding="5">                              
 								<Span FontWeight="Bold" FontSize="12">3RDD GCode Sender <Run Text="{Binding Version,Mode=OneWay}"/></Span><LineBreak/>                               
-								<Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="http://3rd-dimension.nz/cncrouter/3rdd-gcode-sender/" FontSize="12">3RDD GCode Sender Webpage</Hyperlink><LineBreak/>
+								<Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="https://github.com/3RD-Dimension/3RDD-GCode-Sender-Issues" FontSize="12">3RDD GCode Sender Webpage</Hyperlink><LineBreak/>
                                 <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="https://github.com/3RD-Dimension/3RDD-GCode-Sender-Issues/issues" FontSize="12">Report Issues, Bugs, Features</Hyperlink><LineBreak/>
                                 <Span FontSize="12">Original Code by Martin Pittermann </Span>
                             </TextBlock>
