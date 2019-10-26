@@ -1,7 +1,6 @@
 MIT License
 
 Copyright (c) 2018 Martin Pittermann (Original UI/Code)
-
 Copyright (c) 2019 3RD-Dimension (Code & UI Modifications/Additions/Deletions)
 
 
