@@ -104,7 +104,8 @@ namespace GCodeSender
                     VerticalAlignment = VerticalAlignment.Center,
                     TextAlignment = TextAlignment.Left                   
                 };
-                valBox.MouseDoubleClick += newHotKeySave;
+
+                valBox.MouseDoubleClick += clearHotKey;
                 valBox.PreviewKeyDown += previewKeyCode;
                 valBox.IsReadOnly = true;
                 Grid.SetRow(valBox, gridMain.RowDefinitions.Count - 1);
@@ -120,24 +121,26 @@ namespace GCodeSender
         /// <param name="e"></param>
         private void previewKeyCode(object sender, KeyEventArgs e)
         {
-            var textBox = sender as TextBox;
+            var hotKeyInputTextBox = sender as TextBox;
 
             // Get Keycode
             string currentHotPressed = HotKeys.KeyProcess(sender, e); // Get Keycode
-            if (currentHotPressed == null) return; // If currentHotPressed is null, Return (to avoid continuing with  blank)
+            if (currentHotPressed == null) return; // If currentHotPressed is null, Return (to avoid continuing with blank)
 
-            textBox.Text = string.Empty;
-            textBox.Text = string.Format("{0}", currentHotPressed);
-            textBox.Background = Brushes.DarkOrange;    
+            hotKeyInputTextBox.Text = string.Empty;
+            hotKeyInputTextBox.Text = string.Format("{0}", currentHotPressed);
+
+            // Save New KeyCode value to Hotkeys XML
+            HotKeys.UpdateHotkey(hotKeyInputTextBox.Name, hotKeyInputTextBox.Text);
+
             e.Handled = true;
         }
 
-        private void newHotKeySave(object sender, RoutedEventArgs e)
+        private void clearHotKey(object sender, RoutedEventArgs e)
         {
-            var newHotKey = sender as TextBox;
-            // Save New KeyCode value to Hotkeys XML
-            HotKeys.UpdateHotkey(newHotKey.Name, newHotKey.Text);
-            newHotKey.Background = Brushes.White;
+            var hotKeyInputTextBox = sender as TextBox;
+            hotKeyInputTextBox.Text = ""; // Clear Hotkey
+            HotKeys.UpdateHotkey(hotKeyInputTextBox.Name, hotKeyInputTextBox.Text); // Save blank hotkey
         }
 
 		private void Window_Closed(object sender, EventArgs e)
