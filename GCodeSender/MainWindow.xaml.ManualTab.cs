@@ -137,13 +137,10 @@ namespace GCodeSender
                 ButtonManualReturnToZero.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             else if (currentHotPressed == HotKeys.hotkeyCode["FSStop"]) // Jog Cancel
                 machine.JogCancel();
-   
-			double feed = Properties.Settings.Default.JogFeed;
-			double distance = Properties.Settings.Default.JogDistance;
 
 			if (direction != null)
 			{
-				machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feed, direction, distance));
+                manualJogSendCommand(direction);
 			}
 		}        
     }

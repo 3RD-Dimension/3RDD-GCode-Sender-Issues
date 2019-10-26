@@ -17,7 +17,6 @@ namespace GCodeSender
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
             manualJogSendCommand("X");
-           
         }
 
         private void manualJogBtnXNegBtn_Click(object sender, RoutedEventArgs e)
@@ -95,7 +94,7 @@ namespace GCodeSender
             machine.SendLine(Properties.Settings.Default.ZeroAllCmd);
         }
 
-        private void manualJogSendCommand(string direction)
+        public void manualJogSendCommand(string direction)
         {
             double feed = Properties.Settings.Default.JogFeed;
             double distance = Properties.Settings.Default.JogDistance;
