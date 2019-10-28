@@ -50,7 +50,7 @@ namespace GCodeSender
                 G54Y.Text = Yaxis;
                 G54Z.Text = Zaxis;
 
-                SendLine.Invoke($"G10 L2 P1 X{Xaxis} Y{Yaxis} Z{Zaxis}");
+                SendLine.Invoke($"G10 L20 P1 X{Xaxis} Y{Yaxis} Z{Zaxis}");
             }
             else if (selectedOffset == "G55")
             {
@@ -62,7 +62,7 @@ namespace GCodeSender
                 G55Y.Text = Yaxis;
                 G55Z.Text = Zaxis;
 
-                SendLine.Invoke($"G10 L2 P2 X{Xaxis} Y{Yaxis} Z{Zaxis}");
+                SendLine.Invoke($"G10 L20 P2 X{Xaxis} Y{Yaxis} Z{Zaxis}");
             }
             else if (selectedOffset == "G56")
             {
@@ -74,7 +74,7 @@ namespace GCodeSender
                 G56Y.Text = Yaxis;
                 G56Z.Text = Zaxis;
 
-                SendLine.Invoke($"G10 L2 P3 X{Xaxis} Y{Yaxis} Z{Zaxis}");
+                SendLine.Invoke($"G10 L20 P3 X{Xaxis} Y{Yaxis} Z{Zaxis}");
             }
             else if (selectedOffset == "G57")
             {
@@ -86,7 +86,7 @@ namespace GCodeSender
                 G57Y.Text = Yaxis;
                 G57Z.Text = Zaxis;
 
-                SendLine.Invoke($"G10 L2 P4 X{Xaxis} Y{Yaxis} Z{Zaxis}");
+                SendLine.Invoke($"G10 L20 P4 X{Xaxis} Y{Yaxis} Z{Zaxis}");
             }
             else if (selectedOffset == "G58")
             {
@@ -98,7 +98,7 @@ namespace GCodeSender
                 G58Y.Text = Yaxis;
                 G58Z.Text = Zaxis;
 
-                SendLine.Invoke($"G10 L2 P5 X{Xaxis} Y{Yaxis} Z{Zaxis}");
+                SendLine.Invoke($"G10 L20 P5 X{Xaxis} Y{Yaxis} Z{Zaxis}");
             }
             else if (selectedOffset == "G59")
             {
@@ -110,7 +110,7 @@ namespace GCodeSender
                 G59Y.Text = Yaxis;
                 G59Z.Text = Zaxis;
 
-                SendLine.Invoke($"G10 L2 P6 X{Xaxis} Y{Yaxis} Z{Zaxis}");
+                SendLine.Invoke($"G10 L20 P6 X{Xaxis} Y{Yaxis} Z{Zaxis}");
             }
             else
             {
