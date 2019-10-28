@@ -1,8 +1,3 @@
-// 3RDD GCode Sender
-// Modified Version of OpenCNCPilot by Shayne Bouda
-// 3RD-Dimension.nz
-// 2019
-
 using Microsoft.Win32;
 using GCodeSender.Communication;
 using GCodeSender.GCode;
@@ -29,7 +24,6 @@ namespace GCodeSender
 		SaveFileDialog saveFileDialogGCode = new SaveFileDialog() { Filter = Constants.FileFilterGCode };
 
 		GCodeFile ToolPath { get; set; } = GCodeFile.Empty;
-		HeightMap Map { get; set; }
 
 		GrblSettingsWindow settingsWindow = new GrblSettingsWindow();
         WorkOffsetsWindow workOffsetsWindows = new WorkOffsetsWindow();
@@ -53,7 +47,7 @@ namespace GCodeSender
             // Check for any updates
             Logger.Info("Checking for Updates");
             AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
-            //AutoUpdater.Start("https://api.github.com/repos/3RD-Dimension/3RDD-GCode-Sender-Issues/releases/latest");
+            AutoUpdater.Start("https://api.github.com/repos/3RD-Dimension/3RDD-GCode-Sender-Issues/releases/latest");
 
             openFileDialogGCode.FileOk += OpenFileDialogGCode_FileOk;
 			saveFileDialogGCode.FileOk += SaveFileDialogGCode_FileOk;
@@ -249,22 +243,11 @@ namespace GCodeSender
 				if (files.Length > 0)
 				{
 					string file = files[0];
-
-					if (file.EndsWith(".hmap"))
+					
+					if (machine.Mode != Machine.OperatingMode.SendFile)
 					{
-						if (machine.Mode != Machine.OperatingMode.Probe && Map == null)
-						{
-							e.Effects = DragDropEffects.Copy;
-							return;
-						}
-					}
-					else
-					{
-						if (machine.Mode != Machine.OperatingMode.SendFile)
-						{
-							e.Effects = DragDropEffects.Copy;
-							return;
-						}
+					    e.Effects = DragDropEffects.Copy;
+						return;
 					}
 				}
 			}

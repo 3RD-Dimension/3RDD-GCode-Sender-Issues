@@ -1,4 +1,4 @@
-![](https://github.com/3RD-Dimension/3RDD-GCode-Sender-Issues/blob/master/img/Header_Logo.png)
+![](https://github.com/3RD-Dimension/3RD-Dimension.github.io/blob/master/images/3rdd_main.png)
 
 # 3RDD GCode Sender, Issues, Bugs, Features and Wiki
 

@@ -364,55 +364,6 @@ namespace GCodeSender.GCode
 			return new GCodeFile(newFile);
 		}
 
-		public GCodeFile ApplyHeightMap(HeightMap map)
-		{
-			double segmentLength = Math.Min(map.GridX, map.GridY);
-
-			List<Command> newToolPath = new List<Command>();
-
-			foreach (Command command in Toolpath)
-			{
-				if (command is Motion)
-				{
-					Motion m = (Motion)command;
-
-					if (m is Arc)
-					{
-						Arc a = m as Arc;
-						if (a.Plane != ArcPlane.XY)
-							throw new Exception("GCode contains arcs in YZ or XZ plane (G18/19), can't apply height map. Use 'Arcs to Lines' if you really need this.");
-					}
-
-					if (m is Line)
-					{
-						Line l = (Line)m;
-
-						// do not split up or modify any lines that are rapid or not fully defined
-						if (l.PositionValid.Any(isValid => !isValid) || l.Rapid)
-						{
-							newToolPath.Add(l);
-							continue;
-						}
-					}
-
-					foreach (Motion subMotion in m.Split(segmentLength))
-					{
-						subMotion.Start.Z += map.InterpolateZ(subMotion.Start.X, subMotion.Start.Y);
-						subMotion.End.Z += map.InterpolateZ(subMotion.End.X, subMotion.End.Y);
-
-						newToolPath.Add(subMotion);
-					}
-				}
-				else
-				{
-					newToolPath.Add(command);
-					continue;
-				}
-			}
-
-			return new GCodeFile(newToolPath);
-		}
-
 		public GCodeFile RotateCW()
 		{
 			List<Command> newFile = new List<Command>();

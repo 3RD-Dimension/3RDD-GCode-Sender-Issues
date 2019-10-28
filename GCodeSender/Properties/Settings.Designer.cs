@@ -265,30 +265,6 @@ namespace GCodeSender.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("250")]
-        public double JogFeedCtrl {
-            get {
-                return ((double)(this["JogFeedCtrl"]));
-            }
-            set {
-                this["JogFeedCtrl"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double JogDistanceCtrl {
-            get {
-                return ((double)(this["JogDistanceCtrl"]));
-            }
-            set {
-                this["JogDistanceCtrl"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool PauseFileOnHold {
             get {
@@ -524,30 +500,6 @@ namespace GCodeSender.Properties {
             }
             set {
                 this["WindowHeight"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool BackupHeightMap {
-            get {
-                return ((bool)(this["BackupHeightMap"]));
-            }
-            set {
-                this["BackupHeightMap"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.8")]
-        public float HeightMapOpacity {
-            get {
-                return ((float)(this["HeightMapOpacity"]));
-            }
-            set {
-                this["HeightMapOpacity"] = value;
             }
         }
         

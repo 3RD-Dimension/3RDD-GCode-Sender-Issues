@@ -49,8 +49,6 @@
             <Grid>
                 <TextBox Margin="10,10,0,0" Text="{util:SettingBinding ViewportArcSplit}" FontSize="10" PreviewTextInput="NumberValidationTextBox"/>
                 <Label Content="Preview Arc Segment Length (mm)" HorizontalAlignment="Left" Margin="135,9,0,0" VerticalAlignment="Top" Height="26" Width="188" FontSize="10"/>
-                <!--<TextBox Margin="10,38,0,0" Text="{util:SettingBinding HeightMapOpacity}" FontSize="10"/>
-                <Label Content="height map opacity (0.0 - 1.0)" HorizontalAlignment="Left" Margin="135,37,0,0" VerticalAlignment="Top" Height="26" Width="165" FontSize="10"/>-->
                 <TextBox Margin="10,38,0,0" Text="{util:SettingBinding GridThickness}" FontSize="10" PreviewTextInput="NumberValidationTextBox"/>
                 <Label Content="Grid Thickness (0.1 default)" HorizontalAlignment="Left" Margin="135,37,0,0" VerticalAlignment="Top" Height="26" Width="165" FontSize="10"/>
                 <CheckBox Content="Preview Toolpath" HorizontalAlignment="Left" Margin="135,65,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding EnableCodePreview}" Height="15" Width="110" FontSize="10"/>

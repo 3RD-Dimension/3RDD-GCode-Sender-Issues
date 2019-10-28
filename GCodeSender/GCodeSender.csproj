@@ -116,7 +116,6 @@
     <Compile Include="GCode\GCodeCommands\Motion.cs" />
     <Compile Include="GCode\GCodeFile.cs" />
     <Compile Include="GCode\GCodeParser.cs" />
-    <Compile Include="GCode\HeightMap.cs" />
     <Compile Include="GCode\ParseException.cs" />
     <Compile Include="GrblSettingsWindow.xaml.cs">
       <DependentUpon>GrblSettingsWindow.xaml</DependentUpon>
@@ -149,9 +148,6 @@
     </Compile>
     <Compile Include="MainWindow.xaml.StatusBar.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NewHeightMapWindow.xaml.cs">
-      <DependentUpon>NewHeightMapWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -203,10 +199,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NewHeightMapWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -281,12 +273,6 @@
     <None Include="License.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Updater XML\GCode_Sender_Update.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Updater XML\Files for Upload.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
