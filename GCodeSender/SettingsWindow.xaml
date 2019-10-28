@@ -86,9 +86,6 @@
 
                 <TextBox Margin="10,130,0,0" Text="{util:SettingBinding ProbeTouchPlateThickness}" FontSize="10" ToolTip="Thickness of your probe" PreviewTextInput="NumberValidationTextBox"/>
                 <Label Content="Probe Thickness (mm)" HorizontalAlignment="Left" Margin="135,130,0,0" VerticalAlignment="Top" FontSize="10" Grid.ColumnSpan="2"/>
-
-                <!-- TODO Delete these from settings ProbeXAxisWeight, ProbeMinimumHeight-->
-
             </Grid>
         </TabItem>
 
@@ -100,20 +97,12 @@
                 </Grid.ColumnDefinitions>
                 <CheckBox Content="Include Spindle 'S' Commands" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding GCodeIncludeSpindle}" ToolTip="Strip S[XX] from file before sending to machine if not checked" Grid.ColumnSpan="2" FontSize="10"/>
                 <CheckBox Content="Include Dwell 'G4' Commands" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding GCodeIncludeDwell}" ToolTip="Strip G4 P[XX] from file before sending to machine if not checked" Grid.ColumnSpan="2" FontSize="10"/>
-                <CheckBox Content="Include Program End (M2, M30)" HorizontalAlignment="Left" Margin="200,10,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding GCodeIncludeMEnd}" ToolTip="Strip M2/M30 from file before sending to machine if not checked. Default is off since these commands reset offsets from G92." Grid.ColumnSpan="2" FontSize="10"/>
                 <CheckBox Content="FeedRate Inc/Dec (Checked 10%, Unchecked 1%)" HorizontalAlignment="Left" Margin="10,50,0,0" Grid.ColumnSpan="2"  IsChecked="{util:SettingBinding FeedRateIncrement}" ToolTip="If checked, Hotkey incease or decrease 10% each time, unchecked increase or decrease 1% each time" VerticalAlignment="Top" FontSize="10"/>
                 <CheckBox Content="Spindle Inc/Dec (Checked 10%, Unchecked 1%)" HorizontalAlignment="Left" Margin="10,70,0,0" Grid.ColumnSpan="2"  IsChecked="{util:SettingBinding SpindleIncrement}" ToolTip="If checked, Hotkey incease or decrease 10% each time, unchecked increase or decrease 1% each time" VerticalAlignment="Top" FontSize="10"/>
-                <CheckBox Content="Warning Window on File Load" HorizontalAlignment="Left" Margin="200,30,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding ShowWarningWindow}" ToolTip="Enable or Disable the display of the warning window when a Gcode file loaded" Grid.ColumnSpan="2" FontSize="10" />
+                <CheckBox Content="Include Program End (M2, M30)" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding GCodeIncludeMEnd}" ToolTip="Strip M2/M30 from file before sending to machine if not checked. Default is off since these commands reset offsets from G92." Grid.ColumnSpan="2" FontSize="10"/>
+                <CheckBox Content="Warning Window on File Load" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding ShowWarningWindow}" ToolTip="Enable or Disable the display of the warning window when a Gcode file loaded" Grid.ColumnSpan="2" FontSize="10" />
+                
                 <!--GCodes for Zero Axis Commands-->
-                <Label Content="Command GCode" HorizontalAlignment="Left" Margin="10,95,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-                <Label Content="Zero All Command" HorizontalAlignment="Left" Margin="10,119,0,0" VerticalAlignment="Top" FontSize="10"/>
-                <TextBox HorizontalAlignment="Left" Margin="0,119,0,0" TextWrapping="Wrap" Text="{util:SettingBinding ZeroAllCmd}" VerticalAlignment="Top" Grid.Column="1" Width="180" FontSize="10"/>
-                <Label Content="Zero X Command" HorizontalAlignment="Left" Margin="10,148,0,0" VerticalAlignment="Top" FontSize="10"/>
-                <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,148,0,0" TextWrapping="Wrap" Text="{util:SettingBinding ZeroXCmd}" VerticalAlignment="Top" Width="180" FontSize="10"/>
-                <Label Content="Zero Y Command" HorizontalAlignment="Left" Margin="10,177,0,0" VerticalAlignment="Top" FontSize="10"/>
-                <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,177,0,0" TextWrapping="Wrap" Text="{util:SettingBinding ZeroYCmd}" VerticalAlignment="Top" Width="180" FontSize="10"/>
-                <Label Content="Zero Z Command" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" FontSize="10"/>
-                <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="0,205,0,0" TextWrapping="Wrap" Text="{util:SettingBinding ZeroZCmd}" VerticalAlignment="Top" Width="180" FontSize="10"/>
             </Grid>
         </TabItem>
         <!-- Hotkey Configuration-->

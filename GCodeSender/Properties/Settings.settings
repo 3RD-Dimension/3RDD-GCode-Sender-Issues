@@ -26,9 +26,6 @@
     <Setting Name="ProbeSafeHeight" Type="System.Double" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
-    <Setting Name="ProbeMinimumHeight" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">1</Value>
-    </Setting>
     <Setting Name="ProbeMaxDepth" Type="System.Double" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
@@ -73,9 +70,6 @@
     </Setting>
     <Setting Name="PauseFileOnHold" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
-    </Setting>
-    <Setting Name="ProbeXAxisWeight" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.95</Value>
     </Setting>
     <Setting Name="ShowStatusLines" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -158,18 +152,6 @@
     <Setting Name="Macros" Type="System.String" Scope="User">
       <Value Profile="(Default)">Probe and set Zero:G38.2Z-10F20
 G92Z0;</Value>
-    </Setting>
-    <Setting Name="ZeroAllCmd" Type="System.String" Scope="User">
-      <Value Profile="(Default)">G90 G10 L20 P0 X0 Y0 Z0</Value>
-    </Setting>
-    <Setting Name="ZeroXCmd" Type="System.String" Scope="User">
-      <Value Profile="(Default)">G90 G10 P0 X0</Value>
-    </Setting>
-    <Setting Name="ZeroYCmd" Type="System.String" Scope="User">
-      <Value Profile="(Default)">G90 G10 P0 Y0</Value>
-    </Setting>
-    <Setting Name="ZeroZCmd" Type="System.String" Scope="User">
-      <Value Profile="(Default)">G90 G10 P0 Z0</Value>
     </Setting>
     <Setting Name="ProbeTouchPlateThickness" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>

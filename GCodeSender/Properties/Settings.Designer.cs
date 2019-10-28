@@ -12,7 +12,7 @@ namespace GCodeSender.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.3.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -116,18 +116,6 @@ namespace GCodeSender.Properties {
             }
             set {
                 this["ProbeSafeHeight"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public double ProbeMinimumHeight {
-            get {
-                return ((double)(this["ProbeMinimumHeight"]));
-            }
-            set {
-                this["ProbeMinimumHeight"] = value;
             }
         }
         
@@ -308,18 +296,6 @@ namespace GCodeSender.Properties {
             }
             set {
                 this["PauseFileOnHold"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.95")]
-        public double ProbeXAxisWeight {
-            get {
-                return ((double)(this["ProbeXAxisWeight"]));
-            }
-            set {
-                this["ProbeXAxisWeight"] = value;
             }
         }
         
@@ -644,54 +620,6 @@ namespace GCodeSender.Properties {
             }
             set {
                 this["Macros"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("G90 G10 L20 P0 X0 Y0 Z0")]
-        public string ZeroAllCmd {
-            get {
-                return ((string)(this["ZeroAllCmd"]));
-            }
-            set {
-                this["ZeroAllCmd"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("G90 G10 P0 X0")]
-        public string ZeroXCmd {
-            get {
-                return ((string)(this["ZeroXCmd"]));
-            }
-            set {
-                this["ZeroXCmd"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("G90 G10 P0 Y0")]
-        public string ZeroYCmd {
-            get {
-                return ((string)(this["ZeroYCmd"]));
-            }
-            set {
-                this["ZeroYCmd"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("G90 G10 P0 Z0")]
-        public string ZeroZCmd {
-            get {
-                return ((string)(this["ZeroZCmd"]));
-            }
-            set {
-                this["ZeroZCmd"] = value;
             }
         }
         

@@ -32,8 +32,8 @@ namespace GCodeSender
         // add PreviewTextInput="NumberValidationTextBox" to relevent textbox
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            Regex regex = new Regex("^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$");
+            e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
         }
 
         private void ComboBoxSerialPort_DropDownOpened(object sender, EventArgs e)

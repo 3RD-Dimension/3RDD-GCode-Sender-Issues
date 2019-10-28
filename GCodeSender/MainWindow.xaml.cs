@@ -126,8 +126,8 @@ namespace GCodeSender
         // add PreviewTextInput="NumberValidationTextBox" to relevent textbox
         private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            Regex regex = new Regex("^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$");
+            e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
         }
 
         private void Machine_LineReceived1(string obj)
@@ -170,12 +170,10 @@ namespace GCodeSender
 				e.SettingName.Equals("JogDistance") ||
 				e.SettingName.Equals("ProbeFeed") ||
 				e.SettingName.Equals("ProbeSafeHeight") ||
-				e.SettingName.Equals("ProbeMinimumHeight") ||
 				e.SettingName.Equals("ProbeMaxDepth") ||
 				e.SettingName.Equals("SplitSegmentLength") ||
 				e.SettingName.Equals("ViewportArcSplit") ||
 				e.SettingName.Equals("ArcToLineSegmentLength") ||
-				e.SettingName.Equals("ProbeXAxisWeight") ||
 				e.SettingName.Equals("ConsoleFadeTime"))
 			{
 				if (((double)e.NewValue) <= 0)
