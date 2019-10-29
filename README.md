@@ -6,7 +6,9 @@
 [![Released](https://img.shields.io/github/release-date/3RD-Dimension/3RDD-GCode-Sender-Issues)](https://github.com/3RD-Dimension/3RDD-GCode-Sender-Issues/releases/latest)
 [![Issues & Bugs](https://img.shields.io/github/issues/3RD-Dimension/3RDD-GCode-Sender-Issues)](https://github.com/3RD-Dimension/3RDD-GCode-Sender-Issues/issues)
 
-Welcome to the 3RDD GCode Sender Issues and Bugs.  
+3RDD GCode Sender is another GRBL streaming program (similar to UGS, bCNC etc) derived and highly continously modified from OpenCNCPilot (more PCB placed) to more towards to general CNC routing and is continously being developed with new and improved features.
+
+Some of the current enhancements include configurable hotkeys, customizable colors for the 3D workspace (Rapids, Lines and Arcs), Jogging buttons, Autoupdater, and Export GRBL settings to a formatted file and other cnc routing tweaks and functions.
 
 * **Download** - [Download the recent release](https://github.com/3RD-Dimension/3RDD-GCode-Sender-Issues/releases)
 * **For Issues, Bugs or Features** - [3RDD GCode Sender Issues](https://github.com/3RD-Dimension/3RDD-GCode-Sender-Issues/issues) or click on "Issues" at the top.
