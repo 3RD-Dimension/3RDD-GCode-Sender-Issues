@@ -12,8 +12,7 @@
         <Setter Property="Margin" Value="5,5,0,0"/>
         <Setter Property="BorderBrush" Value="Black" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Background" Value="Gray" />
-        <!--<Setter Property="CornerRadius" Value="10"/>-->
+        <Setter Property="Background" Value="Silver" />
     </Style>
 
     <Style x:Key="styleButton" TargetType="Button">
