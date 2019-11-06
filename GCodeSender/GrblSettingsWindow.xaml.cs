@@ -5,8 +5,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Media;
 using Microsoft.Win32;
 
 namespace GCodeSender
@@ -38,11 +36,6 @@ namespace GCodeSender
             {
                 try
                 {
-                    // Add new expander, stack panel and text block.
-                    var newExpander = new Expander { Name = "NewExpander", Header = "New Expander" };
-                    var newstackPanel = new StackPanel { Name = "NewExpanderStackPanel" };
-                    var newtextBlock = new TextBlock { Text = "777" };
-
                     Match m = settingParser.Match(line);
                     int number = int.Parse(m.Groups[1].Value);
                     double value = double.Parse(m.Groups[2].Value, Util.Constants.DecimalParseFormat);
