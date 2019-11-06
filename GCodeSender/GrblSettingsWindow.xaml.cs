@@ -5,6 +5,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 using Microsoft.Win32;
 
 namespace GCodeSender
@@ -21,9 +23,9 @@ namespace GCodeSender
 		public GrblSettingsWindow()
 		{
 			InitializeComponent();
-        }
+        }       
 
-		static Regex settingParser = new Regex(@"\$([0-9]+)=([0-9\.]+)");
+        static Regex settingParser = new Regex(@"\$([0-9]+)=([0-9\.]+)");
 		public void LineReceived(string line)
 		{
             // Recieve GRBL Controller Version number and display - $i
@@ -36,9 +38,16 @@ namespace GCodeSender
             {
                 try
                 {
+                    // Add new expander, stack panel and text block.
+                    var newExpander = new Expander { Name = "NewExpander", Header = "New Expander" };
+                    var newstackPanel = new StackPanel { Name = "NewExpanderStackPanel" };
+                    var newtextBlock = new TextBlock { Text = "777" };
+
                     Match m = settingParser.Match(line);
                     int number = int.Parse(m.Groups[1].Value);
                     double value = double.Parse(m.Groups[2].Value, Util.Constants.DecimalParseFormat);
+
+                    // Value = Setting Value, Number = Setting Code
 
                     if (!CurrentSettings.ContainsKey(number))
                     {
@@ -46,11 +55,16 @@ namespace GCodeSender
                         rowDef.Height = new GridLength(25);
                         gridMain.RowDefinitions.Add(rowDef);
 
-                        TextBox valBox = new TextBox
+                        TextBox valBox = new TextBox // Value of Setting Textbox
                         {
                             Text = value.ToString(Util.Constants.DecimalOutputFormat),
                             VerticalAlignment = VerticalAlignment.Center
                         };
+
+                        // Define Mouseclick for textbox to open GRBLStepsCalcWindow for setting $100, $101, $102
+                        if (number == 100){valBox.Name = "Set100"; valBox.MouseDoubleClick += openStepsCalc;}
+                        else if (number == 101){valBox.Name = "Set101"; valBox.MouseDoubleClick += openStepsCalc;}
+                        else if (number == 102){valBox.Name = "Set102"; valBox.MouseDoubleClick += openStepsCalc;}
                         Grid.SetRow(valBox, gridMain.RowDefinitions.Count - 1);
                         Grid.SetColumn(valBox, 1);
                         gridMain.Children.Add(valBox);
@@ -176,11 +190,6 @@ namespace GCodeSender
 			}
 		}
 
-		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{      
-            e.Cancel = true;
-			Hide();
-		}
         private void ButtonGrblExport_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("This will export the currently displayed settings to a file - even any modified values that you have entered.  If you need to export the settings before modifications, please export before changing.  Continue To Export?", "Important", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
@@ -216,5 +225,14 @@ namespace GCodeSender
                 return;
             }
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            StepsCalcPanel.Visibility = Visibility.Hidden; // Hide FineTune Panel
+            GRBLSettingsScroller.IsEnabled = true; // Re-Enable Settings Scroller
+            e.Cancel = true;
+            Hide();
+        }
+
     }
 }

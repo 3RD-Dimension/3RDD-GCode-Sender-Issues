@@ -31,6 +31,7 @@
     <UseVSHostingProcess>true</UseVSHostingProcess>
     <DocumentationFile>
     </DocumentationFile>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -41,6 +42,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>false</SignAssembly>
@@ -117,6 +119,9 @@
     <Compile Include="GCode\GCodeFile.cs" />
     <Compile Include="GCode\GCodeParser.cs" />
     <Compile Include="GCode\ParseException.cs" />
+    <Compile Include="GRBLStepsCalc.cs">
+      <DependentUpon>GrblSettingsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GrblSettingsWindow.xaml.cs">
       <DependentUpon>GrblSettingsWindow.xaml</DependentUpon>
     </Compile>
@@ -177,6 +182,11 @@
     <Page Include="EnterNumberWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GRBLStepsCalc.Resources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
+      <DependentUpon>GrblSettingsWindow.xaml</DependentUpon>
     </Page>
     <Page Include="GrblSettingsWindow.xaml">
       <SubType>Designer</SubType>
