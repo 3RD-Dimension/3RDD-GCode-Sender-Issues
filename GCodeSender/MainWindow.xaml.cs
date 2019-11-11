@@ -74,7 +74,10 @@ namespace GCodeSender
 			machine.OverrideChanged += Machine_OverrideChanged;
 			machine.PinStateChanged += Machine_PinStateChanged;
 
-			Machine_OperatingMode_Changed();
+            // Global Function Number Validation for MainWindow
+            PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+
+            Machine_OperatingMode_Changed();
 			Machine_PositionUpdateReceived();
 
 			Properties.Settings.Default.SettingChanging += Default_SettingChanging;
@@ -114,14 +117,6 @@ namespace GCodeSender
                 //Mandatory = json.mandatory,
                 DownloadURL = AssetDownloadURL
             };
-        }
-
-        // Only allow numebrs for textbox values
-        // add PreviewTextInput="NumberValidationTextBox" to relevent textbox
-        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$");
-            e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
         }
 
         private void Machine_LineReceived1(string obj)
@@ -444,6 +439,11 @@ namespace GCodeSender
             machine.SendLine("G91");
             machine.SendLine($"G0 Z{Properties.Settings.Default.ProbeSafeHeight}");
             machine.SendLine("M30");
-        }      
+        }
+
+        private void TextBoxJogFeed_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
+        }
     }
 }

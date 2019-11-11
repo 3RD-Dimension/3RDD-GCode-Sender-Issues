@@ -29,15 +29,15 @@
                 <ComboBox Name="ComboBoxSerialPort" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0" Width="140" SelectedValuePath="Tag" SelectedValue="{util:SettingBinding SerialPortName}" DropDownOpened="ComboBoxSerialPort_DropDownOpened" FontSize="10"/>
                 <Label Content="Serial Port" HorizontalAlignment="Left" Margin="155,10,0,0" VerticalAlignment="Top" FontSize="10" Grid.ColumnSpan="3"/>
 
-                <TextBox Margin="10,37,0,0" Text="{util:SettingBinding SerialPortBaud}" FontSize="10" Width="140" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBox x:Name="SerialPortBaud" Margin="10,37,0,0" Text="{util:SettingBinding SerialPortBaud}" FontSize="10" Width="140"/>
                 <Label Content="BaudRate" HorizontalAlignment="Left" Margin="155,36,0,0" VerticalAlignment="Top" FontSize="10" Grid.ColumnSpan="3"/>
 
                 <CheckBox Content="Reset grbl when connecting" HorizontalAlignment="Left" Margin="136,65,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding SerialPortDTR}" ToolTip="the DTR signal is used to reset grbl when the connection is established, set by default on many other gcode senders" Grid.ColumnSpan="3" FontSize="10"/>
 
-                <TextBox Margin="10,88,0,0" Text="{util:SettingBinding ControllerBufferSize}" FontSize="10" Width="140" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBox x:Name="ControllerBufferSize" Margin="10,88,0,0" Text="{util:SettingBinding ControllerBufferSize}" FontSize="10" Width="140"/>
                 <Label Content="Controller Buffer" HorizontalAlignment="Left" Margin="155,87,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" FontSize="10"/>
 
-                <TextBox Margin="10,116,0,0" Text="{util:SettingBinding StatusPollInterval}" FontSize="10" Width="140" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBox x:Name="StatusPollInterval" Margin="10,116,0,0" Text="{util:SettingBinding StatusPollInterval}" FontSize="10" Width="140"/>
                 <Label Content="Status Poll Interval (ms)" HorizontalAlignment="Left" Margin="155,115,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" FontSize="10"/>
 
                 <CheckBox Content="Log traffic to file" HorizontalAlignment="Left" Margin="136,144,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding LogTraffic}" ToolTip="Restart required to take effect" Grid.ColumnSpan="3" FontSize="10"/>
@@ -47,9 +47,9 @@
 
         <TabItem Header="Viewport">
             <Grid>
-                <TextBox Margin="10,10,0,0" Text="{util:SettingBinding ViewportArcSplit}" FontSize="10" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBox x:Name="ViewportArcSplit" Margin="10,10,0,0" Text="{util:SettingBinding ViewportArcSplit}" FontSize="10"/>
                 <Label Content="Preview Arc Segment Length (mm)" HorizontalAlignment="Left" Margin="135,9,0,0" VerticalAlignment="Top" Height="26" Width="188" FontSize="10"/>
-                <TextBox Margin="10,38,0,0" Text="{util:SettingBinding GridThickness}" FontSize="10" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBox x:Name="GridThickness" Margin="10,38,0,0" Text="{util:SettingBinding GridThickness}" FontSize="10"/>
                 <Label Content="Grid Thickness (0.1 default)" HorizontalAlignment="Left" Margin="135,37,0,0" VerticalAlignment="Top" Height="26" Width="165" FontSize="10"/>
                 <CheckBox Content="Preview Toolpath" HorizontalAlignment="Left" Margin="135,65,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding EnableCodePreview}" Height="15" Width="110" FontSize="10"/>
                 <!--Rapid Line Color-->
@@ -70,19 +70,19 @@
                     <ColumnDefinition Width="173*"/>
                     <ColumnDefinition Width="205*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Margin="10,10,0,0" Text="{util:SettingBinding ProbeFeed}" FontSize="10" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBox x:Name="ProbeFeed" Margin="10,10,0,0" Text="{util:SettingBinding ProbeFeed}" FontSize="10"/>
                 <Label Content="Probe Plunge Feedrate (mm/min)" HorizontalAlignment="Left" Margin="135,9,0,0" VerticalAlignment="Top" FontSize="10" Grid.ColumnSpan="2"/>
 
                 <CheckBox Content="Abort and signal on Probe Fail" HorizontalAlignment="Left" Margin="116,40,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding AbortOnProbeFail}" FontSize="10" Grid.ColumnSpan="2"/>
 
-                <TextBox Margin="10,61,0,0" Text="{util:SettingBinding ProbeSafeHeight}" FontSize="10" ToolTip="The height to safely retract Z after probe" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBox x:Name="ProbeSafeHeight" Margin="10,61,0,0" Text="{util:SettingBinding ProbeSafeHeight}" FontSize="10" ToolTip="The height to safely retract Z after probe"/>
                 <Label Content="Safe Retract Height (mm)" HorizontalAlignment="Left" Margin="135,61,0,0" VerticalAlignment="Top" FontSize="10" Grid.ColumnSpan="2"/>
 
                 <!-- This is maximum probe depth -->
-                <TextBox Margin="10,95,0,0" Text="{util:SettingBinding ProbeMaxDepth}" FontSize="10" ToolTip="The maxmum Z will move to contact the probe" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBox x:Name="ProbeMaxDepth" Margin="10,95,0,0" Text="{util:SettingBinding ProbeMaxDepth}" FontSize="10" ToolTip="The maxmum Z will move to contact the probe"/>
                 <Label Content="Max Probe Distance (mm)" HorizontalAlignment="Left" Margin="135,95,0,0" VerticalAlignment="Top" FontSize="10" Grid.ColumnSpan="2"/>
 
-                <TextBox Margin="10,130,0,0" Text="{util:SettingBinding ProbeTouchPlateThickness}" FontSize="10" ToolTip="Thickness of your probe" PreviewTextInput="NumberValidationTextBox"/>
+                <TextBox x:Name="ProbeTouchPlateThickness" Margin="10,130,0,0" Text="{util:SettingBinding ProbeTouchPlateThickness}" FontSize="10" ToolTip="Thickness of your probe"/>
                 <Label Content="Probe Thickness (mm)" HorizontalAlignment="Left" Margin="135,130,0,0" VerticalAlignment="Top" FontSize="10" Grid.ColumnSpan="2"/>
             </Grid>
         </TabItem>

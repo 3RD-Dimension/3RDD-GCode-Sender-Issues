@@ -1,36 +1,40 @@
-﻿using System;
+﻿using GCodeSender.Util;
+using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using Microsoft.Win32;
 
 namespace GCodeSender
 {
-	public partial class GrblSettingsWindow : Window
-	{
-		Dictionary<int, double> CurrentSettings = new Dictionary<int, double>(); // Current Settigs
-		Dictionary<int, TextBox> SettingsBoxes = new Dictionary<int, TextBox>(); // Setting Boxes
+    public partial class GrblSettingsWindow : Window
+    {
+        Dictionary<int, double> CurrentSettings = new Dictionary<int, double>(); // Current Settigs
+        Dictionary<int, TextBox> SettingsBoxes = new Dictionary<int, TextBox>(); // Setting Boxes
 
         public string controllerInfo = ""; // Options Description Output
 
         public event Action<string> SendLine;
 
-		public GrblSettingsWindow()
-		{
-			InitializeComponent();
-        }       
+        public GrblSettingsWindow()
+        {
+            InitializeComponent();
+            currentSteps.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            distanceCommanded.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            distanceTraveled.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+        }
 
         static Regex settingParser = new Regex(@"\$([0-9]+)=([0-9\.]+)");
-		public void LineReceived(string line)
-		{
+        public void LineReceived(string line)
+        {
             // Recieve GRBL Controller Version number and display - $i
             // Recieved in format [VER: ... and [OPT:
 
             if (!line.StartsWith("$") && !line.StartsWith("[VER:") && !line.StartsWith("[OPT:"))
-				return;
+                return;
 
             if (line.StartsWith("$"))
             {
@@ -55,9 +59,9 @@ namespace GCodeSender
                         };
 
                         // Define Mouseclick for textbox to open GRBLStepsCalcWindow for setting $100, $101, $102
-                        if (number == 100){valBox.Name = "Set100"; valBox.MouseDoubleClick += openStepsCalc;}
-                        else if (number == 101){valBox.Name = "Set101"; valBox.MouseDoubleClick += openStepsCalc;}
-                        else if (number == 102){valBox.Name = "Set102"; valBox.MouseDoubleClick += openStepsCalc;}
+                        if (number == 100) { valBox.Name = "Set100"; valBox.MouseDoubleClick += openStepsCalc; }
+                        else if (number == 101) { valBox.Name = "Set101"; valBox.MouseDoubleClick += openStepsCalc; }
+                        else if (number == 102) { valBox.Name = "Set102"; valBox.MouseDoubleClick += openStepsCalc; }
                         Grid.SetRow(valBox, gridMain.RowDefinitions.Count - 1);
                         Grid.SetColumn(valBox, 1);
                         gridMain.Children.Add(valBox);
@@ -116,10 +120,10 @@ namespace GCodeSender
                 string[] VerOptTrimmed;
                 VerOptInput = line.Remove(0, 1); // Remove [ from the start
                 VerOptInput = VerOptInput.Remove(VerOptInput.Length - 1);
-                               
+
                 // Next, split the values in half at the : - we only want VER/OPT and then the values
-                VerOptTrimmed = VerOptInput.Split(':');   
-                
+                VerOptTrimmed = VerOptInput.Split(':');
+
                 // Now we fill in the boxes depending on which one
                 switch (VerOptTrimmed[0])
                 {
@@ -145,43 +149,43 @@ namespace GCodeSender
                             }
                         }
                         controllerInfo += Environment.NewLine + "Block Buffer Size: " + optSplit[1];
-                        controllerInfo += Environment.NewLine + "RX Buffer Size: " + optSplit[2];                      
+                        controllerInfo += Environment.NewLine + "RX Buffer Size: " + optSplit[2];
                         GRBL_Controller_Info.Text = controllerInfo.ToString();
                         break;
                 }
             }
-   		}
+        }
 
-		private async void ButtonApply_Click(object sender, RoutedEventArgs e)
-		{
-			List<Tuple<int, double>> ToSend = new List<Tuple<int, double>>();
+        private async void ButtonApply_Click(object sender, RoutedEventArgs e)
+        {
+            List<Tuple<int, double>> ToSend = new List<Tuple<int, double>>();
 
-			foreach (KeyValuePair<int, double> kvp in CurrentSettings)
-			{
-				double newval;
+            foreach (KeyValuePair<int, double> kvp in CurrentSettings)
+            {
+                double newval;
 
-				if (!double.TryParse(SettingsBoxes[kvp.Key].Text, System.Globalization.NumberStyles.Float, Util.Constants.DecimalParseFormat, out newval))
-				{
-					MessageBox.Show($"Value \"{SettingsBoxes[kvp.Key].Text}\" is invalid for Setting \"{Util.GrblCodeTranslator.Settings[kvp.Key].Item1}\"");
-					return;
-				}
+                if (!double.TryParse(SettingsBoxes[kvp.Key].Text, System.Globalization.NumberStyles.Float, Util.Constants.DecimalParseFormat, out newval))
+                {
+                    MessageBox.Show($"Value \"{SettingsBoxes[kvp.Key].Text}\" is invalid for Setting \"{Util.GrblCodeTranslator.Settings[kvp.Key].Item1}\"");
+                    return;
+                }
 
-				if (newval == kvp.Value)
-					continue;
+                if (newval == kvp.Value)
+                    continue;
 
-				ToSend.Add(new Tuple<int, double>(kvp.Key, newval));
-			}
+                ToSend.Add(new Tuple<int, double>(kvp.Key, newval));
+            }
 
-			if (SendLine == null)
-				return;
+            if (SendLine == null)
+                return;
 
-			foreach (Tuple<int, double> setting in ToSend)
-			{
-				SendLine.Invoke($"${setting.Item1}={setting.Item2.ToString(Util.Constants.DecimalOutputFormat)}");
-				CurrentSettings[setting.Item1] = setting.Item2;
-				await Task.Delay(Properties.Settings.Default.SettingsSendDelay);
-			}
-		}
+            foreach (Tuple<int, double> setting in ToSend)
+            {
+                SendLine.Invoke($"${setting.Item1}={setting.Item2.ToString(Util.Constants.DecimalOutputFormat)}");
+                CurrentSettings[setting.Item1] = setting.Item2;
+                await Task.Delay(Properties.Settings.Default.SettingsSendDelay);
+            }
+        }
 
         private void ButtonGrblExport_Click(object sender, RoutedEventArgs e)
         {
@@ -199,7 +203,7 @@ namespace GCodeSender
                     {
                         ToExport.Add(new Tuple<int, double>(kvp.Key, kvp.Value));
                     }
-                    
+
                     using (StreamWriter sw = new StreamWriter(exportFileName.FileName))
                     {
                         sw.WriteLine("{0,-10} {1,-10} {2,-18} {3, -35}", "Setting", "Value", "Units", "Description");
@@ -211,8 +215,8 @@ namespace GCodeSender
                         }
                         MessageBox.Show("Settings Exported to " + exportFileName.FileName, "Exported GRBL Settings", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                }               
-            }      
+                }
+            }
             else
             { // NO
                 return;

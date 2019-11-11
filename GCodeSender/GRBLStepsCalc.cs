@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GCodeSender.Util;
+using System;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -10,22 +11,6 @@ namespace GCodeSender
 {
     partial class GrblSettingsWindow
     {
-        #region Functions
-        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("^[.][0-9]+$|^[0-9]*[.]{0,1}[0-9]*$");
-            e.Handled = !regex.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
-        }
-
-        string DecimalPlaceNoRounding(double d, int decimalPlaces)
-        {
-            d = d * Math.Pow(10, decimalPlaces);
-            d = Math.Truncate(d);
-            d = d / Math.Pow(10, decimalPlaces);
-            return string.Format("{0:N" + Math.Abs(decimalPlaces) + "}", d);
-        }
-        #endregion
-
         #region Steps Fine Tune
         // Steps Fine Tune
         double _currentSteps = 0; // Current Step Value from GRBLSettingsWindow
@@ -47,7 +32,7 @@ namespace GCodeSender
         private void calcNewSteps()
         {
             _newFineTuneSteps = _currentSteps * (_distanceCommanded / _distanceTraveled);
-            newStepValue.Text = DecimalPlaceNoRounding(_newFineTuneSteps, 3); ;
+            newStepValue.Text = GlobalFunctions.DecimalPlaceNoRounding(_newFineTuneSteps, 3); ;
         }
 
         public void openStepsCalc(object sender, RoutedEventArgs e)
@@ -62,7 +47,6 @@ namespace GCodeSender
             _currentSteps = Convert.ToDouble(currentSteps.Text);
             GRBLSettingsScroller.IsEnabled = false;
             StepsCalcPanel.Visibility = Visibility.Visible;
-            Console.WriteLine(_settingTextBox.Name);
         }
 
         private void cancel_Click(object sender, RoutedEventArgs e)
