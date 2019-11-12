@@ -9,8 +9,10 @@ using System.Windows.Media;
 
 namespace GCodeSender
 {
+   
     partial class MainWindow
-    {     
+    {
+        private string zeroCommand = "G10 L20 P0";
 
         private void manualJogBtnXPlusBtn_Click(object sender, RoutedEventArgs e)
         {
@@ -59,21 +61,29 @@ namespace GCodeSender
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
-            machine.SendLine(Properties.Settings.Default.ZeroXCmd);
+            machine.SendLine(zeroCommand + "X0");
         }
         // Zero Y Axis
         private void ButtonManualResetY_Click(object sender, RoutedEventArgs e)
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
-            machine.SendLine(Properties.Settings.Default.ZeroYCmd);
+            machine.SendLine(zeroCommand + "Y0");
         }
         // Zero Z Axis
         private void ButtonManualResetZ_Click(object sender, RoutedEventArgs e)
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
-            machine.SendLine(Properties.Settings.Default.ZeroZCmd);
+            machine.SendLine(zeroCommand + "Z0");
+        }
+
+        // Zero All Axis
+        private void ButtonManualResetAll_Click(object sender, RoutedEventArgs e)
+        {
+            if (machine.Mode != Machine.OperatingMode.Manual)
+                return;
+            machine.SendLine(zeroCommand + "X0 Y0 Z0");
         }
 
         private void ButtonManualReturnToZero_Click(object sender, RoutedEventArgs e)
@@ -84,14 +94,6 @@ namespace GCodeSender
 
             machine.SendLine("G90 G0 X0 Y0");
             machine.SendLine("G90 G0 Z0");
-        }
-
-         // Zero All Axis
-        private void ButtonManualResetAll_Click(object sender, RoutedEventArgs e)
-        {
-            if (machine.Mode != Machine.OperatingMode.Manual)
-                return;
-            machine.SendLine(Properties.Settings.Default.ZeroAllCmd);
         }
 
         public void manualJogSendCommand(string direction)

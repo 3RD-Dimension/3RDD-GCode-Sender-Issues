@@ -362,8 +362,6 @@ Be aware that the affected lines will likely move when using edit functions." + 
             // Manual Control - TextBoxJogFeed, TextBoxJogDistance, TextBoxJogFeedFine, TextBoxJogDistanceFine
             TextBoxJogFeed.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
             TextBoxJogDistance.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
-            TextBoxJogFeedFine.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
-            TextBoxJogDistanceFine.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
 
             if (machine.Mode != Machine.OperatingMode.Manual)
 				CheckBoxEnableJog.IsChecked = false;

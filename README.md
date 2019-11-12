@@ -14,5 +14,6 @@ Some of the current enhancements include configurable hotkeys, customizable colo
 * **For Issues, Bugs or Features** - [3RDD GCode Sender Issues](https://github.com/3RD-Dimension/3RDD-GCode-Sender-Issues/issues) or click on "Issues" at the top.
 * **Information about the program** - [visit our Wiki right here](https://3rd-dimension.github.io/)
 
+Built and Compiled using Visual Studio 2019 and WPF and due to that, it is Windows only.
 
 _Copyright 2018 Martin Pitterman (OpenCNCPilot), Copyright 2019 3RDD (Modified Versions)_

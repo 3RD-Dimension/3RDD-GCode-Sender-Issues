@@ -1,8 +1,3 @@
-// 3RDD GCode Sender
-// Modified Version of OpenCNCPilot by Shayne Bouda
-// 3RD-Dimension.nz
-// 2019
-
 using Microsoft.Win32;
 using GCodeSender.Communication;
 using GCodeSender.GCode;
@@ -29,7 +24,6 @@ namespace GCodeSender
 		SaveFileDialog saveFileDialogGCode = new SaveFileDialog() { Filter = Constants.FileFilterGCode };
 
 		GCodeFile ToolPath { get; set; } = GCodeFile.Empty;
-		HeightMap Map { get; set; }
 
 		GrblSettingsWindow settingsWindow = new GrblSettingsWindow();
         WorkOffsetsWindow workOffsetsWindows = new WorkOffsetsWindow();
@@ -53,7 +47,7 @@ namespace GCodeSender
             // Check for any updates
             Logger.Info("Checking for Updates");
             AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
-            //AutoUpdater.Start("https://api.github.com/repos/3RD-Dimension/3RDD-GCode-Sender-Issues/releases/latest");
+            AutoUpdater.Start("https://api.github.com/repos/3RD-Dimension/3RDD-GCode-Sender-Issues/releases/latest");
 
             openFileDialogGCode.FileOk += OpenFileDialogGCode_FileOk;
 			saveFileDialogGCode.FileOk += SaveFileDialogGCode_FileOk;
@@ -80,7 +74,11 @@ namespace GCodeSender
 			machine.OverrideChanged += Machine_OverrideChanged;
 			machine.PinStateChanged += Machine_PinStateChanged;
 
-			Machine_OperatingMode_Changed();
+            // Global Function Number Validation for MainWindow
+            TextBoxJogFeed.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            TextBoxJogDistance.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+
+            Machine_OperatingMode_Changed();
 			Machine_PositionUpdateReceived();
 
 			Properties.Settings.Default.SettingChanging += Default_SettingChanging;
@@ -120,14 +118,6 @@ namespace GCodeSender
                 //Mandatory = json.mandatory,
                 DownloadURL = AssetDownloadURL
             };
-        }
-
-        // Only allow numebrs for textbox values
-        // add PreviewTextInput="NumberValidationTextBox" to relevent textbox
-        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
         }
 
         private void Machine_LineReceived1(string obj)
@@ -170,12 +160,10 @@ namespace GCodeSender
 				e.SettingName.Equals("JogDistance") ||
 				e.SettingName.Equals("ProbeFeed") ||
 				e.SettingName.Equals("ProbeSafeHeight") ||
-				e.SettingName.Equals("ProbeMinimumHeight") ||
 				e.SettingName.Equals("ProbeMaxDepth") ||
 				e.SettingName.Equals("SplitSegmentLength") ||
 				e.SettingName.Equals("ViewportArcSplit") ||
 				e.SettingName.Equals("ArcToLineSegmentLength") ||
-				e.SettingName.Equals("ProbeXAxisWeight") ||
 				e.SettingName.Equals("ConsoleFadeTime"))
 			{
 				if (((double)e.NewValue) <= 0)
@@ -251,22 +239,11 @@ namespace GCodeSender
 				if (files.Length > 0)
 				{
 					string file = files[0];
-
-					if (file.EndsWith(".hmap"))
+					
+					if (machine.Mode != Machine.OperatingMode.SendFile)
 					{
-						if (machine.Mode != Machine.OperatingMode.Probe && Map == null)
-						{
-							e.Effects = DragDropEffects.Copy;
-							return;
-						}
-					}
-					else
-					{
-						if (machine.Mode != Machine.OperatingMode.SendFile)
-						{
-							e.Effects = DragDropEffects.Copy;
-							return;
-						}
+					    e.Effects = DragDropEffects.Copy;
+						return;
 					}
 				}
 			}
@@ -463,6 +440,11 @@ namespace GCodeSender
             machine.SendLine("G91");
             machine.SendLine($"G0 Z{Properties.Settings.Default.ProbeSafeHeight}");
             machine.SendLine("M30");
-        }      
+        }
+
+        private void TextBoxJogFeed_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+
+        }
     }
 }

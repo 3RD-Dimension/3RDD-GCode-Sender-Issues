@@ -94,6 +94,81 @@
                     </Expander>
                 </Border>
                 <Border Style="{StaticResource stylePanelOut}" BorderBrush="#FFCE0606">
+                    <Expander Header="Manual" IsExpanded="{util:SettingBinding ManualExpanderOpen}">
+                        <StackPanel>
+                            <Grid Margin="3,0,3,0">
+                                <TextBox Name="TextBoxManual" Height="23" HorizontalAlignment="Stretch" PreviewKeyDown="TextBoxManual_PreviewKeyDown" Margin="0,5,41,5"/>
+                                <Button Name="ButtonManualSend" Click="ButtonManualSend_Click" Style="{StaticResource styleButton}" Height="23" Content="Send" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Name="ButtonManualResetX" Click="ButtonManualResetX_Click" Style="{StaticResource styleButton}" Content="Zero X"
+									    ToolTip="Zero X Axis"/>
+                                <Button Name="ButtonManualResetY" Click="ButtonManualResetY_Click" Style="{StaticResource styleButton}" Content="Zero Y"
+									    ToolTip="Zero Y Axis"/>
+                                <Button Name="ButtonManualResetZ" Click="ButtonManualResetZ_Click" Style="{StaticResource styleButton}" Content="Zero Z"
+									    ToolTip="Zero Z Axis"/>
+                                <Button Name="ButtonManualResetAll" Click="ButtonManualResetAll_Click" Style="{StaticResource styleButton}" Content="Zero All"
+									    ToolTip="Zero All Axis"/>
+                                <Button Name="ButtonManualReturnToZero" Click="ButtonManualReturnToZero_Click" Style="{StaticResource styleButton}" Content="Return to Zero"
+									    ToolTip="Return all Axis to Zero point"/>
+                            </StackPanel>
+                            <GroupBox>
+                                <GroupBox.Header>
+                                    <CheckBox Name="CheckBoxEnableJog" Content="Enable Keyboard Jogging" Checked="CheckBoxEnableJog_Checked" Unchecked="CheckBoxEnableJog_Unchecked" VerticalAlignment="Top"/>
+                                </GroupBox.Header>
+                                <!--<Grid IsEnabled="{Binding ElementName=CheckBoxEnableJog, Path=IsChecked}">-->
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="75"/>
+                                        <ColumnDefinition Width="70"/>
+                                        <ColumnDefinition Width="119*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Name="TextBoxJog" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="23" Margin="35,5,0,0" Text="Jogging Hotkey Focus" VerticalAlignment="Top" Width="208" VerticalContentAlignment="Center"
+											 PreviewKeyDown="Jogging_KeyDown" PreviewKeyUp="Jogging_KeyUp" LostKeyboardFocus="Jogging_LostKeyboardFocus" Grid.ColumnSpan="3" IsEnabled="{Binding ElementName=CheckBoxEnableJog, Path=IsChecked}">
+                                        <TextBox.ToolTip>
+                                            <TextBlock>
+												You can only Jog as long as this textbox has the keyboard focus<LineBreak/>
+												The motion will stop when you release the button (not 100% stable at the moment)<LineBreak/>
+                                            </TextBlock>
+                                        </TextBox.ToolTip>
+                                    </TextBox>
+                                    <Label Content="Jog Feed" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                                    <TextBox x:Name="TextBoxJogFeed" Text="{util:SettingBinding JogFeed}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="1"/>
+                                    <Label Content="Jog Dist" HorizontalAlignment="Left" Margin="0,33,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                                    <TextBox x:Name="TextBoxJogDistance" Text="{util:SettingBinding JogDistance}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="90,34,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2"/>
+                                </Grid>
+                            </GroupBox>
+                            <StackPanel Orientation="Horizontal">
+                                <Grid Margin="25,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="55"/>
+                                        <RowDefinition Height="55"/>
+                                        <RowDefinition Height="55"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="55"/>
+                                        <ColumnDefinition Width="55"/>
+                                        <ColumnDefinition Width="55"/>
+                                        <ColumnDefinition Width="80"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button x:Name="manualJogBtnXPlusBtn" Click="manualJogBtnXPlusBtn_Click" Style="{StaticResource styleButton}" Content="X +"
+									    ToolTip="Move X Axis +" Width="45" Height="45" Grid.Row="1" Grid.Column="2"/>
+                                    <Button x:Name="manualJogBtnXNegBtn" Click="manualJogBtnXNegBtn_Click" Style="{StaticResource styleButton}" Content="X -"
+									    ToolTip="Move X Axis -" Width="45" Height="45" Grid.Row="1" Grid.Column="0"/>
+                                    <Button x:Name="manualJogBtnYPlusBtn" Click="manualJogBtnYPlusBtn_Click" Style="{StaticResource styleButton}" Content="Y +"
+									    ToolTip="Move Y Axis +" Width="45" Height="45" Grid.Row="0" Grid.Column="1"/>
+                                    <Button x:Name="manualJogBtnYNegBtn" Click="manualJogBtnYNegBtn_Click" Style="{StaticResource styleButton}" Content="Y -"
+									    ToolTip="Move Y Axis -" Width="45" Height="45" Grid.Row="2" Grid.Column="1"/>
+                                    <Button x:Name="manualJogBtnZPlusBtn" Click="manualJogBtnZPlusBtn_Click" Style="{StaticResource styleButton}" Content="Z +"
+									    ToolTip="Move Z Axis +" Width="45" Height="45" Grid.Row="0" Grid.Column="5"/>
+                                    <Button x:Name="manualJogBtnZNegBtn" Click="manualJogBtnZNegBtn_Click" Style="{StaticResource styleButton}" Content="Z -"
+									    ToolTip="Move Z Axis 0" Width="45" Height="45" Grid.Row="2" Grid.Column="5"/>
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                    </Expander>
+                </Border>
+                <Border Style="{StaticResource stylePanelOut}" BorderBrush="#FFCE0606">
                     <Expander Header="Overrides" IsExpanded="{util:SettingBinding OverrideExpanderOpen}">
                         <StackPanel Name="StackPanelOverrides">
                             <TextBlock>
@@ -126,88 +201,6 @@
                                 <Button Click="ButtonSpindleOverride_Click" Content="100%" Style="{StaticResource styleButton}" Tag="100%"/>
                                 <Button Name="Spindle1Dec" Click="ButtonSpindleOverride_Click" Content="-1%" Style="{StaticResource styleButton}" Tag="-1%"/>
                                 <Button Name="Spindle10Dec" Click="ButtonSpindleOverride_Click" Content="-10%" Style="{StaticResource styleButton}" Tag="-10%"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Expander>
-                </Border>
-                <Border Style="{StaticResource stylePanelOut}" BorderBrush="#FFCE0606">
-                    <Expander Header="Manual" IsExpanded="{util:SettingBinding ManualExpanderOpen}">
-                        <StackPanel>
-                            <Grid Margin="3,0,3,0">
-                                <TextBox Name="TextBoxManual" Height="23" HorizontalAlignment="Stretch" PreviewKeyDown="TextBoxManual_PreviewKeyDown" Margin="0,5,41,5"/>
-                                <Button Name="ButtonManualSend" Click="ButtonManualSend_Click" Style="{StaticResource styleButton}" Height="23" Content="Send" HorizontalAlignment="Right"/>
-                            </Grid>
-                            <StackPanel Orientation="Horizontal">
-                                <Button Name="ButtonManualResetX" Click="ButtonManualResetX_Click" Style="{StaticResource styleButton}" Content="Zero X"
-									    ToolTip="Zero X Axis"/>
-                                <Button Name="ButtonManualResetY" Click="ButtonManualResetY_Click" Style="{StaticResource styleButton}" Content="Zero Y"
-									    ToolTip="Zero Y Axis"/>
-                                <Button Name="ButtonManualResetZ" Click="ButtonManualResetZ_Click" Style="{StaticResource styleButton}" Content="Zero Z"
-									    ToolTip="Zero Z Axis"/>
-                                <Button Name="ButtonManualResetAll" Click="ButtonManualResetAll_Click" Style="{StaticResource styleButton}" Content="Zero All"
-									    ToolTip="Zero All Axis"/>
-                                <Button Name="ButtonManualReturnToZero" Click="ButtonManualReturnToZero_Click" Style="{StaticResource styleButton}" Content="Return to Zero"
-									    ToolTip="Return all Axis to Zero point"/>
-                            </StackPanel>
-                            <GroupBox>
-                                <GroupBox.Header>
-                                    <CheckBox Name="CheckBoxEnableJog" Content="Enable Keyboard Jogging" Checked="CheckBoxEnableJog_Checked" Unchecked="CheckBoxEnableJog_Unchecked" VerticalAlignment="Top"/>
-                                </GroupBox.Header>
-                                <!--<Grid IsEnabled="{Binding ElementName=CheckBoxEnableJog, Path=IsChecked}">-->
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="75"/>
-                                        <ColumnDefinition Width="70"/>
-                                        <ColumnDefinition Width="119*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox Name="TextBoxJog" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="23" Margin="35,5,0,0" Text="Jogging Keyboard Focus" VerticalAlignment="Top" Width="208" VerticalContentAlignment="Center"
-											 PreviewKeyDown="Jogging_KeyDown" PreviewKeyUp="Jogging_KeyUp" LostKeyboardFocus="Jogging_LostKeyboardFocus" Grid.ColumnSpan="3" IsEnabled="{Binding ElementName=CheckBoxEnableJog, Path=IsChecked}">
-                                        <TextBox.ToolTip>
-                                            <TextBlock>
-												You can only Jog as long as this textbox has the keyboard focus<LineBreak/>
-												Use the arrow keys for XY movement (Right/Up is the positive direction for X/Y)<LineBreak/>
-												Use PgUp/Down for Z movement<LineBreak/>
-												The motion will stop when you release the button (not 100% stable at the moment)<LineBreak/>
-												Esc will issue a soft reset
-                                            </TextBlock>
-                                        </TextBox.ToolTip>
-                                    </TextBox>
-                                    <Label Content="Jog Feed" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                    <TextBox Name="TextBoxJogFeed" Text="{util:SettingBinding JogFeed}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="1" PreviewTextInput="NumberValidationTextBox"/>
-                                    <Label Content="Max Jog Dist" HorizontalAlignment="Left" Margin="0,33,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-                                    <TextBox Name="TextBoxJogDistance" Text="{util:SettingBinding JogDistance}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="90,34,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2" PreviewTextInput="NumberValidationTextBox"/>
-                                    <Label Content="Feed Fine" HorizontalAlignment="Left" Margin="10,61,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                    <TextBox Name="TextBoxJogFeedFine" Text="{util:SettingBinding JogFeedCtrl}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="1" PreviewTextInput="NumberValidationTextBox"/>
-                                    <Label Content="Fine Distance" HorizontalAlignment="Left" Margin="0,61,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-                                    <TextBox Name="TextBoxJogDistanceFine" Text="{util:SettingBinding JogDistanceCtrl}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="90,62,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2" PreviewTextInput="NumberValidationTextBox"/>
-                                </Grid>
-                            </GroupBox>
-                            <StackPanel Orientation="Horizontal">
-                                <Grid Margin="25,10,0,0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="55"/>
-                                        <RowDefinition Height="55"/>
-                                        <RowDefinition Height="55"/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="55"/>
-                                        <ColumnDefinition Width="55"/>
-                                        <ColumnDefinition Width="55"/>
-                                        <ColumnDefinition Width="80"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Button x:Name="manualJogBtnXPlusBtn" Click="manualJogBtnXPlusBtn_Click" Style="{StaticResource styleButton}" Content="X +"
-									    ToolTip="Move X Axis +" Width="45" Height="45" Grid.Row="1" Grid.Column="2"/>
-                                    <Button x:Name="manualJogBtnXNegBtn" Click="manualJogBtnXNegBtn_Click" Style="{StaticResource styleButton}" Content="X -"
-									    ToolTip="Move X Axis -" Width="45" Height="45" Grid.Row="1" Grid.Column="0"/>
-                                    <Button x:Name="manualJogBtnYPlusBtn" Click="manualJogBtnYPlusBtn_Click" Style="{StaticResource styleButton}" Content="Y +"
-									    ToolTip="Move Y Axis +" Width="45" Height="45" Grid.Row="0" Grid.Column="1"/>
-                                    <Button x:Name="manualJogBtnYNegBtn" Click="manualJogBtnYNegBtn_Click" Style="{StaticResource styleButton}" Content="Y -"
-									    ToolTip="Move Y Axis -" Width="45" Height="45" Grid.Row="2" Grid.Column="1"/>
-                                    <Button x:Name="manualJogBtnZPlusBtn" Click="manualJogBtnZPlusBtn_Click" Style="{StaticResource styleButton}" Content="Z +"
-									    ToolTip="Move Z Axis +" Width="45" Height="45" Grid.Row="0" Grid.Column="5"/>
-                                    <Button x:Name="manualJogBtnZNegBtn" Click="manualJogBtnZNegBtn_Click" Style="{StaticResource styleButton}" Content="Z -"
-									    ToolTip="Move Z Axis 0" Width="45" Height="45" Grid.Row="2" Grid.Column="5"/>
-                                </Grid>
                             </StackPanel>
                         </StackPanel>
                     </Expander>
@@ -337,9 +330,10 @@
                             <Image HorizontalAlignment="Center"  Source="Resources/3rdd_logo.png" Height="37" Width="187"/>
                             <TextBlock TextAlignment="Center" FontSize="14" Padding="5">                              
 								<Span FontWeight="Bold" FontSize="12">3RDD GCode Sender <Run Text="{Binding Version,Mode=OneWay}"/></Span><LineBreak/>                               
-								<Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="https://github.com/3RD-Dimension/3RDD-GCode-Sender-Issues" FontSize="12">3RDD GCode Sender Webpage</Hyperlink><LineBreak/>
+								<Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="https://3rd-dimension.github.io" FontSize="12">3RDD GCode Sender Webpage</Hyperlink><LineBreak/>
                                 <Hyperlink RequestNavigate="Hyperlink_RequestNavigate" NavigateUri="https://github.com/3RD-Dimension/3RDD-GCode-Sender-Issues/issues" FontSize="12">Report Issues, Bugs, Features</Hyperlink><LineBreak/>
-                                <Span FontSize="12">Original Code by Martin Pittermann </Span>
+                                <Span FontSize="12">Original Code by Martin Pittermann </Span><LineBreak />
+                                <Span FontSize="12" FontWeight="Bold">Copyright 2019 3RD-Dimension </Span>
                             </TextBlock>
                         </StackPanel>
                     </Expander>

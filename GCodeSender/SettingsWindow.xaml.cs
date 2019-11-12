@@ -8,6 +8,7 @@ using System.Windows.Input;
 using GCodeSender.Hotkey;
 using System.Windows.Media;
 using System.Text.RegularExpressions;
+using GCodeSender.Util;
 
 namespace GCodeSender
 {
@@ -21,19 +22,20 @@ namespace GCodeSender
         public SettingsWindow()
 		{
 			InitializeComponent();
+            SerialPortBaud.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            ControllerBufferSize.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            StatusPollInterval.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            ViewportArcSplit.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            GridThickness.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            ProbeFeed.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            ProbeSafeHeight.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            ProbeMaxDepth.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            ProbeTouchPlateThickness.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
 
-			ComboBoxSerialPort_DropDownOpened(null, null);
+            ComboBoxSerialPort_DropDownOpened(null, null);
 
             // Load Keycodes from HotKeys.hotkeycodes
             LoadHotKeys();
-        }
-
-        // Only allow numebrs for textbox values
-        // add PreviewTextInput="NumberValidationTextBox" to relevent textbox
-        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
-        {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
         }
 
         private void ComboBoxSerialPort_DropDownOpened(object sender, EventArgs e)
