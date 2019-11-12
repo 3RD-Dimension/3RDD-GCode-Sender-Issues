@@ -75,7 +75,8 @@ namespace GCodeSender
 			machine.PinStateChanged += Machine_PinStateChanged;
 
             // Global Function Number Validation for MainWindow
-            PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            TextBoxJogFeed.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            TextBoxJogDistance.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
 
             Machine_OperatingMode_Changed();
 			Machine_PositionUpdateReceived();
