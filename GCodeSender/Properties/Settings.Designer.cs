@@ -194,12 +194,12 @@ namespace GCodeSender.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1000")]
-        public double JogFeed {
+        public double JogFeedX {
             get {
-                return ((double)(this["JogFeed"]));
+                return ((double)(this["JogFeedX"]));
             }
             set {
-                this["JogFeed"] = value;
+                this["JogFeedX"] = value;
             }
         }
         
@@ -668,6 +668,42 @@ namespace GCodeSender.Properties {
             }
             set {
                 this["JogDistanceY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public double JogFeedY {
+            get {
+                return ((double)(this["JogFeedY"]));
+            }
+            set {
+                this["JogFeedY"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public double JogDistanceZ {
+            get {
+                return ((double)(this["JogDistanceZ"]));
+            }
+            set {
+                this["JogDistanceZ"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("500")]
+        public double JogFeedZ {
+            get {
+                return ((double)(this["JogFeedZ"]));
+            }
+            set {
+                this["JogFeedZ"] = value;
             }
         }
     }

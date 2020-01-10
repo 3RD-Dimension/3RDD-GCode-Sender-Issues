@@ -121,12 +121,23 @@
                                         <ColumnDefinition Width="70"/>
                                         <ColumnDefinition Width="119*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Content="Jog Feed" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                    <TextBox x:Name="TextBoxJogFeed" Text="{util:SettingBinding JogFeed}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2"/>
-                                    <Label Content="Jog Dist X" HorizontalAlignment="Left" Margin="0,33,0,0" VerticalAlignment="Top" Grid.Column="3"/>
-                                    <TextBox x:Name="TextBoxJogDistanceX" Text="{util:SettingBinding JogDistanceX}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="0,34,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="3"/>
-                                    <Label Content="Jog Dist Y" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Grid.Column="3"/>
-                                    <TextBox x:Name="TextBoxJogDistanceY" Text="{util:SettingBinding JogDistanceY}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="0,60,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="3"/>
+                                    <!-- X Jog Feed and Distance -->
+                                    <Label Content="Jog Feed X" HorizontalAlignment="Left" Margin="5,15,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                                    <TextBox x:Name="TextBoxJogFeedX" Text="{util:SettingBinding JogFeedX}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2"/>
+                                    <Label Content="Jog Dist X" HorizontalAlignment="Left" Margin="0,15,0,0" VerticalAlignment="Top" Grid.Column="3"/>
+                                    <TextBox x:Name="TextBoxJogDistanceX" Text="{util:SettingBinding JogDistanceX}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="0,15,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="3"/>
+                                    <!-- Y Jog Feed and Distance -->
+                                    <Label Content="Jog Feed Y" HorizontalAlignment="Left" Margin="5,40,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                                    <TextBox x:Name="TextBoxJogFeedY" Text="{util:SettingBinding JogFeedY}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2"/>
+                                    <Label Content="Jog Dist Y" HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" Grid.Column="3"/>
+                                    <TextBox x:Name="TextBoxJogDistanceY" Text="{util:SettingBinding JogDistanceY}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="0,40,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="3"/>
+                                    <!-- Y Jog Feed and Distance -->
+                                    <Label Content="Jog Feed Z" HorizontalAlignment="Left" Margin="5,65,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                                    <TextBox x:Name="TextBoxJogFeedZ" Text="{util:SettingBinding JogFeedZ}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2"/>
+                                    <Label Content="Jog Dist Z" HorizontalAlignment="Left" Margin="0,65,0,0" VerticalAlignment="Top" Grid.Column="3"/>
+                                    <TextBox x:Name="TextBoxJogDistanceZ" Text="{util:SettingBinding JogDistanceZ}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="0,65,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="3"/>
+                                    
+
                                 </Grid>
                             </GroupBox>
                             <StackPanel Orientation="Horizontal">

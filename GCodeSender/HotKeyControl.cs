@@ -76,17 +76,17 @@ namespace GCodeSender
             // Jog rate Increase and Decrease (This is saved to settings always)
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateInc"])
             {
-                int currentJogRate = Convert.ToInt32(TextBoxJogFeed.Text);
-                TextBoxJogFeed.Text = (currentJogRate + 10).ToString();
-                Properties.Settings.Default.JogFeed = Convert.ToDouble(TextBoxJogFeed.Text);
+                int currentJogRate = Convert.ToInt32(TextBoxJogFeedX.Text);
+                TextBoxJogFeedX.Text = (currentJogRate + 10).ToString();
+                Properties.Settings.Default.JogFeedX = Convert.ToDouble(TextBoxJogFeedX.Text);
             }
 
             // Jog rate Increase and Decrease (This is saved to settings always)
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateDec"])
             {
-                int currentJogRate = Convert.ToInt32(TextBoxJogFeed.Text);
-                TextBoxJogFeed.Text = (currentJogRate - 10).ToString();
-                Properties.Settings.Default.JogFeed = Convert.ToDouble(TextBoxJogFeed.Text);
+                int currentJogRate = Convert.ToInt32(TextBoxJogFeedX.Text);
+                TextBoxJogFeedX.Text = (currentJogRate - 10).ToString();
+                Properties.Settings.Default.JogFeedX = Convert.ToDouble(TextBoxJogFeedX.Text);
             }
 
             // Feed Rate

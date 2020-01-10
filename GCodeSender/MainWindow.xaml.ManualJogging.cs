@@ -99,19 +99,26 @@ namespace GCodeSender
 
         public void manualJogSendCommand(string direction)
         {
-            double feed = Properties.Settings.Default.JogFeed;
+            double feedX = Properties.Settings.Default.JogFeedX;
             double distanceX = Properties.Settings.Default.JogDistanceX;
+            double feedY = Properties.Settings.Default.JogFeedY;
             double distanceY = Properties.Settings.Default.JogDistanceY;
-            Console.WriteLine(direction);
+            double feedZ = Properties.Settings.Default.JogFeedZ;
+            double distanceZ = Properties.Settings.Default.JogDistanceZ;
+
 
             // If X+,X- or Y+,Y-
             if (direction == "X" || direction == "X-")
             {
-                machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feed, direction, distanceX));
+                machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feedX, direction, distanceX));
             }
-            else if (direction == "Y" || direction == "Y-" || direction == "Z" || direction == "Z-")
+            else if (direction == "Y" || direction == "Y-")
             {
-                machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feed, direction, distanceY));
+                machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feedY, direction, distanceY));
+            }
+            else if (direction == "Z" || direction == "Z-")
+            {
+                machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feedZ, direction, distanceZ));
             }
             
         }

@@ -44,7 +44,7 @@
     <Setting Name="WebServerPort" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">8080</Value>
     </Setting>
-    <Setting Name="JogFeed" Type="System.Double" Scope="User">
+    <Setting Name="JogFeedX" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
     <Setting Name="JogDistanceX" Type="System.Double" Scope="User">
@@ -164,6 +164,15 @@ G92Z0;</Value>
     </Setting>
     <Setting Name="JogDistanceY" Type="System.Double" Scope="User">
       <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="JogFeedY" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="JogDistanceZ" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="JogFeedZ" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">500</Value>
     </Setting>
   </Settings>
 </SettingsFile>

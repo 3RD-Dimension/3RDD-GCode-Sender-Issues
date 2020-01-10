@@ -75,9 +75,12 @@ namespace GCodeSender
 			machine.PinStateChanged += Machine_PinStateChanged;
 
             // Global Function Number Validation for MainWindow
-            TextBoxJogFeed.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            TextBoxJogFeedX.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
             TextBoxJogDistanceX.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            TextBoxJogFeedY.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
             TextBoxJogDistanceY.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            TextBoxJogFeedZ.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            TextBoxJogDistanceZ.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
 
             Machine_OperatingMode_Changed();
 			Machine_PositionUpdateReceived();
@@ -450,9 +453,10 @@ namespace GCodeSender
 
             string PositionX = GlobalFunctions.DecimalPlaceNoRounding(Convert.ToDouble(viewport.CurrentPosition.X), 3);
             string PositionY = GlobalFunctions.DecimalPlaceNoRounding(Convert.ToDouble(viewport.CurrentPosition.Y), 3);
-           // MessageBox.Show("Goto Position " + "X:" + PositionX + ", Y:" + PositionY + "?", "Go to Position?", MessageBoxButton.YesNo);
-
-            machine.SendLine($"G90 G0 X{PositionX} Y{PositionY}");
+           if (MessageBox.Show("Goto Position " + "X:" + PositionX + ", Y:" + PositionY + "?", "Go to Position?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                machine.SendLine($"G90 G0 X{PositionX} Y{PositionY}");
+            }
 
             // This one creates an Unhandled Null Exception
             //Console.WriteLine("Y" + viewport.CursorPosition.Value.Y.ToString());
