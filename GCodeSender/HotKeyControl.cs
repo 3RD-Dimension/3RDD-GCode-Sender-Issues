@@ -12,9 +12,46 @@ namespace GCodeSender
         // Any other keys during normal operation including when machine is in motion
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            if (!machine.Connected)
+                return;
+
+            viewport.IsRotationEnabled = false;
+            viewport.IsMoveEnabled = false;
+            viewport.IsPanEnabled = false;
+
             string currentHotPressed = HotKeys.KeyProcess(sender, e); // Get Keycode
             if (currentHotPressed == null) return; // If currentHotPressed is null, Return (to avoid continuing with  blank)
-       
+
+            if (machine.Mode == Machine.OperatingMode.Manual)
+            {
+                if (machine.BufferState > 0 || machine.Status != "Idle")
+                    return;
+
+                string direction = null;
+
+                if (currentHotPressed == HotKeys.hotkeyCode["JogXPos"])
+                    direction = "X";
+                else if (currentHotPressed == HotKeys.hotkeyCode["JogXNeg"])
+                    direction = "X-";
+                else if (currentHotPressed == HotKeys.hotkeyCode["JogYPos"])
+                    direction = "Y";
+                else if (currentHotPressed == HotKeys.hotkeyCode["JogYNeg"])
+                    direction = "Y-";
+                else if (currentHotPressed == HotKeys.hotkeyCode["JogZPos"])
+                    direction = "Z";
+                else if (currentHotPressed == HotKeys.hotkeyCode["JogZNeg"])
+                    direction = "Z-";
+                else if (currentHotPressed == HotKeys.hotkeyCode["RTOrigin"]) // Return to Origin ie back to all axis Zero position
+                    ButtonManualReturnToZero.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                else if (currentHotPressed == HotKeys.hotkeyCode["FSStop"]) // Jog Cancel
+                    machine.JogCancel();
+
+                if (direction != null)
+                {
+                    manualJogSendCommand(direction);
+                }
+            }
+      
             // Emergency Reset
             if (machine.Connected && currentHotPressed == HotKeys.hotkeyCode["EmgStop"])
                 machine.SoftReset();
@@ -98,6 +135,10 @@ namespace GCodeSender
                     Spindle1Dec.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                 }
             }
+
+            viewport.IsRotationEnabled = true;
+            viewport.IsMoveEnabled = true;
+            viewport.IsPanEnabled = true;
         }
     }
 }

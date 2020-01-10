@@ -113,29 +113,20 @@
 									    ToolTip="Return all Axis to Zero point"/>
                             </StackPanel>
                             <GroupBox>
-                                <GroupBox.Header>
-                                    <CheckBox Name="CheckBoxEnableJog" Content="Enable Keyboard Jogging" Checked="CheckBoxEnableJog_Checked" Unchecked="CheckBoxEnableJog_Unchecked" VerticalAlignment="Top"/>
-                                </GroupBox.Header>
                                 <!--<Grid IsEnabled="{Binding ElementName=CheckBoxEnableJog, Path=IsChecked}">-->
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="75"/>
+                                        <ColumnDefinition Width="51"/>
+                                        <ColumnDefinition Width="24"/>
                                         <ColumnDefinition Width="70"/>
                                         <ColumnDefinition Width="119*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox Name="TextBoxJog" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="23" Margin="35,5,0,0" Text="Jogging Hotkey Focus" VerticalAlignment="Top" Width="208" VerticalContentAlignment="Center"
-											 PreviewKeyDown="Jogging_KeyDown" PreviewKeyUp="Jogging_KeyUp" LostKeyboardFocus="Jogging_LostKeyboardFocus" Grid.ColumnSpan="3" IsEnabled="{Binding ElementName=CheckBoxEnableJog, Path=IsChecked}">
-                                        <TextBox.ToolTip>
-                                            <TextBlock>
-												You can only Jog as long as this textbox has the keyboard focus<LineBreak/>
-												The motion will stop when you release the button (not 100% stable at the moment)<LineBreak/>
-                                            </TextBlock>
-                                        </TextBox.ToolTip>
-                                    </TextBox>
                                     <Label Content="Jog Feed" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                    <TextBox x:Name="TextBoxJogFeed" Text="{util:SettingBinding JogFeed}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="1"/>
-                                    <Label Content="Jog Dist" HorizontalAlignment="Left" Margin="0,33,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-                                    <TextBox x:Name="TextBoxJogDistance" Text="{util:SettingBinding JogDistance}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="90,34,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2"/>
+                                    <TextBox x:Name="TextBoxJogFeed" Text="{util:SettingBinding JogFeed}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2"/>
+                                    <Label Content="Jog Dist X" HorizontalAlignment="Left" Margin="0,33,0,0" VerticalAlignment="Top" Grid.Column="3"/>
+                                    <TextBox x:Name="TextBoxJogDistanceX" Text="{util:SettingBinding JogDistanceX}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="0,34,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="3"/>
+                                    <Label Content="Jog Dist Y" HorizontalAlignment="Left" Margin="0,60,0,0" VerticalAlignment="Top" Grid.Column="3"/>
+                                    <TextBox x:Name="TextBoxJogDistanceY" Text="{util:SettingBinding JogDistanceY}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="0,60,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="3"/>
                                 </Grid>
                             </GroupBox>
                             <StackPanel Orientation="Horizontal">
@@ -295,12 +286,12 @@
                                 <ComboBoxItem Name="G58" Foreground="Red">G58</ComboBoxItem>
                                 <ComboBoxItem Name="G59" Foreground="Red">G59</ComboBoxItem>
                             </ComboBox>
-                            
+
                             <StackPanel Orientation="Horizontal">
                                 <Button Name="ButtonWorkOffsets" Content="Work Offsets" Style="{StaticResource styleButton}" Click="ButtonWorkOffsets_click"/>
                             </StackPanel>
-                            
-                            
+
+
                             <StackPanel Orientation="Horizontal">
                                 <Button Content="GRBL Settings" Style="{StaticResource styleButton}" Click="ShowGrblSettings_Click" Name="ButtonGrblSettings"/>
                             </StackPanel>

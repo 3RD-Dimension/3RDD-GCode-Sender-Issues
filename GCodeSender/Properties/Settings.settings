@@ -47,7 +47,7 @@
     <Setting Name="JogFeed" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
-    <Setting Name="JogDistance" Type="System.Double" Scope="User">
+    <Setting Name="JogDistanceX" Type="System.Double" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="LogTraffic" Type="System.Boolean" Scope="User">
@@ -161,6 +161,9 @@ G92Z0;</Value>
     </Setting>
     <Setting Name="ModelArcColor" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="JogDistanceY" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
     </Setting>
   </Settings>
 </SettingsFile>

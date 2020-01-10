@@ -206,12 +206,12 @@ namespace GCodeSender.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10")]
-        public double JogDistance {
+        public double JogDistanceX {
             get {
-                return ((double)(this["JogDistance"]));
+                return ((double)(this["JogDistanceX"]));
             }
             set {
-                this["JogDistance"] = value;
+                this["JogDistanceX"] = value;
             }
         }
         
@@ -656,6 +656,18 @@ namespace GCodeSender.Properties {
             }
             set {
                 this["ModelArcColor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public double JogDistanceY {
+            get {
+                return ((double)(this["JogDistanceY"]));
+            }
+            set {
+                this["JogDistanceY"] = value;
             }
         }
     }
