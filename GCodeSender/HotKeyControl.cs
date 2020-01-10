@@ -15,6 +15,7 @@ namespace GCodeSender
             if (!machine.Connected)
                 return;
 
+            // Disable Viewport Rotation, Move and Pan in case hotkey is an arrow key
             viewport.IsRotationEnabled = false;
             viewport.IsMoveEnabled = false;
             viewport.IsPanEnabled = false;
@@ -49,7 +50,7 @@ namespace GCodeSender
                 if (direction != null)
                 {
                     manualJogSendCommand(direction);
-                }
+                }               
             }
       
             // Emergency Reset
@@ -135,7 +136,7 @@ namespace GCodeSender
                     Spindle1Dec.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                 }
             }
-
+            // Enable Viewport Rotation, Move and Pan after jogging
             viewport.IsRotationEnabled = true;
             viewport.IsMoveEnabled = true;
             viewport.IsPanEnabled = true;

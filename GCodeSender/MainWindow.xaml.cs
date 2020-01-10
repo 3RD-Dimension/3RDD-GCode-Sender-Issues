@@ -443,9 +443,19 @@ namespace GCodeSender
             machine.SendLine("M30");
         }
 
-        private void TextBoxJogFeed_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void viewport_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
+            viewport.CalculateCursorPosition = true;
+            // Obsolete but works for now
 
+            string PositionX = GlobalFunctions.DecimalPlaceNoRounding(Convert.ToDouble(viewport.CurrentPosition.X), 3);
+            string PositionY = GlobalFunctions.DecimalPlaceNoRounding(Convert.ToDouble(viewport.CurrentPosition.Y), 3);
+           // MessageBox.Show("Goto Position " + "X:" + PositionX + ", Y:" + PositionY + "?", "Go to Position?", MessageBoxButton.YesNo);
+
+            machine.SendLine($"G90 G0 X{PositionX} Y{PositionY}");
+
+            // This one creates an Unhandled Null Exception
+            //Console.WriteLine("Y" + viewport.CursorPosition.Value.Y.ToString());
         }
     }
 }
