@@ -76,7 +76,8 @@ namespace GCodeSender
 
             // Global Function Number Validation for MainWindow
             TextBoxJogFeed.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
-            TextBoxJogDistance.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            TextBoxJogDistanceX.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            TextBoxJogDistanceY.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
 
             Machine_OperatingMode_Changed();
 			Machine_PositionUpdateReceived();
@@ -94,7 +95,7 @@ namespace GCodeSender
 			ButtonRestoreViewport_Click(null, null);
 
             HotKeys.LoadHotKeys(); // Load Hotkeys
-        }
+       }
 
         private void AutoUpdaterOnParseUpdateInfoEvent(ParseUpdateInfoEventArgs args)
         {

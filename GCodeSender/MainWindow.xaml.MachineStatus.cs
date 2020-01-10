@@ -361,11 +361,8 @@ Be aware that the affected lines will likely move when using edit functions." + 
 
             // Manual Control - TextBoxJogFeed, TextBoxJogDistance, TextBoxJogFeedFine, TextBoxJogDistanceFine
             TextBoxJogFeed.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
-            TextBoxJogDistance.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
-
-            if (machine.Mode != Machine.OperatingMode.Manual)
-				CheckBoxEnableJog.IsChecked = false;
-			CheckBoxEnableJog.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            TextBoxJogDistanceX.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            TextBoxJogDistanceY.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
 
 			ButtonEditSimplify.IsEnabled = machine.Mode != Machine.OperatingMode.SendFile;
 			ButtonEditArcToLines.IsEnabled = machine.Mode != Machine.OperatingMode.SendFile;

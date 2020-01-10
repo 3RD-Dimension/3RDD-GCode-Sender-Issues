@@ -1,6 +1,7 @@
 ﻿// Manual Jogging
 using GCodeSender.Communication;
 using GCodeSender.Util;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,7 +10,7 @@ using System.Windows.Media;
 
 namespace GCodeSender
 {
-   
+
     partial class MainWindow
     {
         private string zeroCommand = "G10 L20 P0";
@@ -53,7 +54,7 @@ namespace GCodeSender
         {
             if (machine.Mode != Machine.OperatingMode.Manual)
                 return;
-            manualJogSendCommand("Z-");  
+            manualJogSendCommand("Z-");
         }
 
         // Zero X Axis
@@ -99,8 +100,20 @@ namespace GCodeSender
         public void manualJogSendCommand(string direction)
         {
             double feed = Properties.Settings.Default.JogFeed;
-            double distance = Properties.Settings.Default.JogDistance;
-            machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feed, direction, distance));
+            double distanceX = Properties.Settings.Default.JogDistanceX;
+            double distanceY = Properties.Settings.Default.JogDistanceY;
+            Console.WriteLine(direction);
+
+            // If X+,X- or Y+,Y-
+            if (direction == "X" || direction == "X-")
+            {
+                machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feed, direction, distanceX));
+            }
+            else if (direction == "Y" || direction == "Y-" || direction == "Z" || direction == "Z-")
+            {
+                machine.SendLine(string.Format(Constants.DecimalOutputFormat, "$J=G91F{0:0.#}{1}{2:0.###}", feed, direction, distanceY));
+            }
+            
         }
        
     }
