@@ -7,15 +7,18 @@ namespace GCodeSender.Hotkey
     public class CheckCreateFile
     {
         private static string HotKeyFile = "Resources\\hotkeys.xml";
-        private static string HotKeyFileVer = "1"; // Hotkey File Version
+        public static int HotKeyFileVer = 2; // Hotkey File Version - Change this with each Hotkey File Change (ie when new hotkeys are added)
+        private static XElement xElement;
+        
         /// <summary>
         /// Checks if Hotkey file exists, if not create with defaults
         /// </summary>
         public static void CreateDefaultXML()
         {
-            MainWindow.Logger.Info("Creating new HotKey file");
+            {
+                MainWindow.Logger.Info("Creating new HotKey file");
 
-            XElement newXML = new XElement("Hotkeys", new XAttribute("Name", "3RDD GCode Sender"), new XAttribute("HotkeyFileVer", HotKeyFileVer),
+                xElement = new XElement("Hotkeys", new XAttribute("Name", "3RDD GCode Sender"), new XAttribute("HotkeyFileVer", HotKeyFileVer),
                  // Default Keys
                  new XElement("bind", new XAttribute("key_description", "Jog X Axis +"), new XAttribute("keyfunction", "JogXPos"), new XAttribute("keycode", "Right")),
                  new XElement("bind", new XAttribute("key_description", "Jog X Axis -"), new XAttribute("keyfunction", "JogXNeg"), new XAttribute("keycode", "Left")),
@@ -38,20 +41,33 @@ namespace GCodeSender.Hotkey
                  new XElement("bind", new XAttribute("key_description", "Re-Do/Reload File"), new XAttribute("keyfunction", "ReDoReload"), new XAttribute("keycode", "")),
                  new XElement("bind", new XAttribute("key_description", "Spindle On/Off"), new XAttribute("keyfunction", "SpindleOnOff"), new XAttribute("keycode", "")),
                  new XElement("bind", new XAttribute("key_description", "Coolant On/Off"), new XAttribute("keyfunction", "CoolantOnOff"), new XAttribute("keycode", "")),
-                 new XElement("bind", new XAttribute("key_description", "Mist On/Off"), new XAttribute("keyfunction", "MistOnOff"), new XAttribute("keycode", "")));
-
-            newXML.Save(HotKeyFile);
-            MainWindow.Logger.Info("Hotkey File Created");
+                 new XElement("bind", new XAttribute("key_description", "Mist On/Off"), new XAttribute("keyfunction", "MistOnOff"), new XAttribute("keycode", "")),
+                // New Hotkeys V2.0.1.4
+                 new XElement("bind", new XAttribute("key_description", "Jog Distance Increase"), new XAttribute("keyfunction", "JDistInc"), new XAttribute("keycode", "")),
+                 new XElement("bind", new XAttribute("key_description", "Jog Distance Decrease"), new XAttribute("keyfunction", "JDistDec"), new XAttribute("keycode", "")));
+                
+                xElement.Save(HotKeyFile);
+                MainWindow.Logger.Info("Hotkey File Created");
+            }
         }
 
-        // Update hotkey file with new version
-        public static void UpdateHotKeyFile()
+        public static void CheckAndUpdateXMLFile(int CurrentKeyFileVersion)
         {
-           // XDocument doc = XDocument.Load(HotKeyFile);
-           // XElement NewElement = doc.Element("Hotkeys");
-            // Add new Element
-            //NewElement.Add(new XElement("bind", new XAttribute("key_description", ""), new XAttribute("keyfunction", ""), new XAttribute("keycode", "")));
-            //doc.Save(HotKeyFile);
+            MainWindow.Logger.Info($"Updating HotkeyXML File. Current File Version {CurrentKeyFileVersion}, Update to File Version {HotKeyFileVer}");
+            // Define new Hotkey fields - This changes every program update if needed   
+            var xDoc = XDocument.Load(HotKeyFile);
+
+            // New Update Hotkeys V2.0.1.4
+            xDoc.Root.Add(new XElement("bind", new XAttribute("key_description", "Jog Distance Increase"), new XAttribute("keyfunction", "JDistInc"), new XAttribute("keycode", "")));
+            xDoc.Root.Add(new XElement("bind", new XAttribute("key_description", "Jog Distance Decrease"), new XAttribute("keyfunction", "JDistDec"), new XAttribute("keycode", "")));
+
+            xDoc.Root.Attribute("HotkeyFileVer").Value = HotKeyFileVer.ToString(); // Set HotKeyFile to same Version
+
+            //And save the XML file
+            xDoc.Save(HotKeyFile);
+
+            // Re-load Hotkeys
+            HotKeys.LoadHotKeys();
         }
     }
 }

@@ -100,8 +100,6 @@
                 <CheckBox Content="Spindle Inc/Dec (Checked 10%, Unchecked 1%)" HorizontalAlignment="Left" Margin="10,70,0,0" Grid.ColumnSpan="2"  IsChecked="{util:SettingBinding SpindleIncrement}" ToolTip="If checked, Hotkey incease or decrease 10% each time, unchecked increase or decrease 1% each time" VerticalAlignment="Top" FontSize="10"/>
                 <CheckBox Content="Include Program End (M2, M30)" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding GCodeIncludeMEnd}" ToolTip="Strip M2/M30 from file before sending to machine if not checked. Default is off since these commands reset offsets from G92." Grid.ColumnSpan="2" FontSize="10"/>
                 <CheckBox Content="Warning Window on File Load" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding ShowWarningWindow}" ToolTip="Enable or Disable the display of the warning window when a Gcode file loaded" Grid.ColumnSpan="2" FontSize="10" />
-
-                <!--GCodes for Zero Axis Commands-->
             </Grid>
         </TabItem>
         <!-- Hotkey Configuration-->

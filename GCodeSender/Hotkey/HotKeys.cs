@@ -17,7 +17,9 @@ namespace GCodeSender.Hotkey
         public static Dictionary<string, string> hotkeyCode = new Dictionary<string, string>(); // Holds Key Fucntions and Keycodes
         public static Dictionary<string, string> hotkeyDescription = new Dictionary<string, string>(); // Holds Key Functions and Description
 
-        public static string HotKeyFile = "Resources\\hotkeys.xml";
+        private static string HotKeyFile = "Resources\\hotkeys.xml";
+
+        private static int CurrentHotKeyFileVersion = 0;
 
         /// <summary>
         /// Loads Hotkey XML file and loads keycodes into hotkeyCode and Description into hotkeyDescription
@@ -27,15 +29,12 @@ namespace GCodeSender.Hotkey
             hotkeyCode.Clear();
             hotkeyDescription.Clear();
 
-            string fileName = HotKeyFile;
-            if (!File.Exists(fileName))
+            if (!File.Exists(HotKeyFile))
             {
                MainWindow.Logger.Error("Hotkey file not found, going to create default");
                 CheckCreateFile.CreateDefaultXML();               
             }
-
-            //CheckCreateFile.UpdateHotKeyFile(); // Run XML Updater
-
+ 
             XmlReader r = XmlReader.Create(HotKeyFile);   // "hotkeys.xml");
 
             while (r.Read())
@@ -45,7 +44,12 @@ namespace GCodeSender.Hotkey
 
                 switch (r.Name)
                 {
-                    case "hotkeys":
+                    case "Hotkeys":
+                        // Get Hotkey Version Number, used for modifying or updating to newer hotkey files (ie if new features are added)
+                        if (r["HotkeyFileVer"].Length > 0)
+                        {                           
+                            CurrentHotKeyFileVersion = Convert.ToInt32(r["HotkeyFileVer"]); // Current Hotkey File Version
+                        }
                         break;
                     case "bind":
                         if ((r["keyfunction"].Length > 0) && (r["keycode"] != null))
@@ -55,8 +59,16 @@ namespace GCodeSender.Hotkey
                             hotkeyDescription.Add(r["keyfunction"], r["key_description"]);
                         }
                         break;
-                }
+                }              
             }
+            r.Close();
+
+            // Check if CurrentFileVersion and NewFileVersion is different and if so, Update the file then reload by running ths process again.
+            MainWindow.Logger.Info("Hotkey file found, checking if needing update/modification");
+            if (CurrentHotKeyFileVersion < CheckCreateFile.HotKeyFileVer) // If Current Hotkey File Version is equal or greater than HotKeyFileVer - then do nothing and return (No update Needed)
+             {
+                 CheckCreateFile.CheckAndUpdateXMLFile(CurrentHotKeyFileVersion);
+             }           
         }
 
         // Testing Updating selected Node

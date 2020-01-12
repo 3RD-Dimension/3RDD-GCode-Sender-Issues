@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("3RDD GCode Sender")]
-[assembly: AssemblyCopyright("Copyright © 3RDD 2019")]
+[assembly: AssemblyCopyright("Copyright © 3RDD 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -49,5 +49,5 @@ using System.Windows;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.0.1.3")]
-[assembly: AssemblyFileVersion("2.0.1.3")]
+[assembly: AssemblyVersion("2.0.1.4")]
+[assembly: AssemblyFileVersion("2.0.1.4")]
