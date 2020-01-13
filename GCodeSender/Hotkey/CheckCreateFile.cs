@@ -67,7 +67,7 @@ namespace GCodeSender.Hotkey
         {
             MainWindow.Logger.Info($"Updating HotkeyXML File. Current File Version {CurrentKeyFileVersion}, Update to File Version {HotKeyFileVer}");
             // Define new Hotkey fields - This changes every program update if needed   
-            var xDoc = XDocument.Load(HotKeyFile);
+            var UpdateHotkey = XDocument.Load(HotKeyFile);
 
             // NOTES | Sample Code for Add, Add at position, Rename:
             // Add to end of file: xDoc.Root.Add(new XElement("bind", new XAttribute("key_description", "Jog Distance Increase"), new XAttribute("keyfunction", "JDistInc"), new XAttribute("keycode", "")));
@@ -78,30 +78,30 @@ namespace GCodeSender.Hotkey
 
             // START FILE MANIPULATION
             // Insert at specific Location - Reverse Order - Bottom will be inserted at the top
-            xDoc.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Distance Decrease Z"), new XAttribute("keyfunction", "JDistDecZ"), new XAttribute("keycode", "")));
-            xDoc.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Distance Increase Z"), new XAttribute("keyfunction", "JDistIncZ"), new XAttribute("keycode", "")));
-            xDoc.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Distance Decrease Y"), new XAttribute("keyfunction", "JDistDecY"), new XAttribute("keycode", "")));
-            xDoc.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Distance Increase Y"), new XAttribute("keyfunction", "JDistIncY"), new XAttribute("keycode", "")));
-            xDoc.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Distance Decrease X"), new XAttribute("keyfunction", "JDistDecX"), new XAttribute("keycode", "")));
-            xDoc.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Distance Increase X"), new XAttribute("keyfunction", "JDistIncX"), new XAttribute("keycode", "")));
-            xDoc.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Rate Decrease Z"), new XAttribute("keyfunction", "JRateDecZ"), new XAttribute("keycode", "")));
-            xDoc.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Rate Increase Z"), new XAttribute("keyfunction", "JRateIncZ"), new XAttribute("keycode", "")));
-            xDoc.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Rate Decrease Y"), new XAttribute("keyfunction", "JRateDecY"), new XAttribute("keycode", "")));
-            xDoc.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Rate Increase Y"), new XAttribute("keyfunction", "JRateIncY"), new XAttribute("keycode", "")));
+            UpdateHotkey.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Distance Decrease Z"), new XAttribute("keyfunction", "JDistDecZ"), new XAttribute("keycode", "")));
+            UpdateHotkey.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Distance Increase Z"), new XAttribute("keyfunction", "JDistIncZ"), new XAttribute("keycode", "")));
+            UpdateHotkey.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Distance Decrease Y"), new XAttribute("keyfunction", "JDistDecY"), new XAttribute("keycode", "")));
+            UpdateHotkey.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Distance Increase Y"), new XAttribute("keyfunction", "JDistIncY"), new XAttribute("keycode", "")));
+            UpdateHotkey.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Distance Decrease X"), new XAttribute("keyfunction", "JDistDecX"), new XAttribute("keycode", "")));
+            UpdateHotkey.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Distance Increase X"), new XAttribute("keyfunction", "JDistIncX"), new XAttribute("keycode", "")));
+            UpdateHotkey.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Rate Decrease Z"), new XAttribute("keyfunction", "JRateDecZ"), new XAttribute("keycode", "")));
+            UpdateHotkey.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Rate Increase Z"), new XAttribute("keyfunction", "JRateIncZ"), new XAttribute("keycode", "")));
+            UpdateHotkey.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Rate Decrease Y"), new XAttribute("keyfunction", "JRateDecY"), new XAttribute("keycode", "")));
+            UpdateHotkey.Element("Hotkeys").Elements("bind").ElementAt(15).AddAfterSelf(new XElement("bind", new XAttribute("key_description", "Jog Rate Increase Y"), new XAttribute("keyfunction", "JRateIncY"), new XAttribute("keycode", "")));
 
             // Change Hotkey Desciptions and Keyfunction Name
-            var hotKeyRename1 = xDoc.Descendants("bind").Where(arg => arg.Attribute("keyfunction").Value == "JRateInc").Single();
-            var hotKeyRename2 = xDoc.Descendants("bind").Where(arg => arg.Attribute("keyfunction").Value == "JRateDec").Single();
+            var hotKeyRename1 = UpdateHotkey.Descendants("bind").Where(arg => arg.Attribute("keyfunction").Value == "JRateInc").Single();
+            var hotKeyRename2 = UpdateHotkey.Descendants("bind").Where(arg => arg.Attribute("keyfunction").Value == "JRateDec").Single();
             hotKeyRename1.Attribute("key_description").Value = "Jog Rate Increase X";
             hotKeyRename1.Attribute("keyfunction").Value = "JRateIncX";
             hotKeyRename2.Attribute("key_description").Value = "Jog Rate Decrease X";
             hotKeyRename2.Attribute("keyfunction").Value = "JRateDecX";
 
             // END FILE MANIPULATION
-            xDoc.Root.Attribute("HotkeyFileVer").Value = HotKeyFileVer.ToString(); // Change HotkeyFileVer to current version
+            UpdateHotkey.Root.Attribute("HotkeyFileVer").Value = HotKeyFileVer.ToString(); // Change HotkeyFileVer to current version
 
             //And save the XML file
-            xDoc.Save(HotKeyFile);
+            UpdateHotkey.Save(HotKeyFile);
 
             // Re-load Hotkeys
             HotKeys.LoadHotKeys();
