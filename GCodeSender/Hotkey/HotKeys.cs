@@ -65,8 +65,8 @@ namespace GCodeSender.Hotkey
 
             // Check if CurrentFileVersion and NewFileVersion is different and if so, Update the file then reload by running ths process again.
             MainWindow.Logger.Info("Hotkey file found, checking if needing update/modification");
-            if (CurrentHotKeyFileVersion < CheckCreateFile.HotKeyFileVer) // If Current Hotkey File Version is equal or greater than HotKeyFileVer - then do nothing and return (No update Needed)
-             {
+            if (CurrentHotKeyFileVersion < CheckCreateFile.HotKeyFileVer) // If CurrentHotKeyFileVersion does not equal HotKeyFileVer then update is required
+            {
                  CheckCreateFile.CheckAndUpdateXMLFile(CurrentHotKeyFileVersion);
              }           
         }

@@ -7,6 +7,10 @@ using System.Windows.Input;
 
 namespace GCodeSender
 {
+    /// <summary>
+    /// Main Hotkey Control
+    /// TODO: Optimize hotkey functions
+    /// </summary>
     partial class MainWindow
     {
         // Any other keys during normal operation including when machine is in motion
@@ -73,21 +77,56 @@ namespace GCodeSender
                 MistControl();
 
             // Need to save back to Settings otherwise will not register unless it is focused, maybe try Focus() first....
-            // Jog rate Increase and Decrease (This is saved to settings always)
-            else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateInc"])
+            
+            // JOG RATE AXIS X
+            else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateIncX"])
             {
                 int currentJogRate = Convert.ToInt32(TextBoxJogFeedX.Text);
                 TextBoxJogFeedX.Text = (currentJogRate + 10).ToString();
                 Properties.Settings.Default.JogFeedX = Convert.ToDouble(TextBoxJogFeedX.Text);
-            }
-
-            // Jog rate Increase and Decrease (This is saved to settings always)
-            else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateDec"])
+            }           
+            else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateDecX"])
             {
                 int currentJogRate = Convert.ToInt32(TextBoxJogFeedX.Text);
                 TextBoxJogFeedX.Text = (currentJogRate - 10).ToString();
                 Properties.Settings.Default.JogFeedX = Convert.ToDouble(TextBoxJogFeedX.Text);
             }
+            // JOG RATE AXIS Y
+            else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateIncY"])
+            {
+                int currentJogRate = Convert.ToInt32(TextBoxJogFeedY.Text);
+                TextBoxJogFeedY.Text = (currentJogRate + 10).ToString();
+                Properties.Settings.Default.JogFeedY = Convert.ToDouble(TextBoxJogFeedY.Text);
+            }
+            else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateDecY"])
+            {
+                int currentJogRate = Convert.ToInt32(TextBoxJogFeedY.Text);
+                TextBoxJogFeedY.Text = (currentJogRate - 10).ToString();
+                Properties.Settings.Default.JogFeedY = Convert.ToDouble(TextBoxJogFeedY.Text);
+            }
+            // JOG RATE AXIS Z
+            else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateIncZ"])
+            {
+                int currentJogRate = Convert.ToInt32(TextBoxJogFeedZ.Text);
+                TextBoxJogFeedZ.Text = (currentJogRate + 10).ToString();
+                Properties.Settings.Default.JogFeedZ = Convert.ToDouble(TextBoxJogFeedZ.Text);
+            }
+            else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateDecZ"])
+            {
+                int currentJogRate = Convert.ToInt32(TextBoxJogFeedZ.Text);
+                TextBoxJogFeedZ.Text = (currentJogRate - 10).ToString();
+                Properties.Settings.Default.JogFeedZ = Convert.ToDouble(TextBoxJogFeedZ.Text);
+            }
+
+            // JOG DISTANCE X
+
+
+            // JOG DISTANCE Y
+
+
+            // JOG DISTANCE Z
+
+
 
             // Feed Rate
             // FeedRateIncrement & SpindleIncrement False = 1% Inc and Dec, True = 10% Inc and Dec
