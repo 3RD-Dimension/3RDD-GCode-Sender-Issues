@@ -31,6 +31,12 @@ namespace GCodeSender
             ProbeSafeHeight.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
             ProbeMaxDepth.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
             ProbeTouchPlateThickness.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            JogSpeedXIncDec.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            JogSpeedYIncDec.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            JogSpeedZIncDec.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            JogDistXIncDec.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            JogDistYIncDec.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            JogDistZIncDec.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
 
             ComboBoxSerialPort_DropDownOpened(null, null);
 

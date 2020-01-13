@@ -706,5 +706,77 @@ namespace GCodeSender.Properties {
                 this["JogFeedZ"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public double JogFeedXIncDec {
+            get {
+                return ((double)(this["JogFeedXIncDec"]));
+            }
+            set {
+                this["JogFeedXIncDec"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public double JogFeedYIncDec {
+            get {
+                return ((double)(this["JogFeedYIncDec"]));
+            }
+            set {
+                this["JogFeedYIncDec"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public double JogFeedZIncDec {
+            get {
+                return ((double)(this["JogFeedZIncDec"]));
+            }
+            set {
+                this["JogFeedZIncDec"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public double JogDistXIncDec {
+            get {
+                return ((double)(this["JogDistXIncDec"]));
+            }
+            set {
+                this["JogDistXIncDec"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public double JogDistYIncDec {
+            get {
+                return ((double)(this["JogDistYIncDec"]));
+            }
+            set {
+                this["JogDistYIncDec"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public double JogDistZIncDec {
+            get {
+                return ((double)(this["JogDistZIncDec"]));
+            }
+            set {
+                this["JogDistZIncDec"] = value;
+            }
+        }
     }
 }

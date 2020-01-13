@@ -82,39 +82,39 @@ namespace GCodeSender
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateIncX"])
             {
                 int currentJogRate = Convert.ToInt32(TextBoxJogFeedX.Text);
-                TextBoxJogFeedX.Text = (currentJogRate + 10).ToString();
+                TextBoxJogFeedX.Text = (currentJogRate + Properties.Settings.Default.JogFeedXIncDec).ToString();
                 Properties.Settings.Default.JogFeedX = Convert.ToDouble(TextBoxJogFeedX.Text);
             }           
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateDecX"])
             {
                 int currentJogRate = Convert.ToInt32(TextBoxJogFeedX.Text);
-                TextBoxJogFeedX.Text = (currentJogRate - 10).ToString();
+                TextBoxJogFeedX.Text = (currentJogRate - Properties.Settings.Default.JogFeedXIncDec).ToString();
                 Properties.Settings.Default.JogFeedX = Convert.ToDouble(TextBoxJogFeedX.Text);
             }
             // JOG RATE AXIS Y
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateIncY"])
             {
                 int currentJogRate = Convert.ToInt32(TextBoxJogFeedY.Text);
-                TextBoxJogFeedY.Text = (currentJogRate + 10).ToString();
+                TextBoxJogFeedY.Text = (currentJogRate + Properties.Settings.Default.JogFeedYIncDec).ToString();
                 Properties.Settings.Default.JogFeedY = Convert.ToDouble(TextBoxJogFeedY.Text);
             }
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateDecY"])
             {
                 int currentJogRate = Convert.ToInt32(TextBoxJogFeedY.Text);
-                TextBoxJogFeedY.Text = (currentJogRate - 10).ToString();
+                TextBoxJogFeedY.Text = (currentJogRate - Properties.Settings.Default.JogFeedYIncDec).ToString();
                 Properties.Settings.Default.JogFeedY = Convert.ToDouble(TextBoxJogFeedY.Text);
             }
             // JOG RATE AXIS Z
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateIncZ"])
             {
                 int currentJogRate = Convert.ToInt32(TextBoxJogFeedZ.Text);
-                TextBoxJogFeedZ.Text = (currentJogRate + 10).ToString();
+                TextBoxJogFeedZ.Text = (currentJogRate + Properties.Settings.Default.JogFeedZIncDec).ToString();
                 Properties.Settings.Default.JogFeedZ = Convert.ToDouble(TextBoxJogFeedZ.Text);
             }
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateDecZ"])
             {
                 int currentJogRate = Convert.ToInt32(TextBoxJogFeedZ.Text);
-                TextBoxJogFeedZ.Text = (currentJogRate - 10).ToString();
+                TextBoxJogFeedZ.Text = (currentJogRate - Properties.Settings.Default.JogFeedZIncDec).ToString();
                 Properties.Settings.Default.JogFeedZ = Convert.ToDouble(TextBoxJogFeedZ.Text);
             }
 
@@ -122,13 +122,13 @@ namespace GCodeSender
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JDistIncX"])
             {
                 int currentJogDist = Convert.ToInt32(TextBoxJogDistanceX.Text);
-                TextBoxJogDistanceX.Text = (currentJogDist + 10).ToString();
+                TextBoxJogDistanceX.Text = (currentJogDist + Properties.Settings.Default.JogDistXIncDec).ToString();
                 Properties.Settings.Default.JogDistanceX = Convert.ToDouble(TextBoxJogDistanceX.Text);
             }
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JDistDecX"])
             {
                 int currentJogDist = Convert.ToInt32(TextBoxJogDistanceX.Text);
-                TextBoxJogDistanceX.Text = (currentJogDist - 10).ToString();
+                TextBoxJogDistanceX.Text = (currentJogDist - Properties.Settings.Default.JogDistXIncDec).ToString();
                 Properties.Settings.Default.JogDistanceX = Convert.ToDouble(TextBoxJogDistanceX.Text);
             }
 
@@ -136,13 +136,13 @@ namespace GCodeSender
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JDistIncY"])
             {
                 int currentJogDist = Convert.ToInt32(TextBoxJogDistanceY.Text);
-                TextBoxJogDistanceY.Text = (currentJogDist + 10).ToString();
+                TextBoxJogDistanceY.Text = (currentJogDist + Properties.Settings.Default.JogDistYIncDec).ToString();
                 Properties.Settings.Default.JogDistanceY = Convert.ToDouble(TextBoxJogDistanceY.Text);
             }
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JDistDecY"])
             {
                 int currentJogDist = Convert.ToInt32(TextBoxJogDistanceY.Text);
-                TextBoxJogDistanceY.Text = (currentJogDist - 10).ToString();
+                TextBoxJogDistanceY.Text = (currentJogDist - Properties.Settings.Default.JogDistYIncDec).ToString();
                 Properties.Settings.Default.JogDistanceY = Convert.ToDouble(TextBoxJogDistanceY.Text);
             }
 
@@ -150,13 +150,13 @@ namespace GCodeSender
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JDistIncZ"])
             {
                 int currentJogDist = Convert.ToInt32(TextBoxJogDistanceZ.Text);
-                TextBoxJogDistanceZ.Text = (currentJogDist + 10).ToString();
+                TextBoxJogDistanceZ.Text = (currentJogDist + Properties.Settings.Default.JogDistZIncDec).ToString();
                 Properties.Settings.Default.JogDistanceZ = Convert.ToDouble(TextBoxJogDistanceZ.Text);
             }
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JDistDecZ"])
             {
                 int currentJogDist = Convert.ToInt32(TextBoxJogDistanceZ.Text);
-                TextBoxJogDistanceZ.Text = (currentJogDist - 10).ToString();
+                TextBoxJogDistanceZ.Text = (currentJogDist - Properties.Settings.Default.JogDistZIncDec).ToString();
                 Properties.Settings.Default.JogDistanceZ = Convert.ToDouble(TextBoxJogDistanceZ.Text);
             }
             
