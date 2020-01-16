@@ -37,7 +37,7 @@ namespace GCodeSender
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
-		public MainWindow()
+        public MainWindow()
 		{
 			AppDomain.CurrentDomain.UnhandledException += UnhandledException;
 			InitializeComponent();
@@ -47,7 +47,7 @@ namespace GCodeSender
             // Check for any updates
             Logger.Info("Checking for Updates");
             AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
-            AutoUpdater.Start("https://api.github.com/repos/3RD-Dimension/3RDD-GCode-Sender-Issues/releases/latest");
+           // AutoUpdater.Start("https://api.github.com/repos/3RD-Dimension/3RDD-GCode-Sender-Issues/releases/latest");
 
             openFileDialogGCode.FileOk += OpenFileDialogGCode_FileOk;
 			saveFileDialogGCode.FileOk += SaveFileDialogGCode_FileOk;
@@ -81,6 +81,9 @@ namespace GCodeSender
             TextBoxJogDistanceY.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
             TextBoxJogFeedZ.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
             TextBoxJogDistanceZ.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+
+            viewport.PanGesture = new MouseGesture(MouseAction.LeftClick);
+            viewport.PanGesture2 = null;
 
             Machine_OperatingMode_Changed();
 			Machine_PositionUpdateReceived();
@@ -444,22 +447,24 @@ namespace GCodeSender
             machine.SendLine("G91");
             machine.SendLine($"G0 Z{Properties.Settings.Default.ProbeSafeHeight}");
             machine.SendLine("M30");
-        }
+        }      
 
         private void viewport_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
+        {             
             viewport.CalculateCursorPosition = true;
-            // Obsolete but works for now
-
-            string PositionX = GlobalFunctions.DecimalPlaceNoRounding(Convert.ToDouble(viewport.CurrentPosition.X), 3);
-            string PositionY = GlobalFunctions.DecimalPlaceNoRounding(Convert.ToDouble(viewport.CurrentPosition.Y), 3);
-           if (MessageBox.Show("Goto Position " + "X:" + PositionX + ", Y:" + PositionY + "?", "Go to Position?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+           if (Keyboard.IsKeyDown(Key.LeftShift))
             {
-                machine.SendLine($"G90 G0 X{PositionX} Y{PositionY}");
-            }
-
-            // This one creates an Unhandled Null Exception
-            //Console.WriteLine("Y" + viewport.CursorPosition.Value.Y.ToString());
+                if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile)
+                {
+                    // CurrentPosition Obsolete but works for now
+                    string PositionX = GlobalFunctions.DecimalPlaceNoRounding(Convert.ToDouble(viewport.CurrentPosition.X), 3);
+                    string PositionY = GlobalFunctions.DecimalPlaceNoRounding(Convert.ToDouble(viewport.CurrentPosition.Y), 3);
+                    if (MessageBox.Show("Jog to Position " + "X:" + PositionX + ", Y:" + PositionY + "?", "Go to Position?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        machine.SendLine($"G90 G0 X{PositionX} Y{PositionY}");
+                    }
+                }
+            }          
         }
     }
 }

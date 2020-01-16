@@ -19,14 +19,9 @@ namespace GCodeSender
             if (!machine.Connected)
                 return;
 
-            // Disable Viewport Rotation, Move and Pan in case hotkey is an arrow key
-            viewport.IsRotationEnabled = false;
-            viewport.IsMoveEnabled = false;
-            viewport.IsPanEnabled = false;
-
             string currentHotPressed = HotKeys.KeyProcess(sender, e); // Get Keycode
             if (currentHotPressed == null) return; // If currentHotPressed is null, Return (to avoid continuing with  blank)
-
+            
             if (machine.Mode == Machine.OperatingMode.Manual)
             {
                 if (machine.BufferState > 0 || machine.Status != "Idle")
@@ -68,7 +63,7 @@ namespace GCodeSender
                 ReloadCurrentFile();
             else if (machine.Mode == Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["FSStop"]) // Put machine on Hold if sending a file
                 ButtonFilePause.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-            // Spindle and Flood  (firmware takes care if it will enable or disable so just need to know if it is connected to controller
+            // Spindle and Flood  (firmware takes care if it will enable or disable so just need to know if it is connected to controller to turn on Manually.           
             else if (machine.Connected && currentHotPressed == HotKeys.hotkeyCode["SpindleOnOff"]) // Spindle Toggle
                 SpindleControl();
             else if (machine.Connected && currentHotPressed == HotKeys.hotkeyCode["CoolantOnOff"]) // Coolant Toggle
@@ -81,83 +76,107 @@ namespace GCodeSender
             // JOG RATE AXIS X
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateIncX"])
             {
-                int currentJogRate = Convert.ToInt32(TextBoxJogFeedX.Text);
-                TextBoxJogFeedX.Text = (currentJogRate + Properties.Settings.Default.JogFeedXIncDec).ToString();
-                Properties.Settings.Default.JogFeedX = Convert.ToDouble(TextBoxJogFeedX.Text);
+                double currentJogRate = Convert.ToDouble(TextBoxJogFeedX.Text);
+                double newJogRate = currentJogRate + Properties.Settings.Default.JogFeedXIncDec;
+                TextBoxJogFeedX.Text = newJogRate.ToString();
+                Properties.Settings.Default.JogFeedX = newJogRate;
             }           
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateDecX"])
             {
-                int currentJogRate = Convert.ToInt32(TextBoxJogFeedX.Text);
-                TextBoxJogFeedX.Text = (currentJogRate - Properties.Settings.Default.JogFeedXIncDec).ToString();
-                Properties.Settings.Default.JogFeedX = Convert.ToDouble(TextBoxJogFeedX.Text);
+                double currentJogRate = Convert.ToDouble(TextBoxJogFeedX.Text);
+                double newJogRate = currentJogRate - Properties.Settings.Default.JogFeedXIncDec;
+                if (newJogRate < Properties.Settings.Default.JogFeedXIncDec)
+                    newJogRate = Properties.Settings.Default.JogFeedXIncDec;
+                TextBoxJogFeedX.Text = newJogRate.ToString();
+                Properties.Settings.Default.JogFeedX = newJogRate;
             }
             // JOG RATE AXIS Y
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateIncY"])
             {
-                int currentJogRate = Convert.ToInt32(TextBoxJogFeedY.Text);
-                TextBoxJogFeedY.Text = (currentJogRate + Properties.Settings.Default.JogFeedYIncDec).ToString();
-                Properties.Settings.Default.JogFeedY = Convert.ToDouble(TextBoxJogFeedY.Text);
+                double currentJogRate = Convert.ToDouble(TextBoxJogFeedY.Text);
+                double newJogRate = currentJogRate + Properties.Settings.Default.JogFeedYIncDec;
+                TextBoxJogFeedY.Text = newJogRate.ToString();
+                Properties.Settings.Default.JogFeedY = newJogRate;
             }
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateDecY"])
             {
-                int currentJogRate = Convert.ToInt32(TextBoxJogFeedY.Text);
-                TextBoxJogFeedY.Text = (currentJogRate - Properties.Settings.Default.JogFeedYIncDec).ToString();
-                Properties.Settings.Default.JogFeedY = Convert.ToDouble(TextBoxJogFeedY.Text);
+                double currentJogRate = Convert.ToDouble(TextBoxJogFeedY.Text);
+                double newJogRate = currentJogRate - Properties.Settings.Default.JogFeedYIncDec;
+                if (newJogRate < Properties.Settings.Default.JogFeedYIncDec)
+                    newJogRate = Properties.Settings.Default.JogFeedYIncDec;
+                TextBoxJogFeedY.Text = newJogRate.ToString();
+                Properties.Settings.Default.JogFeedY = newJogRate;
             }
             // JOG RATE AXIS Z
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateIncZ"])
             {
-                int currentJogRate = Convert.ToInt32(TextBoxJogFeedZ.Text);
-                TextBoxJogFeedZ.Text = (currentJogRate + Properties.Settings.Default.JogFeedZIncDec).ToString();
-                Properties.Settings.Default.JogFeedZ = Convert.ToDouble(TextBoxJogFeedZ.Text);
+                double currentJogRate = Convert.ToDouble(TextBoxJogFeedZ.Text);
+                double newJogRate = currentJogRate + Properties.Settings.Default.JogFeedZIncDec;
+                TextBoxJogFeedZ.Text = newJogRate.ToString();
+                Properties.Settings.Default.JogFeedZ = newJogRate;
             }
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JRateDecZ"])
             {
-                int currentJogRate = Convert.ToInt32(TextBoxJogFeedZ.Text);
-                TextBoxJogFeedZ.Text = (currentJogRate - Properties.Settings.Default.JogFeedZIncDec).ToString();
-                Properties.Settings.Default.JogFeedZ = Convert.ToDouble(TextBoxJogFeedZ.Text);
+                double currentJogRate = Convert.ToDouble(TextBoxJogFeedZ.Text);
+                double newJogRate = currentJogRate - Properties.Settings.Default.JogFeedZIncDec;
+                if (newJogRate < Properties.Settings.Default.JogFeedZIncDec)
+                    newJogRate = Properties.Settings.Default.JogFeedZIncDec;
+                TextBoxJogFeedZ.Text = newJogRate.ToString();
+                Properties.Settings.Default.JogFeedZ = newJogRate;
             }
 
             // JOG DISTANCE X
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JDistIncX"])
             {
-                int currentJogDist = Convert.ToInt32(TextBoxJogDistanceX.Text);
-                TextBoxJogDistanceX.Text = (currentJogDist + Properties.Settings.Default.JogDistXIncDec).ToString();
-                Properties.Settings.Default.JogDistanceX = Convert.ToDouble(TextBoxJogDistanceX.Text);
+                double currentJogDist = Convert.ToDouble(TextBoxJogDistanceX.Text);
+                double newJogDist = currentJogDist + Properties.Settings.Default.JogDistXIncDec;
+                TextBoxJogDistanceX.Text = newJogDist.ToString();
+                Properties.Settings.Default.JogDistanceX = newJogDist;
             }
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JDistDecX"])
             {
-                int currentJogDist = Convert.ToInt32(TextBoxJogDistanceX.Text);
-                TextBoxJogDistanceX.Text = (currentJogDist - Properties.Settings.Default.JogDistXIncDec).ToString();
-                Properties.Settings.Default.JogDistanceX = Convert.ToDouble(TextBoxJogDistanceX.Text);
+                double currentJogDist = Convert.ToDouble(TextBoxJogDistanceX.Text);
+                double newJogDist = currentJogDist - Properties.Settings.Default.JogDistXIncDec;
+                if (newJogDist < Properties.Settings.Default.JogDistXIncDec)  
+                    newJogDist = Properties.Settings.Default.JogDistXIncDec;
+                TextBoxJogDistanceX.Text = newJogDist.ToString();
+                Properties.Settings.Default.JogDistanceX = newJogDist;
             }
 
             // JOG DISTANCE Y
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JDistIncY"])
             {
-                int currentJogDist = Convert.ToInt32(TextBoxJogDistanceY.Text);
-                TextBoxJogDistanceY.Text = (currentJogDist + Properties.Settings.Default.JogDistYIncDec).ToString();
-                Properties.Settings.Default.JogDistanceY = Convert.ToDouble(TextBoxJogDistanceY.Text);
+                double currentJogDist = Convert.ToDouble(TextBoxJogDistanceY.Text);
+                double newJogDist = currentJogDist + Properties.Settings.Default.JogDistYIncDec;
+                TextBoxJogDistanceY.Text = newJogDist.ToString();
+                Properties.Settings.Default.JogDistanceY = newJogDist;
             }
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JDistDecY"])
             {
-                int currentJogDist = Convert.ToInt32(TextBoxJogDistanceY.Text);
-                TextBoxJogDistanceY.Text = (currentJogDist - Properties.Settings.Default.JogDistYIncDec).ToString();
-                Properties.Settings.Default.JogDistanceY = Convert.ToDouble(TextBoxJogDistanceY.Text);
+                double currentJogDist = Convert.ToDouble(TextBoxJogDistanceY.Text);
+                double newJogDist = currentJogDist - Properties.Settings.Default.JogDistYIncDec;
+                if (newJogDist < Properties.Settings.Default.JogDistYIncDec)
+                    newJogDist = Properties.Settings.Default.JogDistYIncDec;
+                TextBoxJogDistanceY.Text = newJogDist.ToString();
+                Properties.Settings.Default.JogDistanceY = newJogDist;
             }
 
             // JOG DISTANCE Z
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JDistIncZ"])
             {
-                int currentJogDist = Convert.ToInt32(TextBoxJogDistanceZ.Text);
-                TextBoxJogDistanceZ.Text = (currentJogDist + Properties.Settings.Default.JogDistZIncDec).ToString();
-                Properties.Settings.Default.JogDistanceZ = Convert.ToDouble(TextBoxJogDistanceZ.Text);
+                double currentJogDist = Convert.ToDouble(TextBoxJogDistanceZ.Text);
+                double newJogDist = currentJogDist + Properties.Settings.Default.JogDistZIncDec;
+                TextBoxJogDistanceZ.Text = newJogDist.ToString();
+                Properties.Settings.Default.JogDistanceZ = newJogDist;
             }
             else if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["JDistDecZ"])
             {
-                int currentJogDist = Convert.ToInt32(TextBoxJogDistanceZ.Text);
-                TextBoxJogDistanceZ.Text = (currentJogDist - Properties.Settings.Default.JogDistZIncDec).ToString();
-                Properties.Settings.Default.JogDistanceZ = Convert.ToDouble(TextBoxJogDistanceZ.Text);
+                double currentJogDist = Convert.ToDouble(TextBoxJogDistanceZ.Text);
+                double newJogDist = currentJogDist - Properties.Settings.Default.JogDistZIncDec;
+                if (newJogDist < Properties.Settings.Default.JogDistZIncDec)
+                    newJogDist = Properties.Settings.Default.JogDistZIncDec;
+                TextBoxJogDistanceZ.Text = newJogDist.ToString();
+                Properties.Settings.Default.JogDistanceZ = newJogDist;
             }
             
             // Feed Rate
@@ -174,7 +193,7 @@ namespace GCodeSender
                 }
             }
             else if (machine.Mode == Machine.OperatingMode.SendFile && currentHotPressed == HotKeys.hotkeyCode["FRateDec"]) // Feed Rate Incease
-            {
+            {               
                 if (Properties.Settings.Default.FeedRateIncrement == true) // 10% Decrease
                 {
                     Feed10Dec.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
@@ -207,10 +226,6 @@ namespace GCodeSender
                     Spindle1Dec.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
                 }
             }
-            // Enable Viewport Rotation, Move and Pan after jogging
-            viewport.IsRotationEnabled = true;
-            viewport.IsMoveEnabled = true;
-            viewport.IsPanEnabled = true;
         }
     }
 }

@@ -17,6 +17,9 @@
         <ResourceDictionary Source="MainWindow.Resources.xaml"/>
     </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid Panel.ZIndex="1">
             <Border Style="{StaticResource stylePanelOut}" VerticalAlignment="Top" HorizontalAlignment="Center" BorderBrush="#FFCE0606">
                 <StackPanel>
@@ -136,7 +139,7 @@
                                     <TextBox x:Name="TextBoxJogFeedZ" Text="{util:SettingBinding JogFeedZ}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2"/>
                                     <Label Content="Jog Dist Z" HorizontalAlignment="Left" Margin="0,65,0,0" VerticalAlignment="Top" Grid.Column="3"/>
                                     <TextBox x:Name="TextBoxJogDistanceZ" Text="{util:SettingBinding JogDistanceZ}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="0,65,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="3"/>
-                                    
+
 
                                 </Grid>
                             </GroupBox>
@@ -350,20 +353,19 @@
                 </ListBox.ItemsPanel>
             </ListBox>
         </Grid>
-        <StackPanel Panel.ZIndex="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal" Margin="446,0,420,0">
+        <StackPanel Panel.ZIndex="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal" Margin="459,0,433,0">
             <Label Name="LabelStateProbe" Content="Probe" FontWeight="ExtraBold" FontSize="40" Foreground="Red" Visibility="Collapsed"/>
             <Label Name="LabelStateLimitX" Content="LimitX" FontWeight="ExtraBold" FontSize="40" Foreground="Red" Visibility="Collapsed"/>
             <Label Name="LabelStateLimitY" Content="LimitY" FontWeight="ExtraBold" FontSize="40" Foreground="Red" Visibility="Collapsed"/>
             <Label Name="LabelStateLimitZ" Content="LimitZ" FontWeight="ExtraBold" FontSize="40" Foreground="Red" Visibility="Collapsed"/>
         </StackPanel>
-        <h:HelixViewport3D Name="viewport" Panel.ZIndex="0" PreviewKeyDown="viewport_PreviewKeyDown" CoordinateSystemHeight="72" ShowCoordinateSystem="True" InfoBackground="#80FFFFFF" MouseRightButtonUp="viewport_MouseRightButtonUp">
+        <h:HelixViewport3D Name="viewport" Panel.ZIndex="0" PreviewKeyDown="viewport_PreviewKeyDown" CoordinateSystemHeight="72" ShowCoordinateSystem="True" InfoBackground="#80FFFFFF" MouseRightButtonUp="viewport_MouseRightButtonUp" ViewCubeLeftText="Y+" ViewCubeFrontText="X+" ViewCubeBottomText="Z-" ViewCubeTopText="Z+" ViewCubeBackText="X-" ViewCubeRightText="Y-">
             <h:HelixViewport3D.Camera>
                 <PerspectiveCamera
 					Position="50, -150, 250"
 					LookDirection="-50, 150,-250"
 					UpDirection="0,0,1"/>
             </h:HelixViewport3D.Camera>
-
             <h:DefaultLights/>
             <h:CoordinateSystemVisual3D ArrowLengths="5"/>
             <h:LinesVisual3D Thickness="1" Color="{util:SettingBinding ModelRapidColor}" x:Name="ModelRapid"/>
