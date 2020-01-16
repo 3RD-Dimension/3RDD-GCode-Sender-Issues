@@ -17,11 +17,18 @@ namespace GCodeSender
         private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (!machine.Connected)
-                return;
+                return;     
 
             string currentHotPressed = HotKeys.KeyProcess(sender, e); // Get Keycode
             if (currentHotPressed == null) return; // If currentHotPressed is null, Return (to avoid continuing with  blank)
-            
+
+            if (currentHotPressed == "Left" || currentHotPressed == "Right" || currentHotPressed == "Up" || currentHotPressed == "Down")
+            {
+                viewport.IsPanEnabled = false;
+                viewport.IsRotationEnabled = false;
+                viewport.IsMoveEnabled = false;
+            }
+
             if (machine.Mode == Machine.OperatingMode.Manual)
             {
                 if (machine.BufferState > 0 || machine.Status != "Idle")
@@ -49,9 +56,13 @@ namespace GCodeSender
                 if (direction != null)
                 {
                     manualJogSendCommand(direction);
-                }               
+                }
             }
-      
+
+            viewport.IsPanEnabled = true;
+            viewport.IsRotationEnabled = true;
+            viewport.IsMoveEnabled = true;
+
             // Emergency Reset
             if (machine.Connected && currentHotPressed == HotKeys.hotkeyCode["EmgStop"])
                 machine.SoftReset();

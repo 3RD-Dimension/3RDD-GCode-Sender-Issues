@@ -54,7 +54,7 @@
             </Border>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                 <Border Style="{StaticResource stylePanelOut}" BorderBrush="#FFCE0606">
-                    <Expander Header="File" Width="Auto" IsExpanded="{util:SettingBinding FileExpanderOpen}">
+                    <Expander x:Name="FilePanel" Header="File" Width="Auto" IsExpanded="{util:SettingBinding FileExpanderOpen}">
                         <Grid Width="240" Height="260">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>

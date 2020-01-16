@@ -84,7 +84,7 @@ namespace GCodeSender
 
             viewport.PanGesture = new MouseGesture(MouseAction.LeftClick);
             viewport.PanGesture2 = null;
-
+ 
             Machine_OperatingMode_Changed();
 			Machine_PositionUpdateReceived();
 
