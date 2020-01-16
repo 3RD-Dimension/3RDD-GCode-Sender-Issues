@@ -213,6 +213,7 @@ namespace GCodeSender
 			ListViewFile.SelectedIndex = machine.FilePosition;
 
 			if (ListViewFile.SelectedItem is TextBlock)
+			if (ListViewFile.SelectedItem is TextBlock)
 				((TextBlock)ListViewFile.SelectedItem).Background = Brushes.Gray;
 
 			ListViewFile.ScrollIntoView(ListViewFile.SelectedItem);
