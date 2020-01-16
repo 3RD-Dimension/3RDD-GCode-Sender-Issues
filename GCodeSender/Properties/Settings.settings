@@ -44,10 +44,10 @@
     <Setting Name="WebServerPort" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">8080</Value>
     </Setting>
-    <Setting Name="JogFeed" Type="System.Double" Scope="User">
+    <Setting Name="JogFeedX" Type="System.Double" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
-    <Setting Name="JogDistance" Type="System.Double" Scope="User">
+    <Setting Name="JogDistanceX" Type="System.Double" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
     <Setting Name="LogTraffic" Type="System.Boolean" Scope="User">
@@ -161,6 +161,36 @@ G92Z0;</Value>
     </Setting>
     <Setting Name="ModelArcColor" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="JogDistanceY" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="JogFeedY" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="JogDistanceZ" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="JogFeedZ" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
+    <Setting Name="JogFeedXIncDec" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="JogFeedYIncDec" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="JogFeedZIncDec" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="JogDistXIncDec" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="JogDistYIncDec" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="JogDistZIncDec" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
     </Setting>
   </Settings>
 </SettingsFile>

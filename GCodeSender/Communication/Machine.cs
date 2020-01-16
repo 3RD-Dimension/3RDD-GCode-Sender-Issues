@@ -765,40 +765,6 @@ namespace GCodeSender.Communication
             Mode = OperatingMode.Manual;
         }
 
-        public void ProbeStart()
-        {
-            if (!Connected)
-            {
-                RaiseEvent(Info, "Not Connected");
-                return;
-            }
-
-            if (Mode != OperatingMode.Manual)
-            {
-                RaiseEvent(Info, "Can't start probing while running!");
-                return;
-            }
-
-            Mode = OperatingMode.Probe;
-        }
-
-        public void ProbeStop()
-        {
-            if (!Connected)
-            {
-                RaiseEvent(Info, "Not Connected");
-                return;
-            }
-
-            if (Mode != OperatingMode.Probe)
-            {
-                RaiseEvent(Info, "Not in Probe mode");
-                return;
-            }
-
-            Mode = OperatingMode.Manual;
-        }
-
         public void FileGoto(int lineNumber)
         {
             if (Mode == OperatingMode.SendFile)

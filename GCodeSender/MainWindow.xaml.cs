@@ -37,7 +37,7 @@ namespace GCodeSender
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
-		public MainWindow()
+        public MainWindow()
 		{
 			AppDomain.CurrentDomain.UnhandledException += UnhandledException;
 			InitializeComponent();
@@ -47,7 +47,7 @@ namespace GCodeSender
             // Check for any updates
             Logger.Info("Checking for Updates");
             AutoUpdater.ParseUpdateInfoEvent += AutoUpdaterOnParseUpdateInfoEvent;
-            AutoUpdater.Start("https://api.github.com/repos/3RD-Dimension/3RDD-GCode-Sender-Issues/releases/latest");
+           // AutoUpdater.Start("https://api.github.com/repos/3RD-Dimension/3RDD-GCode-Sender-Issues/releases/latest");
 
             openFileDialogGCode.FileOk += OpenFileDialogGCode_FileOk;
 			saveFileDialogGCode.FileOk += SaveFileDialogGCode_FileOk;
@@ -75,9 +75,16 @@ namespace GCodeSender
 			machine.PinStateChanged += Machine_PinStateChanged;
 
             // Global Function Number Validation for MainWindow
-            TextBoxJogFeed.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
-            TextBoxJogDistance.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            TextBoxJogFeedX.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            TextBoxJogDistanceX.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            TextBoxJogFeedY.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            TextBoxJogDistanceY.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            TextBoxJogFeedZ.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
+            TextBoxJogDistanceZ.PreviewTextInput += GlobalFunctions.NumberValidationTextBox;
 
+            viewport.PanGesture = new MouseGesture(MouseAction.LeftClick);
+            viewport.PanGesture2 = null;
+ 
             Machine_OperatingMode_Changed();
 			Machine_PositionUpdateReceived();
 
@@ -94,7 +101,7 @@ namespace GCodeSender
 			ButtonRestoreViewport_Click(null, null);
 
             HotKeys.LoadHotKeys(); // Load Hotkeys
-        }
+       }
 
         private void AutoUpdaterOnParseUpdateInfoEvent(ParseUpdateInfoEventArgs args)
         {
@@ -440,11 +447,24 @@ namespace GCodeSender
             machine.SendLine("G91");
             machine.SendLine($"G0 Z{Properties.Settings.Default.ProbeSafeHeight}");
             machine.SendLine("M30");
-        }
+        }      
 
-        private void TextBoxJogFeed_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-
+        private void viewport_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {             
+            viewport.CalculateCursorPosition = true;
+           if (Keyboard.IsKeyDown(Key.LeftShift))
+            {
+                if (machine.Connected && machine.Mode != Machine.OperatingMode.SendFile)
+                {
+                    // CurrentPosition Obsolete but works for now
+                    string PositionX = GlobalFunctions.DecimalPlaceNoRounding(Convert.ToDouble(viewport.CurrentPosition.X), 3);
+                    string PositionY = GlobalFunctions.DecimalPlaceNoRounding(Convert.ToDouble(viewport.CurrentPosition.Y), 3);
+                    if (MessageBox.Show("Jog to Position " + "X:" + PositionX + ", Y:" + PositionY + "?", "Go to Position?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        machine.SendLine($"G90 G0 X{PositionX} Y{PositionY}");
+                    }
+                }
+            }          
         }
     }
 }

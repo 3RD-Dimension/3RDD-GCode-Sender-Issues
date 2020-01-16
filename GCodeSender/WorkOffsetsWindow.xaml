@@ -40,6 +40,7 @@
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="35"/>
                 <RowDefinition Height="35"/>
+                <RowDefinition Height="35"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80"/>
@@ -89,6 +90,7 @@
             <TextBox x:Name="G59Z" VerticalContentAlignment="Center" Grid.Column="3" HorizontalAlignment="Left" Height="23" Margin="10,6,0,0" Grid.Row="6" TextWrapping="NoWrap" VerticalAlignment="Top" Width="75" Tag="G59Z" MouseDoubleClick="saveIndividualOffsetAxis"/>
             <Button x:Name="btnSetG59" Grid.Column="0" Grid.Row="6" Content="Set G59" Width="70" Height="25" Click="BtnSetG59_Click"  Style="{StaticResource styleButton}"/>
             <Button x:Name="btnZeroG59" Grid.Column="4" Grid.Row="6" Content="Reset to 0" Width="70" Height="25" Click="BtnResetOffset_Click"  Style="{StaticResource styleButton}" Tag="ResetG59"/>
+            <Label Content="Double-Click in field to save manually entered values" HorizontalAlignment="Left" Margin="67,10,0,0" Grid.Row="7" Grid.Column="0" VerticalAlignment="Top" FontWeight="Medium" Grid.ColumnSpan="5"/>
         </Grid>
     </StackPanel>
 </Window>

@@ -72,23 +72,7 @@ namespace GCodeSender
 			}
 		}
 	   
-        private void CheckBoxEnableJog_Checked(object sender, RoutedEventArgs e)
-		{
-			if (machine.Mode != Machine.OperatingMode.Manual)
-			{
-				CheckBoxEnableJog.IsChecked = false;
-				return;
-			}
-		}
-
-		private void CheckBoxEnableJog_Unchecked(object sender, RoutedEventArgs e)
-		{
-			if (!machine.Connected)
-				return;
-			machine.JogCancel();
-		}
-
-        private void Jogging_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+         private void Jogging_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
             machine.JogCancel();
         }
@@ -97,51 +81,5 @@ namespace GCodeSender
         {
             machine.JogCancel();
         }
-        
-        // This is run when Jogging Keyboard Focus is Focused
-        private void Jogging_KeyDown(object sender, KeyEventArgs e)
-		{
-			if (!machine.Connected)
-				return;
-
-            // Get Keycode
-            string currentHotPressed = HotKeys.KeyProcess(sender, e); // Get Keycode
-            if (currentHotPressed == null) return; // If currentHotPressed is null, Return (to avoid continuing with  blank)
-
-			if (!CheckBoxEnableJog.IsChecked.Value)
-				return;
-
-			e.Handled = e.Key != Key.Tab;
-
-			if (e.IsRepeat)
-				return;
-
-			if (machine.BufferState > 0 || machine.Status != "Idle")
-				return;
-
-			string direction = null;
-
-            if (currentHotPressed == HotKeys.hotkeyCode["JogXPos"])
-                direction = "X";
-            else if (currentHotPressed == HotKeys.hotkeyCode["JogXNeg"])
-                direction = "X-";
-            else if (currentHotPressed == HotKeys.hotkeyCode["JogYPos"])
-                direction = "Y";
-            else if (currentHotPressed == HotKeys.hotkeyCode["JogYNeg"])
-                direction = "Y-";
-            else if (currentHotPressed == HotKeys.hotkeyCode["JogZPos"])
-                direction = "Z";
-            else if (currentHotPressed == HotKeys.hotkeyCode["JogZNeg"])
-                direction = "Z-";
-            else if (currentHotPressed == HotKeys.hotkeyCode["RTOrigin"]) // Return to Origin ie back to all axis Zero position
-                ButtonManualReturnToZero.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-            else if (currentHotPressed == HotKeys.hotkeyCode["FSStop"]) // Jog Cancel
-                machine.JogCancel();
-
-			if (direction != null)
-			{
-                manualJogSendCommand(direction);
-			}
-		}        
     }
 }

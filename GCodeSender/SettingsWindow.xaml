@@ -90,8 +90,9 @@
         <TabItem Header="GCode">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="147*"/>
-                    <ColumnDefinition Width="229*"/>
+                    <ColumnDefinition Width="148*"/>
+                    <ColumnDefinition Width="197*"/>
+                    <ColumnDefinition Width="33*"/>
                 </Grid.ColumnDefinitions>
                 <CheckBox Content="Include Spindle 'S' Commands" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding GCodeIncludeSpindle}" ToolTip="Strip S[XX] from file before sending to machine if not checked" Grid.ColumnSpan="2" FontSize="10"/>
                 <CheckBox Content="Include Dwell 'G4' Commands" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding GCodeIncludeDwell}" ToolTip="Strip G4 P[XX] from file before sending to machine if not checked" Grid.ColumnSpan="2" FontSize="10"/>
@@ -99,8 +100,6 @@
                 <CheckBox Content="Spindle Inc/Dec (Checked 10%, Unchecked 1%)" HorizontalAlignment="Left" Margin="10,70,0,0" Grid.ColumnSpan="2"  IsChecked="{util:SettingBinding SpindleIncrement}" ToolTip="If checked, Hotkey incease or decrease 10% each time, unchecked increase or decrease 1% each time" VerticalAlignment="Top" FontSize="10"/>
                 <CheckBox Content="Include Program End (M2, M30)" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding GCodeIncludeMEnd}" ToolTip="Strip M2/M30 from file before sending to machine if not checked. Default is off since these commands reset offsets from G92." Grid.ColumnSpan="2" FontSize="10"/>
                 <CheckBox Content="Warning Window on File Load" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top" IsChecked="{util:SettingBinding ShowWarningWindow}" ToolTip="Enable or Disable the display of the warning window when a Gcode file loaded" Grid.ColumnSpan="2" FontSize="10" />
-                
-                <!--GCodes for Zero Axis Commands-->
             </Grid>
         </TabItem>
         <!-- Hotkey Configuration-->
@@ -113,6 +112,32 @@
                     </Grid.ColumnDefinitions>
                 </Grid>
             </ScrollViewer>
+        </TabItem>
+        <!-- Jogging Options -->
+        <TabItem Header="Jogging">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextWrapping="WrapWithOverflow" Margin="5,5,5,0" Grid.ColumnSpan="2" IsEnabled="False" Height="40" VerticalAlignment="Top" HorizontalAlignment="Center">
+               Adjust these values to the amount of Increment or Decrement when adjusting Jogging Feed Rate or Distance using Hotkeys
+                </TextBlock>
+              
+                <TextBox x:Name="JogSpeedXIncDec" Margin="10,50,0,0" Text="{util:SettingBinding JogFeedXIncDec}" FontSize="10" Width="70"/>
+                <Label Content="X Axis Jog Feed Inc/Dec" HorizontalAlignment="Left" Margin="90,50,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" FontSize="10"/>
+                <TextBox x:Name="JogSpeedYIncDec" Margin="10,80,0,0" Text="{util:SettingBinding JogFeedYIncDec}" FontSize="10" Width="70"/>
+                <Label Content="Y Axis Jog Feed Inc/Dec" HorizontalAlignment="Left" Margin="90,80,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" FontSize="10"/>
+                <TextBox x:Name="JogSpeedZIncDec" Margin="10,110,0,0" Text="{util:SettingBinding JogFeedZIncDec}" FontSize="10" Width="70"/>
+                <Label Content="Z Axis Jog Feed Inc/Dec" HorizontalAlignment="Left" Margin="90,110,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" FontSize="10"/>
+                <TextBox x:Name="JogDistXIncDec" Margin="10,140,0,0" Text="{util:SettingBinding JogDistXIncDec}" FontSize="10" Width="70"/>
+                <Label Content="X Axis Jog Dist Inc/Dec" HorizontalAlignment="Left" Margin="90,140,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" FontSize="10"/>
+                <TextBox x:Name="JogDistYIncDec" Margin="10,170,0,0" Text="{util:SettingBinding JogDistYIncDec}" FontSize="10" Width="70"/>
+                <Label Content="Y Axis Jog Dist Inc/Dec" HorizontalAlignment="Left" Margin="90,170,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" FontSize="10"/>
+                <TextBox x:Name="JogDistZIncDec" Margin="10,200,0,0" Text="{util:SettingBinding JogDistZIncDec}" FontSize="10" Width="70"/>
+                <Label Content="Z Axis Jog Dist Inc/Dec" HorizontalAlignment="Left" Margin="90,200,0,0" VerticalAlignment="Top" Grid.ColumnSpan="3" FontSize="10"/>
+
+            </Grid>
         </TabItem>
     </TabControl>
 </Window>

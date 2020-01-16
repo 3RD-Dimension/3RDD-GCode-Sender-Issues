@@ -361,14 +361,15 @@ Be aware that the affected lines will likely move when using edit functions." + 
             manualJogBtnZNegBtn.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
 
             // Manual Control - TextBoxJogFeed, TextBoxJogDistance, TextBoxJogFeedFine, TextBoxJogDistanceFine
-            TextBoxJogFeed.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
-            TextBoxJogDistance.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            TextBoxJogFeedX.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            TextBoxJogDistanceX.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            TextBoxJogFeedY.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            TextBoxJogDistanceY.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            TextBoxJogFeedZ.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
+            TextBoxJogDistanceZ.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
 
-            if (machine.Mode != Machine.OperatingMode.Manual)
-				CheckBoxEnableJog.IsChecked = false;
-			CheckBoxEnableJog.IsEnabled = machine.Mode == Machine.OperatingMode.Manual;
 
-			ButtonEditSimplify.IsEnabled = machine.Mode != Machine.OperatingMode.SendFile;
+            ButtonEditSimplify.IsEnabled = machine.Mode != Machine.OperatingMode.SendFile;
 			ButtonEditArcToLines.IsEnabled = machine.Mode != Machine.OperatingMode.SendFile;
 			ButtonEditSplit.IsEnabled = machine.Mode != Machine.OperatingMode.SendFile;
 			ButtonEditRotateCW.IsEnabled = machine.Mode != Machine.OperatingMode.SendFile;

@@ -17,6 +17,9 @@
         <ResourceDictionary Source="MainWindow.Resources.xaml"/>
     </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid Panel.ZIndex="1">
             <Border Style="{StaticResource stylePanelOut}" VerticalAlignment="Top" HorizontalAlignment="Center" BorderBrush="#FFCE0606">
                 <StackPanel>
@@ -51,7 +54,7 @@
             </Border>
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                 <Border Style="{StaticResource stylePanelOut}" BorderBrush="#FFCE0606">
-                    <Expander Header="File" Width="Auto" IsExpanded="{util:SettingBinding FileExpanderOpen}">
+                    <Expander x:Name="FilePanel" Header="File" Width="Auto" IsExpanded="{util:SettingBinding FileExpanderOpen}">
                         <Grid Width="240" Height="260">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
@@ -113,29 +116,31 @@
 									    ToolTip="Return all Axis to Zero point"/>
                             </StackPanel>
                             <GroupBox>
-                                <GroupBox.Header>
-                                    <CheckBox Name="CheckBoxEnableJog" Content="Enable Keyboard Jogging" Checked="CheckBoxEnableJog_Checked" Unchecked="CheckBoxEnableJog_Unchecked" VerticalAlignment="Top"/>
-                                </GroupBox.Header>
                                 <!--<Grid IsEnabled="{Binding ElementName=CheckBoxEnableJog, Path=IsChecked}">-->
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="75"/>
+                                        <ColumnDefinition Width="51"/>
+                                        <ColumnDefinition Width="24"/>
                                         <ColumnDefinition Width="70"/>
                                         <ColumnDefinition Width="119*"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox Name="TextBoxJog" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Height="23" Margin="35,5,0,0" Text="Jogging Hotkey Focus" VerticalAlignment="Top" Width="208" VerticalContentAlignment="Center"
-											 PreviewKeyDown="Jogging_KeyDown" PreviewKeyUp="Jogging_KeyUp" LostKeyboardFocus="Jogging_LostKeyboardFocus" Grid.ColumnSpan="3" IsEnabled="{Binding ElementName=CheckBoxEnableJog, Path=IsChecked}">
-                                        <TextBox.ToolTip>
-                                            <TextBlock>
-												You can only Jog as long as this textbox has the keyboard focus<LineBreak/>
-												The motion will stop when you release the button (not 100% stable at the moment)<LineBreak/>
-                                            </TextBlock>
-                                        </TextBox.ToolTip>
-                                    </TextBox>
-                                    <Label Content="Jog Feed" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
-                                    <TextBox x:Name="TextBoxJogFeed" Text="{util:SettingBinding JogFeed}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="1"/>
-                                    <Label Content="Jog Dist" HorizontalAlignment="Left" Margin="0,33,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-                                    <TextBox x:Name="TextBoxJogDistance" Text="{util:SettingBinding JogDistance}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="90,34,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2"/>
+                                    <!-- X Jog Feed and Distance -->
+                                    <Label Content="Jog Feed X" HorizontalAlignment="Left" Margin="5,15,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                                    <TextBox x:Name="TextBoxJogFeedX" Text="{util:SettingBinding JogFeedX}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2"/>
+                                    <Label Content="Jog Dist X" HorizontalAlignment="Left" Margin="0,15,0,0" VerticalAlignment="Top" Grid.Column="3"/>
+                                    <TextBox x:Name="TextBoxJogDistanceX" Text="{util:SettingBinding JogDistanceX}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="0,15,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="3"/>
+                                    <!-- Y Jog Feed and Distance -->
+                                    <Label Content="Jog Feed Y" HorizontalAlignment="Left" Margin="5,40,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                                    <TextBox x:Name="TextBoxJogFeedY" Text="{util:SettingBinding JogFeedY}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2"/>
+                                    <Label Content="Jog Dist Y" HorizontalAlignment="Left" Margin="0,40,0,0" VerticalAlignment="Top" Grid.Column="3"/>
+                                    <TextBox x:Name="TextBoxJogDistanceY" Text="{util:SettingBinding JogDistanceY}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="0,40,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="3"/>
+                                    <!-- Y Jog Feed and Distance -->
+                                    <Label Content="Jog Feed Z" HorizontalAlignment="Left" Margin="5,65,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                                    <TextBox x:Name="TextBoxJogFeedZ" Text="{util:SettingBinding JogFeedZ}" VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="23" Margin="5,65,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="2"/>
+                                    <Label Content="Jog Dist Z" HorizontalAlignment="Left" Margin="0,65,0,0" VerticalAlignment="Top" Grid.Column="3"/>
+                                    <TextBox x:Name="TextBoxJogDistanceZ" Text="{util:SettingBinding JogDistanceZ}" VerticalContentAlignment="Center"  HorizontalAlignment="Right" Height="23" Margin="0,65,10,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="40" Grid.Column="3"/>
+
+
                                 </Grid>
                             </GroupBox>
                             <StackPanel Orientation="Horizontal">
@@ -295,12 +300,12 @@
                                 <ComboBoxItem Name="G58" Foreground="Red">G58</ComboBoxItem>
                                 <ComboBoxItem Name="G59" Foreground="Red">G59</ComboBoxItem>
                             </ComboBox>
-                            
+
                             <StackPanel Orientation="Horizontal">
                                 <Button Name="ButtonWorkOffsets" Content="Work Offsets" Style="{StaticResource styleButton}" Click="ButtonWorkOffsets_click"/>
                             </StackPanel>
-                            
-                            
+
+
                             <StackPanel Orientation="Horizontal">
                                 <Button Content="GRBL Settings" Style="{StaticResource styleButton}" Click="ShowGrblSettings_Click" Name="ButtonGrblSettings"/>
                             </StackPanel>
@@ -348,20 +353,19 @@
                 </ListBox.ItemsPanel>
             </ListBox>
         </Grid>
-        <StackPanel Panel.ZIndex="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal" Margin="446,0,420,0">
+        <StackPanel Panel.ZIndex="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal" Margin="459,0,433,0">
             <Label Name="LabelStateProbe" Content="Probe" FontWeight="ExtraBold" FontSize="40" Foreground="Red" Visibility="Collapsed"/>
             <Label Name="LabelStateLimitX" Content="LimitX" FontWeight="ExtraBold" FontSize="40" Foreground="Red" Visibility="Collapsed"/>
             <Label Name="LabelStateLimitY" Content="LimitY" FontWeight="ExtraBold" FontSize="40" Foreground="Red" Visibility="Collapsed"/>
             <Label Name="LabelStateLimitZ" Content="LimitZ" FontWeight="ExtraBold" FontSize="40" Foreground="Red" Visibility="Collapsed"/>
         </StackPanel>
-        <h:HelixViewport3D Name="viewport" Panel.ZIndex="0" PreviewKeyDown="viewport_PreviewKeyDown" CoordinateSystemHeight="72" ShowCoordinateSystem="True" InfoBackground="#80FFFFFF">
+        <h:HelixViewport3D Name="viewport" Panel.ZIndex="0" PreviewKeyDown="viewport_PreviewKeyDown" CoordinateSystemHeight="72" ShowCoordinateSystem="True" InfoBackground="#80FFFFFF" MouseRightButtonUp="viewport_MouseRightButtonUp" ViewCubeLeftText="Y+" ViewCubeFrontText="X+" ViewCubeBottomText="Z-" ViewCubeTopText="Z+" ViewCubeBackText="X-" ViewCubeRightText="Y-">
             <h:HelixViewport3D.Camera>
                 <PerspectiveCamera
 					Position="50, -150, 250"
 					LookDirection="-50, 150,-250"
 					UpDirection="0,0,1"/>
             </h:HelixViewport3D.Camera>
-
             <h:DefaultLights/>
             <h:CoordinateSystemVisual3D ArrowLengths="5"/>
             <h:LinesVisual3D Thickness="1" Color="{util:SettingBinding ModelRapidColor}" x:Name="ModelRapid"/>
