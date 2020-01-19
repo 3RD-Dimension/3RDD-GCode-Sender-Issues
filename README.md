@@ -10,6 +10,7 @@
 
 Some of the current enhancements include configurable hotkeys, customizable colors for the 3D workspace (Rapids, Lines and Arcs), Jogging buttons, Autoupdater, and Export GRBL settings to a formatted file and other cnc routing tweaks and functions.
 
+* **We now have a Reddit Page** - [Use our Redit page for discussion on the 3RDD Gcode Sender](https://www.reddit.com/r/3RDDGcodeSender)
 * **Download** - [Download the recent release](https://github.com/3RD-Dimension/3RDD-GCode-Sender-Issues/releases)
 * **For Issues, Bugs or Features** - [3RDD GCode Sender Issues](https://github.com/3RD-Dimension/3RDD-GCode-Sender-Issues/issues) or click on "Issues" at the top.
 * **Information about the program** - [visit our Wiki right here](https://3rd-dimension.github.io/)
